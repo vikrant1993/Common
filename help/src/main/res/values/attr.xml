@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FastScroller">
+        <attr name="bubbleColor" format="color"  />
+        <attr name="handleColor" format="color" />
+        <attr name="bubbleTextAppearance" format="reference" />
+    </declare-styleable>
+
+    <attr name="CalendarViewLayout" format="reference"/>
+    <attr name="CalendarSquareCell" format="reference"/>
+    <attr name="CalendarNormalCell" format="reference"/>
+    <attr name="CalendarGridView" format="reference"/>
+    <attr name="CalendarWeekdayView" format="reference"/>
+    <declare-styleable name="CalendarCell" >
+        <attr name="android:textColor" />
+        <attr name="android:background" />
+    </declare-styleable>
+    <!-- Custom states -->
+    <declare-styleable name="DateState">
+        <attr name="state_date_today" format="boolean"/>
+        <attr name="state_date_selected" format="boolean"/>
+        <attr name="state_date_disabled" format="boolean"/>
+        <attr name="state_date_prev_next_month" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="signature">
+        <attr name="enableSignature" format="boolean" />
+        <attr name="penSize" format="dimension" />
+        <attr name="penColor" format="color" />
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="NumberProgressBar">
+        <attr name="progress_current" format="integer" />
+        <attr name="progress_max" format="integer" />
+
+        <attr name="progress_unreached_color" format="color" />
+        <attr name="progress_reached_color" format="color" />
+
+        <attr name="progress_reached_bar_height" format="dimension" />
+        <attr name="progress_unreached_bar_height" format="dimension" />
+
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_text_color" format="color" />
+
+        <attr name="progress_text_offset" format="dimension" />
+
+        <attr name="progress_text_visibility" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

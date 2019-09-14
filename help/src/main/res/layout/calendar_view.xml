@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?CalendarViewLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/calendar_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/calendar_left_arrow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/left_arrow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/calendar_month_year_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="22sp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/calendar_right_arrow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/right_arrow" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/weekday_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:numColumns="7"
+        android:stretchMode="columnWidth" />
+
+    <vk.help.calendar.InfiniteViewPager
+        android:id="@+id/months_infinite_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
