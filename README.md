@@ -1,6 +1,6 @@
 # Common
 common operation for any project
-add library->
+
 
 allprojects {
 		repositories {
