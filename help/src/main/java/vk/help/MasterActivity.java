@@ -9,9 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MasterActivity extends AppCompatActivity {
 
     private Context context;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=this;
+        context = this;
     }
 }
