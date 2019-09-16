@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class MasterActivity : AppCompatActivity() {
+open class MasterActivity : AppCompatActivity() {
 
     private lateinit var context: Context
 
