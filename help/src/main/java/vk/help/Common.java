@@ -29,6 +29,7 @@ public class Common {
     public static final String OnlyDatePattern = "dd-MMM-yyyy";
     public static final String ServerCommonDateTimePattern = "yyyy-MM-dd'T'HH:mm:ss";
 
+
     public static String convertDate(String from, String to, String value) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(from.isEmpty() ? ServerCommonDateTimePattern : from, Locale.getDefault());
