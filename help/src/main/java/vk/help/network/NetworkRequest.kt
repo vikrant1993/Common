@@ -17,10 +17,11 @@ import java.net.ConnectException
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
-class NetworkRequest(
-    private var context: Context?,
-    private var progressBar: View,
-    private var listener: ResultsListener
+
+class NetworkRequest @JvmOverloads constructor(
+    private val context: Context? = null,
+    private val progressBar: View? = null,
+    private val listener: ResultsListener
 ) : AsyncTask<String, Void, String>() {
 
     companion object {
@@ -49,10 +50,10 @@ class NetworkRequest(
         return this
     }
 
-    public fun setListener(listener: ResultsListener): NetworkRequest {
-        this.listener = listener
-        return this
-    }
+//    public fun setListener(listener: ResultsListener): NetworkRequest {
+//        this.listener = listener
+//        return this
+//    }
 
     fun setProgressMessage(progressMessage: String): NetworkRequest {
         this.progressMessage = progressMessage
