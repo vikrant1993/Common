@@ -1,8 +1,10 @@
 package vk.help.network
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
+import android.view.View
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Request
@@ -10,13 +12,16 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONException
 import org.json.JSONObject
 import vk.help.HelpApp
-import vk.help.R
 import java.io.IOException
-import java.lang.ref.WeakReference
 import java.net.ConnectException
 import java.util.*
 
-class NetworkRequest() : AsyncTask<String, Void, String>() {
+@SuppressLint("StaticFieldLeak")
+class NetworkRequest(
+    private var context: Context?,
+    private var progressBar: View,
+    private var listener: ResultsListener
+) : AsyncTask<String, Void, String>() {
 
     companion object {
         private const val RequestURL = "RequestURL"
@@ -24,18 +29,20 @@ class NetworkRequest() : AsyncTask<String, Void, String>() {
         private const val OUTPUT = "OUTPUT"
     }
 
-    private var context: WeakReference<Context>? = null
-    private var listener: ResultsListener? = null
     private var requestJSON: String = ""
     private var progressMessage = ""
     private var call: Call? = null
 
-    constructor(listener: ResultsListener) : this(null, listener)
-    constructor(context: Context?, listener: ResultsListener) : this() {
-        this.context = WeakReference(context!!)
-        this.listener = listener
+    init {
         requestJSON = ""
     }
+
+//    constructor(listener: ResultsListener) : this(null, listener)
+//    constructor(context: Context?, listener: ResultsListener) : this() {
+//        this.context = context
+//        this.listener = listener
+//        requestJSON = ""
+//    }
 
     public fun post(requestJSON: String): NetworkRequest {
         this.requestJSON = requestJSON
@@ -67,7 +74,9 @@ class NetworkRequest() : AsyncTask<String, Void, String>() {
                 Log.d(RequestDATA, requestJSON)
             }
             var builder: Request.Builder = Request.Builder().url(url)
-            builder = if (requestJSON.isEmpty()) builder.get() else builder.post(requestJSON.toRequestBody("application/json".toMediaTypeOrNull()))
+            builder = if (requestJSON.isEmpty()) builder.get() else builder.post(
+                requestJSON.toRequestBody("application/json".toMediaTypeOrNull())
+            )
             call = HelpApp.client.newCall(builder.build())
             String(call!!.execute().body!!.bytes())
         } catch (e: ConnectException) {
@@ -96,12 +105,28 @@ class NetworkRequest() : AsyncTask<String, Void, String>() {
         val response: NetworkResponse
         response = when {
             output.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
-            output.toLowerCase(Locale.ROOT).contains("No HTTP resource".toLowerCase(Locale.ROOT)) -> NetworkResponse(false, "No Data Found", "URL Not Found")
-            output.toLowerCase(Locale.ROOT).contains("Failed to connect".toLowerCase(Locale.ROOT)) -> NetworkResponse(false, "", "Failed to connect")
-            output.toLowerCase(Locale.ROOT).contains("Server Data Not Found") -> NetworkResponse(false, "", "Data On Server Not Found")
+            output.toLowerCase(Locale.ROOT).contains("No HTTP resource".toLowerCase(Locale.ROOT)) -> NetworkResponse(
+                false,
+                "No Data Found",
+                "URL Not Found"
+            )
+            output.toLowerCase(Locale.ROOT).contains("Failed to connect".toLowerCase(Locale.ROOT)) -> NetworkResponse(
+                false,
+                "",
+                "Failed to connect"
+            )
+            output.toLowerCase(Locale.ROOT).contains("Server Data Not Found") -> NetworkResponse(
+                false,
+                "",
+                "Data On Server Not Found"
+            )
             else -> try {
                 val jsonObject = JSONObject(output)
-                NetworkResponse(jsonObject.getBoolean("status"), jsonObject.getString("data"), jsonObject.getString("message"))
+                NetworkResponse(
+                    jsonObject.getBoolean("status"),
+                    jsonObject.getString("data"),
+                    jsonObject.getString("message")
+                )
             } catch (e: JSONException) {
                 e.printStackTrace()
                 NetworkResponse(false, output, "Data Conversion Error")
