@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 open class MasterActivity : AppCompatActivity() {
 
-    private lateinit var context: Context
+    public lateinit var context: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
