@@ -1,7 +1,8 @@
 package vk.help;
 
-import android.app.Application;
 import android.graphics.Typeface;
+
+import androidx.multidex.MultiDexApplication;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
-public class HelpApp extends Application {
+public class HelpApp extends MultiDexApplication {
 
     public static OkHttpClient client;
     private static final int cacheSize = 10 * 1024 * 1024;
