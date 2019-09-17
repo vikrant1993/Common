@@ -30,8 +30,6 @@ public class CalendarGridAdapter extends BaseAdapter {
     protected ArrayList<DateTime> disableDates;
     protected ArrayList<DateTime> selectedDates;
 
-    // Use internally, to make the search for date faster instead of using
-    // indexOf methods on ArrayList
     protected Map<DateTime, Integer> disableDatesMap = new HashMap<>();
     protected Map<DateTime, Integer> selectedDatesMap = new HashMap<>();
 
@@ -47,13 +45,7 @@ public class CalendarGridAdapter extends BaseAdapter {
     protected int defaultCellBackgroundRes = -1;
     protected ColorStateList defaultTextColorRes;
 
-    /**
-     * caldroidData belongs to Caldroid
-     */
     protected Map<String, Object> caldroidData;
-    /**
-     * extraData belongs to client
-     */
     protected Map<String, Object> extraData;
 
     protected LayoutInflater localInflater;
@@ -65,7 +57,6 @@ public class CalendarGridAdapter extends BaseAdapter {
                 startDayOfWeek, sixWeeksInCalendar);
     }
 
-    // GETTERS AND SETTERS
     public ArrayList<DateTime> getDatetimeList() {
         return datetimeList;
     }
@@ -112,8 +103,6 @@ public class CalendarGridAdapter extends BaseAdapter {
 
     public void setCaldroidData(Map<String, Object> caldroidData) {
         this.caldroidData = caldroidData;
-
-        // Reset parameters
         populateFromCaldroidData();
     }
 
@@ -134,7 +123,6 @@ public class CalendarGridAdapter extends BaseAdapter {
         this.extraData = extraData;
         this.resources = context.getResources();
 
-        // Get data from caldroidData
         populateFromCaldroidData();
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -176,12 +164,8 @@ public class CalendarGridAdapter extends BaseAdapter {
         getDefaultResources();
     }
 
-    // This method retrieve default resources for background and text color,
-    // based on the Caldroid theme
     private void getDefaultResources() {
         Context wrapped = new ContextThemeWrapper(context, themeResource);
-
-        // Get style of normal cell or square cell in the theme
         Resources.Theme theme = wrapped.getTheme();
         TypedValue styleCellVal = new TypedValue();
         if (squareTextViewCell) {
@@ -189,8 +173,6 @@ public class CalendarGridAdapter extends BaseAdapter {
         } else {
             theme.resolveAttribute(R.attr.CalendarNormalCell, styleCellVal, true);
         }
-
-        // Get default background of cell
         TypedArray typedArray = wrapped.obtainStyledAttributes(styleCellVal.data, R.styleable.CalendarCell);
         defaultCellBackgroundRes = typedArray.getResourceId(R.styleable.CalendarCell_android_background, -1);
         defaultTextColorRes = typedArray.getColorStateList(R.styleable.CalendarCell_android_textColor);
@@ -208,17 +190,11 @@ public class CalendarGridAdapter extends BaseAdapter {
         return today;
     }
 
-    @SuppressWarnings("unchecked")
-    protected void setCustomResources(DateTime dateTime, View backgroundView,
-                                      TextView textView) {
-        // Set custom background resource
+    protected void setCustomResources(DateTime dateTime, View backgroundView, TextView textView) {
         Map<DateTime, Drawable> backgroundForDateTimeMap = (Map<DateTime, Drawable>) caldroidData
                 .get(CalendarFragment._BACKGROUND_FOR_DATETIME_MAP);
         if (backgroundForDateTimeMap != null) {
-            // Get background resource for the dateTime
             Drawable drawable = backgroundForDateTimeMap.get(dateTime);
-
-            // Set it
             if (drawable != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     backgroundView.setBackground(drawable);
@@ -228,14 +204,9 @@ public class CalendarGridAdapter extends BaseAdapter {
             }
         }
 
-        // Set custom text color
-        Map<DateTime, Integer> textColorForDateTimeMap = (Map<DateTime, Integer>) caldroidData
-                .get(CalendarFragment._TEXT_COLOR_FOR_DATETIME_MAP);
+        Map<DateTime, Integer> textColorForDateTimeMap = (Map<DateTime, Integer>) caldroidData.get(CalendarFragment._TEXT_COLOR_FOR_DATETIME_MAP);
         if (textColorForDateTimeMap != null) {
-            // Get textColor for the dateTime
             Integer textColorResource = textColorForDateTimeMap.get(dateTime);
-
-            // Set it
             if (textColorResource != null) {
                 textView.setTextColor(resources.getColor(textColorResource));
             }
@@ -247,23 +218,12 @@ public class CalendarGridAdapter extends BaseAdapter {
         cellView.setTextColor(defaultTextColorRes);
     }
 
-    /**
-     * Customize colors of text and background based on states of the cell
-     * (disabled, active, selected, etc)
-     * <p/>
-     * To be used only in getView method
-     *
-     * @param position
-     * @param cellView
-     */
     protected void customizeTextView(int position, CellView cellView) {
-        // Get the padding of cell so that it can be restored later
         int topPadding = cellView.getPaddingTop();
         int leftPadding = cellView.getPaddingLeft();
         int bottomPadding = cellView.getPaddingBottom();
         int rightPadding = cellView.getPaddingRight();
 
-        // Get dateTime of this cell
         DateTime dateTime = this.datetimeList.get(position);
 
         cellView.resetCustomStates();
@@ -273,12 +233,10 @@ public class CalendarGridAdapter extends BaseAdapter {
             cellView.addCustomState(CellView.Companion.getSTATE_TODAY());
         }
 
-        // Set color of the dates in previous / next month
         if (dateTime.getMonth() != month) {
             cellView.addCustomState(CellView.Companion.getSTATE_PREV_NEXT_MONTH());
         }
 
-        // Customize for disabled dates and date outside min/max dates
         if ((minDateTime != null && dateTime.lt(minDateTime))
                 || (maxDateTime != null && dateTime.gt(maxDateTime))
                 || (disableDates != null && disableDatesMap
@@ -287,23 +245,14 @@ public class CalendarGridAdapter extends BaseAdapter {
             cellView.addCustomState(CellView.Companion.getSTATE_DISABLED());
         }
 
-        // Customize for selected dates
         if (selectedDates != null && selectedDatesMap.containsKey(dateTime)) {
             cellView.addCustomState(CellView.Companion.getSTATE_SELECTED());
         }
 
         cellView.refreshDrawableState();
-
-        // Set text
         cellView.setText(String.valueOf(dateTime.getDay()));
-
-        // Set custom color if required
         setCustomResources(dateTime, cellView, cellView);
-
-        // Somehow after setBackgroundResource, the padding collapse.
-        // This is to recover the padding
-        cellView.setPadding(leftPadding, topPadding, rightPadding,
-                bottomPadding);
+        cellView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
     }
 
     @Override
@@ -324,8 +273,6 @@ public class CalendarGridAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CellView cellView;
-
-        // For reuse
         if (convertView == null) {
             final int squareDateCellResource = squareTextViewCell ? R.layout.square_date_cell : R.layout.normal_date_cell;
             cellView = (CellView) localInflater.inflate(squareDateCellResource, parent, false);

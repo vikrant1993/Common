@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import vk.help.R;
 
 public class DateGridFragment extends Fragment {
+
     private GridView gridView;
     private CalendarGridAdapter gridAdapter;
     private OnItemClickListener onItemClickListener;

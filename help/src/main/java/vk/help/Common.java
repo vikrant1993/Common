@@ -39,7 +39,6 @@ public class Common {
             } else {
                 return value;
             }
-
         } catch (ParseException e) {
             e.printStackTrace();
         }

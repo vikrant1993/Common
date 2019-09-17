@@ -6,6 +6,7 @@ import android.view.animation.DecelerateInterpolator
 import androidx.recyclerview.widget.RecyclerView
 
 class HideFabOnScroll(val view: View) : RecyclerView.OnScrollListener() {
+
     private var scrollDist = 0
     private var fabMargin: Int = view.context.resources.getDimensionPixelSize(R.dimen.dimen_24dp)
     private var isVisible = true

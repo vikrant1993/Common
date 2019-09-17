@@ -113,7 +113,6 @@ final class DateTimeInterval {
         } else {
             fYear = fFrom.getYear() - fYearIncr;
         }
-        //the DateTime ctor will check the range of the year
     }
 
     private void changeMonth() {
@@ -156,11 +155,6 @@ final class DateTimeInterval {
         }
     }
 
-    /**
-     * Nanos are different from other items. They don't cycle one step at a time.
-     * They are just added. If they under/over flow, then extra math is performed.
-     * They don't over/under by more than 1 second, since the size of the increment is limited.
-     */
     private void changeNanosecond() {
         if (fIsPlus) {
             fNanosecond = fNanosecond + fNanosecondIncr;

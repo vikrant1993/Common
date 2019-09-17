@@ -96,7 +96,7 @@ final class DateTimeParser {
     int getDateTimeSeparator(String aDateTime) {
         String SPACE = " ";
         int NOT_FOUND = -1;
-        int result = NOT_FOUND;
+        int result;
         result = aDateTime.indexOf(SPACE);
         if (result == NOT_FOUND) {
             result = aDateTime.indexOf("T");
