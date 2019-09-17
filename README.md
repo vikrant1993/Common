@@ -10,5 +10,5 @@ allprojects {
 	}
   
   dependencies {
-	        implementation 'com.github.vikrant1993:Common:1.0.0'
+	        implementation 'com.github.vikrant1993:Common:1.0.6'
 	}
