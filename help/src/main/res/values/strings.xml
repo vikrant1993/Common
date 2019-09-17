@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">fastScroll</string>
     <string name="please_wait_">Please Wait…</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="no_menu_view">No view for menu provided. You must either call .withMenuView(View) or pass a valid resource id to .withMenuLayout(int)</string>
+    <string name="bad_content_view">Your content view must contain exactly one child. Make sure you call inject() after setContentView().</string>
+
 </resources>
