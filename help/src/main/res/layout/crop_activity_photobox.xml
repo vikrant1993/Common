@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/crop_photobox"
     android:layout_width="match_parent"
@@ -10,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/crop_color_toolbar"
-        android:minHeight="?attr/actionBarSize">
+        android:minHeight="?actionBarSize">
 
         <TextView
             android:id="@+id/toolbar_title"
