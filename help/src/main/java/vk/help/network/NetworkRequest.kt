@@ -22,7 +22,8 @@ import java.util.*
 class NetworkRequest @JvmOverloads constructor(
     private val context: Context? = null,
     private val progressBar: View? = null,
-    private val listener: ResultsListener
+    private val listener: ResultsListener,
+    private val progressMessage: String = ""
 ) : AsyncTask<String, Void, String>() {
 
     companion object {
@@ -32,7 +33,6 @@ class NetworkRequest @JvmOverloads constructor(
     }
 
     private var requestJSON: String = ""
-    private var progressMessage = ""
     private var call: Call? = null
 
     init {
@@ -56,10 +56,10 @@ class NetworkRequest @JvmOverloads constructor(
 //        return this
 //    }
 
-    fun setProgressMessage(progressMessage: String): NetworkRequest {
-        this.progressMessage = progressMessage
-        return this
-    }
+//    fun setProgressMessage(progressMessage: String): NetworkRequest {
+//        this.progressMessage = progressMessage
+//        return this
+//    }
 
     override fun onPreExecute() {
         super.onPreExecute()
