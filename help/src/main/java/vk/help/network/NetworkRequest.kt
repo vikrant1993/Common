@@ -13,6 +13,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import vk.help.HelpApp
 import java.io.IOException
+import java.lang.Exception
 import java.net.ConnectException
 import java.util.*
 
@@ -65,6 +66,11 @@ class NetworkRequest @JvmOverloads constructor(
         if (context != null) {
 //            HelpingClass.showProgress(context, false, if (progressMessage.isEmpty()) context!!.get()!!.getString(R.string.please_wait_) else progressMessage)
         }
+        try {
+            progressBar?.visibility = View.VISIBLE
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun doInBackground(vararg urls: String?): String {
@@ -100,6 +106,13 @@ class NetworkRequest @JvmOverloads constructor(
     override fun onPostExecute(output: String) {
         super.onPostExecute(output)
         Log.i(OUTPUT, output)
+
+        try {
+            progressBar?.visibility = View.GONE
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         if (context != null) {
 //            HelpingClass.hideProgress()
         }
@@ -133,6 +146,6 @@ class NetworkRequest @JvmOverloads constructor(
                 NetworkResponse(false, output, "Data Conversion Error")
             }
         }
-        listener!!.onResultsSucceeded(response)
+        listener.onResultsSucceeded(response)
     }
 }
