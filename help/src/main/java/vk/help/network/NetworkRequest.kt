@@ -92,6 +92,9 @@ class NetworkRequest @JvmOverloads constructor(
         } catch (e: IOException) {
             e.printStackTrace()
             "Server Data Not Found"
+        } catch (e: IllegalArgumentException){
+            e.printStackTrace()
+            "Url not found"
         }
     }
 
