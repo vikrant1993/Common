@@ -51,12 +51,6 @@ public class Crop {
     private Intent mCropIntent;
     private Bundle mCropOptionsBundle;
 
-    /**
-     * This method creates new Intent builder and sets both source and destination image URIs.
-     *
-     * @param source      Uri for image to crop
-     * @param destination Uri for saving the cropped image
-     */
     public static Crop of(@NonNull Uri source, @NonNull Uri destination) {
         return new Crop(source, destination);
     }
@@ -68,23 +62,12 @@ public class Crop {
         mCropOptionsBundle.putParcelable(EXTRA_OUTPUT_URI, destination);
     }
 
-    /**
-     * Set an aspect ratio for crop bounds.
-     * User won't see the menu with other ratios options.
-     *
-     * @param x aspect ratio X
-     * @param y aspect ratio Y
-     */
     public Crop withAspectRatio(float x, float y) {
         mCropOptionsBundle.putFloat(EXTRA_ASPECT_RATIO_X, x);
         mCropOptionsBundle.putFloat(EXTRA_ASPECT_RATIO_Y, y);
         return this;
     }
 
-    /**
-     * Set an aspect ratio for crop bounds that is evaluated from source image width and height.
-     * User won't see the menu with other ratios options.
-     */
     public Crop useSourceImageAspectRatio() {
         mCropOptionsBundle.putFloat(EXTRA_ASPECT_RATIO_X, 0);
         mCropOptionsBundle.putFloat(EXTRA_ASPECT_RATIO_Y, 0);
