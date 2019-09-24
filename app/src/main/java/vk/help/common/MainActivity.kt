@@ -2,6 +2,7 @@ package vk.help.common
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import vk.help.MasterActivity
 import vk.help.crop.Crop
 import vk.help.network.NetworkRequest
@@ -14,11 +15,15 @@ class MainActivity : MasterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        NetworkRequest(null, null, object : ResultsListener {
-            override fun onResultsSucceeded(result: NetworkResponse) {
+        NetworkRequest(listener = { result ->
+            Log.i("output",result.data)
+        }).execute("http//www.google.com")
 
-            }
-        }, "").execute("")
+//        ( object : ResultsListener {
+//            override fun onResultsSucceeded(result: NetworkResponse) {
+//
+//            }
+//        }, "").execute("")
 
         Crop.of(
             Uri.fromFile(File("/sdcard/Download/images.jpeg")),

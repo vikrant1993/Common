@@ -92,7 +92,7 @@ class NetworkRequest @JvmOverloads constructor(
         } catch (e: IOException) {
             e.printStackTrace()
             "Server Data Not Found"
-        } catch (e: IllegalArgumentException){
+        } catch (e: IllegalArgumentException) {
             e.printStackTrace()
             "Url not found"
         }
@@ -149,6 +149,6 @@ class NetworkRequest @JvmOverloads constructor(
                 NetworkResponse(false, output, "Data Conversion Error")
             }
         }
-        listener.onResultsSucceeded(response)
+        listener.invoke(response)
     }
 }
