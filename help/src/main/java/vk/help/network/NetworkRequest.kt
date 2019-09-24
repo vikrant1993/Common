@@ -6,8 +6,10 @@ import android.os.AsyncTask
 import android.util.Log
 import android.view.View
 import okhttp3.Call
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -87,17 +89,16 @@ class NetworkRequest @JvmOverloads constructor(
                 Log.d(RequestDATA, requestJSON)
             }
 
-            var request: Request = null
-
+            val request: Request
             if (requestBody != null) {
-                request = Request.Builder().url(url).post(requestBody).build();
+                request = Request.Builder().url(url).post(requestBody!!).build();
             } else {
                 if (requestJSON.isEmpty()) {
                     request = Request.Builder().url(url).get().build()
                 } else {
                     request = Request.Builder().url(url).post(
                         RequestBody.create(
-                            MediaType.parse("multipart/form-data"),
+                            "multipart/form-data".toMediaTypeOrNull(),
                             requestJSON
                         )
                     ).build()
