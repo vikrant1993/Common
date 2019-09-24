@@ -1,7 +1,5 @@
 package vk.help.network
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import okhttp3.Call
@@ -16,43 +14,31 @@ import java.io.IOException
 import java.net.ConnectException
 import java.util.*
 
-@SuppressLint("StaticFieldLeak")
+//@SuppressLint("StaticFieldLeak")
 
 class NetworkRequest @JvmOverloads constructor(
-    private val context: Context? = null,
-    private val listener: ResultsListener
+    private val listener: ResultsListener,
+    private val requestJSON: String = "",
+    private val requestBody: RequestBody? = null
 ) : AsyncTask<String, Void, String>() {
 
     companion object {
-        private const val RequestURL = "RequestURL"
-        private const val RequestDATA = "RequestDATA"
-        private const val OUTPUT = "OUTPUT"
+        private const val RequestURL = "Request URL"
+        private const val RequestDATA = "Request Data"
+        private const val OUTPUT = "Output"
     }
 
-    private var requestJSON: String = ""
     private var call: Call? = null
-    private var requestBody: RequestBody? = null
 
-    init {
-        requestJSON = ""
-    }
-
-//    constructor(listener: ResultsListener) : this(null, listener)
-//    constructor(context: Context?, listener: ResultsListener) : this() {
-//        this.context = context
-//        this.listener = listener
-//        requestJSON = ""
+//    public fun post(requestJSON: String): NetworkRequest {
+//        this.requestJSON = requestJSON
+//        return this
 //    }
-
-    public fun post(requestJSON: String): NetworkRequest {
-        this.requestJSON = requestJSON
-        return this
-    }
-
-    fun post(requestBody: RequestBody): NetworkRequest {
-        this.requestBody = requestBody
-        return this
-    }
+//
+//    fun post(requestBody: RequestBody): NetworkRequest {
+//        this.requestBody = requestBody
+//        return this
+//    }
 
 //    public fun setListener(listener: ResultsListener): NetworkRequest {
 //        this.listener = listener
@@ -63,25 +49,21 @@ class NetworkRequest @JvmOverloads constructor(
 //        this.progressMessage = progressMessage
 //        return this
 //    }
-
-    override fun onPreExecute() {
-        super.onPreExecute()
-        if (context != null) {
-//            HelpingClass.showProgress(context, false, if (progressMessage.isEmpty()) context!!.get()!!.getString(R.string.please_wait_) else progressMessage)
-        }
-    }
+//
+//    override fun onPreExecute() {
+//        super.onPreExecute()
+//        if (context != null) {
+////            HelpingClass.showProgress(context, false, if (progressMessage.isEmpty()) context!!.get()!!.getString(R.string.please_wait_) else progressMessage)
+//        }
+//    }
 
     override fun doInBackground(vararg urls: String?): String {
         return try {
             val url = urls[0]
             Log.i(RequestURL, url!!)
-            if (requestJSON.isNotEmpty()) {
-                Log.d(RequestDATA, requestJSON)
-            }
-
             val request: Request
             if (requestBody != null) {
-                request = Request.Builder().url(url).post(requestBody!!).build()
+                request = Request.Builder().url(url).post(requestBody).build()
             } else {
                 if (requestJSON.isEmpty()) {
                     request = Request.Builder().url(url).get().build()
@@ -117,9 +99,9 @@ class NetworkRequest @JvmOverloads constructor(
     override fun onPostExecute(output: String) {
         super.onPostExecute(output)
         Log.i(OUTPUT, output)
-        if (context != null) {
-//            HelpingClass.hideProgress()
-        }
+//        if (context != null) {
+////            HelpingClass.hideProgress()
+//        }
         val response: NetworkResponse
         response = when {
             output.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
