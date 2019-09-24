@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import android.view.View
 import okhttp3.Call
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -15,7 +13,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import vk.help.HelpApp
 import java.io.IOException
-import java.lang.Exception
 import java.net.ConnectException
 import java.util.*
 
@@ -23,9 +20,7 @@ import java.util.*
 
 class NetworkRequest @JvmOverloads constructor(
     private val context: Context? = null,
-    private val progressBar: View? = null,
-    private val listener: ResultsListener,
-    private val progressMessage: String = ""
+    private val listener: ResultsListener
 ) : AsyncTask<String, Void, String>() {
 
     companion object {
@@ -74,11 +69,6 @@ class NetworkRequest @JvmOverloads constructor(
         if (context != null) {
 //            HelpingClass.showProgress(context, false, if (progressMessage.isEmpty()) context!!.get()!!.getString(R.string.please_wait_) else progressMessage)
         }
-        try {
-            progressBar?.visibility = View.VISIBLE
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     override fun doInBackground(vararg urls: String?): String {
@@ -91,16 +81,13 @@ class NetworkRequest @JvmOverloads constructor(
 
             val request: Request
             if (requestBody != null) {
-                request = Request.Builder().url(url).post(requestBody!!).build();
+                request = Request.Builder().url(url).post(requestBody!!).build()
             } else {
                 if (requestJSON.isEmpty()) {
                     request = Request.Builder().url(url).get().build()
                 } else {
                     request = Request.Builder().url(url).post(
-                        RequestBody.create(
-                            "multipart/form-data".toMediaTypeOrNull(),
-                            requestJSON
-                        )
+                        requestJSON.toRequestBody("multipart/form-data".toMediaTypeOrNull())
                     ).build()
                     Log.i(RequestDATA, requestJSON)
                 }
@@ -130,13 +117,6 @@ class NetworkRequest @JvmOverloads constructor(
     override fun onPostExecute(output: String) {
         super.onPostExecute(output)
         Log.i(OUTPUT, output)
-
-        try {
-            progressBar?.visibility = View.GONE
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
         if (context != null) {
 //            HelpingClass.hideProgress()
         }
