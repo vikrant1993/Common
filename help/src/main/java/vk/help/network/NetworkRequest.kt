@@ -34,6 +34,7 @@ class NetworkRequest @JvmOverloads constructor(
 
     private var requestJSON: String = ""
     private var call: Call? = null
+    private var requestBody: RequestBody? = null
 
     init {
         requestJSON = ""
@@ -48,6 +49,11 @@ class NetworkRequest @JvmOverloads constructor(
 
     public fun post(requestJSON: String): NetworkRequest {
         this.requestJSON = requestJSON
+        return this
+    }
+
+    fun post(requestBody: RequestBody): NetworkRequest {
+        this.requestBody = requestBody
         return this
     }
 
@@ -80,11 +86,25 @@ class NetworkRequest @JvmOverloads constructor(
             if (requestJSON.isNotEmpty()) {
                 Log.d(RequestDATA, requestJSON)
             }
-            var builder: Request.Builder = Request.Builder().url(url)
-            builder = if (requestJSON.isEmpty()) builder.get() else builder.post(
-                requestJSON.toRequestBody("application/json".toMediaTypeOrNull())
-            )
-            call = HelpApp.client.newCall(builder.build())
+
+            var request: Request = null
+
+            if (requestBody != null) {
+                request = Request.Builder().url(url).post(requestBody).build();
+            } else {
+                if (requestJSON.isEmpty()) {
+                    request = Request.Builder().url(url).get().build()
+                } else {
+                    request = Request.Builder().url(url).post(
+                        RequestBody.create(
+                            MediaType.parse("multipart/form-data"),
+                            requestJSON
+                        )
+                    ).build()
+                    Log.i(RequestDATA, requestJSON)
+                }
+            }
+            call = HelpApp.client.newCall(request)
             String(call!!.execute().body!!.bytes())
         } catch (e: ConnectException) {
             e.printStackTrace()
