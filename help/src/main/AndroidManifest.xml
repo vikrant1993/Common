@@ -1,5 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="vk.help">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,20 +15,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <!--        <activity-->
-        <!--            android:name="imagepicker.features.ImagePickerActivity"-->
-        <!--            android:configChanges="orientation|screenSize"-->
-        <!--            android:theme="@style/ef_AppTheme"/>-->
+                <activity
+                    android:name="imagepicker.features.ImagePickerActivity"
+                    android:configChanges="orientation|screenSize"/>
 
-        <!--        <provider-->
-        <!--            android:name="imagepicker.helper.ImagePickerFileProvider"-->
-        <!--            android:authorities="${applicationId}.imagepicker.provider"-->
-        <!--            android:exported="false"-->
-        <!--            android:grantUriPermissions="true">-->
-        <!--            <meta-data-->
-        <!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-        <!--                android:resource="@xml/image_picker_provider_paths"/>-->
-        <!--        </provider>-->
+                <provider
+                    android:name="vk.help.imagepicker.helper.ImagePickerFileProvider"
+                    android:authorities="{applicationId}.imagepicker.provider"
+                    android:exported="false"
+                    android:grantUriPermissions="true">
+                    <meta-data
+                        android:name="android.support.FILE_PROVIDER_PATHS"
+                        android:resource="@xml/image_picker_provider_paths"/>
+                </provider>
 
     </application>
 

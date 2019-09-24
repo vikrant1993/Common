@@ -100,4 +100,9 @@
         <item name="android:textSize">@dimen/crop_text_size_controls_text</item>
     </style>
 
+    <style name="customToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/ef_colorTextPrimary</item>
+        <item name="actionMenuTextColor">@color/ef_colorTextPrimary</item>
+    </style>
+
 </resources>
