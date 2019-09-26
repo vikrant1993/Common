@@ -16,7 +16,7 @@ import java.util.*
 
 //@SuppressLint("StaticFieldLeak")
 
-class NetworkRequest @JvmOverloads constructor(
+open class NetworkRequest @JvmOverloads constructor(
     private val listener: ResultsListener,
     private val requestJSON: String = "",
     private val requestBody: RequestBody? = null
