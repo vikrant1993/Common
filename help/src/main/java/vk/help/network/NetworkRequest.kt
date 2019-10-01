@@ -14,8 +14,6 @@ import java.io.IOException
 import java.net.ConnectException
 import java.util.*
 
-//@SuppressLint("StaticFieldLeak")
-
 open class NetworkRequest @JvmOverloads constructor(
     private val listener: ResultsListener,
     private val requestJSON: String = "",
@@ -29,33 +27,6 @@ open class NetworkRequest @JvmOverloads constructor(
     }
 
     private var call: Call? = null
-
-//    public fun post(requestJSON: String): NetworkRequest {
-//        this.requestJSON = requestJSON
-//        return this
-//    }
-//
-//    fun post(requestBody: RequestBody): NetworkRequest {
-//        this.requestBody = requestBody
-//        return this
-//    }
-
-//    public fun setListener(listener: ResultsListener): NetworkRequest {
-//        this.listener = listener
-//        return this
-//    }
-
-//    fun setProgressMessage(progressMessage: String): NetworkRequest {
-//        this.progressMessage = progressMessage
-//        return this
-//    }
-//
-//    override fun onPreExecute() {
-//        super.onPreExecute()
-//        if (context != null) {
-////            HelpingClass.showProgress(context, false, if (progressMessage.isEmpty()) context!!.get()!!.getString(R.string.please_wait_) else progressMessage)
-//        }
-//    }
 
     override fun doInBackground(vararg urls: String?): String {
         return try {
@@ -99,9 +70,6 @@ open class NetworkRequest @JvmOverloads constructor(
     override fun onPostExecute(output: String) {
         super.onPostExecute(output)
         Log.i(OUTPUT, output)
-//        if (context != null) {
-////            HelpingClass.hideProgress()
-//        }
         val response: NetworkResponse
         response = when {
             output.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
