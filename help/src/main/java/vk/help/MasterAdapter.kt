@@ -4,7 +4,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class MasterAdapter(private val recyclerView: RecyclerView, private val errorView: View?, private val adapterView: AdapterView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MasterAdapter(
+    private val recyclerView: RecyclerView,
+    private val errorView: View?,
+    private val adapterView: AdapterView
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {
         recyclerView.adapter = this
@@ -25,6 +29,7 @@ class MasterAdapter(private val recyclerView: RecyclerView, private val errorVie
     }
 
     fun setData(data: ArrayList<*>) {
+        _list.clear()
         _list.addAll(data)
         notifyDataSetChanged()
         updateUI()
