@@ -73,17 +73,17 @@ open class NetworkRequest @JvmOverloads constructor(
         val response: NetworkResponse
         response = when {
             output.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
-            output.toLowerCase(Locale.ROOT).contains("No HTTP resource".toLowerCase(Locale.ROOT)) -> NetworkResponse(
+            output.toLowerCase(Locale.getDefault()).contains("No HTTP resource".toLowerCase(Locale.getDefault())) -> NetworkResponse(
                 false,
                 "No Data Found",
                 "URL Not Found"
             )
-            output.toLowerCase(Locale.ROOT).contains("Failed to connect".toLowerCase(Locale.ROOT)) -> NetworkResponse(
+            output.toLowerCase(Locale.getDefault()).contains("Failed to connect".toLowerCase(Locale.getDefault())) -> NetworkResponse(
                 false,
                 "",
                 "Failed to connect"
             )
-            output.toLowerCase(Locale.ROOT).contains("Server Data Not Found") -> NetworkResponse(
+            output.toLowerCase(Locale.getDefault()).contains("Server Data Not Found") -> NetworkResponse(
                 false,
                 "",
                 "Data On Server Not Found"
