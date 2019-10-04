@@ -11,8 +11,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class
-NumberProgressBar extends View {
+public class NumberProgressBar extends View {
 
     private int mMaxProgress = 100;
 
@@ -501,4 +500,3 @@ NumberProgressBar extends View {
         void onProgressChange(int current, int max);
     }
 }
-

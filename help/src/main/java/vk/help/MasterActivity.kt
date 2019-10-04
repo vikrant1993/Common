@@ -3,6 +3,7 @@ package vk.help
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 open class MasterActivity : AppCompatActivity() {
@@ -22,5 +23,13 @@ open class MasterActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    public fun showToastSimple(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    public fun showToast(message: String) {
+        Toast.makeText(context, Common.capitalize(message), Toast.LENGTH_LONG).show()
     }
 }
