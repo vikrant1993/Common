@@ -15,20 +15,25 @@ public class HelpApp extends MultiDexApplication {
 
     public static OkHttpClient client;
     private static final int cacheSize = 10 * 1024 * 1024;
+    private HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.level(HttpLoggingInterceptor.Level.BODY);
-
-        client = new OkHttpClient.Builder()
-                .addInterceptor(logging)
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS).build();
+                .readTimeout(30, TimeUnit.SECONDS);
+
+
+        builder.addInterceptor(interceptor);
+        client = builder.build();
+    }
+
+    void setLogLevel(HttpLoggingInterceptor.Level level) {
+        interceptor.level(level);
     }
 
     public void setFont(Typeface typeface) {
