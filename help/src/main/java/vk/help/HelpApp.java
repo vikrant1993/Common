@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class HelpApp extends MultiDexApplication {
 
@@ -18,7 +19,12 @@ public class HelpApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.level(HttpLoggingInterceptor.Level.BODY);
+
         client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
                 .cache(new Cache(getCacheDir(), cacheSize))
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
