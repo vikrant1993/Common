@@ -13,6 +13,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public class HelpApp extends MultiDexApplication {
 
+    public enum Level {
+        NONE, BASIC, HEADERS, BODY
+    }
+
     public static OkHttpClient client;
     private static final int cacheSize = 10 * 1024 * 1024;
     private HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -32,8 +36,16 @@ public class HelpApp extends MultiDexApplication {
         client = builder.build();
     }
 
-    void setLogLevel(HttpLoggingInterceptor.Level level) {
-        interceptor.level(level);
+    public void setLogLevel(Level level) {
+        if (level == Level.BASIC) {
+            interceptor.level(HttpLoggingInterceptor.Level.BASIC);
+        } else if (level == Level.HEADERS) {
+            interceptor.level(HttpLoggingInterceptor.Level.HEADERS);
+        } else if (level == Level.BODY) {
+            interceptor.level(HttpLoggingInterceptor.Level.BODY);
+        } else {
+            interceptor.level(HttpLoggingInterceptor.Level.NONE);
+        }
     }
 
     public void setFont(Typeface typeface) {
