@@ -12,6 +12,7 @@ open class MasterActivity : AppCompatActivity() {
         const val DATA = "DATA"
         const val KEY = "KEY"
         const val ID = "ID"
+        const val PHONE_NUMBER = "PHONE_NUMBER"
     }
 
     public lateinit var context: Context
