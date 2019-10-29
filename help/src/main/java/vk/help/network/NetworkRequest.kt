@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import android.util.Log
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -13,11 +14,13 @@ import vk.help.HelpApp
 import java.io.IOException
 import java.net.ConnectException
 import java.util.*
+import kotlin.collections.HashMap
 
 open class NetworkRequest @JvmOverloads constructor(
     private val listener: ResultsListener,
     private val requestJSON: String = "",
-    private val requestBody: RequestBody? = null
+    private var requestBody: RequestBody? = null,
+    private val requestMap: HashMap<String, String>? = null
 ) : AsyncTask<String, Void, String>() {
 
     companion object {
@@ -28,13 +31,26 @@ open class NetworkRequest @JvmOverloads constructor(
 
     private var call: Call? = null
 
+    override fun onPreExecute() {
+        super.onPreExecute()
+        if (requestMap != null) {
+            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+            val iterator = requestMap.entries.iterator()
+            while (iterator.hasNext()) {
+                val temp = iterator.next()
+                builder.addFormDataPart(temp.key, temp.value)
+            }
+            requestBody = builder.build()
+        }
+    }
+
     override fun doInBackground(vararg urls: String?): String {
         return try {
             val url = urls[0]
             Log.i(RequestURL, url!!)
             val request: Request
             if (requestBody != null) {
-                request = Request.Builder().url(url).post(requestBody).build()
+                request = Request.Builder().url(url).post(requestBody!!).build()
             } else {
                 if (requestJSON.isEmpty()) {
                     request = Request.Builder().url(url).get().build()

@@ -33,4 +33,9 @@ open class MasterActivity : AppCompatActivity() {
     public fun showToast(message: String) {
         Toast.makeText(context, Common.capitalize(message), Toast.LENGTH_LONG).show()
     }
+
+    public fun showErrorToast(message: String) {
+        Toast.makeText(context, Common.capitalize(message), Toast.LENGTH_LONG).show()
+    }
+
 }
