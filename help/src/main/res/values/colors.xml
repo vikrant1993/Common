@@ -8,7 +8,8 @@
     <color name="middle_gray">#888</color>
     <color name="holo_blue_light">#ff33b5e5</color>
     <color name="blue">#1565C0</color>
-
+    <color name="material_black">#33333D</color>
+    <color name="material_red">#F44336</color>
 
     <color name="orange">#FF6300</color>
     <color name="clay">#20242F</color>

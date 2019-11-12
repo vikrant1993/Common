@@ -17,7 +17,8 @@ import java.util.*
 import kotlin.collections.HashMap
 
 open class NetworkRequest @JvmOverloads constructor(
-    private val listener: ResultsListener,
+    private val listener: ResultsListener?=null,
+    private val output:SimpleResultListener?=null,
     private val requestJSON: String = "",
     private var requestBody: RequestBody? = null,
     private val requestMap: HashMap<String, String>? = null
@@ -26,7 +27,7 @@ open class NetworkRequest @JvmOverloads constructor(
     companion object {
         private const val RequestURL = "Request URL"
         private const val RequestDATA = "Request Data"
-        private const val OUTPUT = "Output"
+        private const val OUTPUT = "ouput"
     }
 
     private var call: Call? = null
@@ -83,29 +84,29 @@ open class NetworkRequest @JvmOverloads constructor(
         }
     }
 
-    override fun onPostExecute(output: String) {
-        super.onPostExecute(output)
-        Log.i(OUTPUT, output)
+    override fun onPostExecute(output_: String) {
+        super.onPostExecute(output_)
+        Log.i(OUTPUT, output_)
         val response: NetworkResponse
         response = when {
-            output.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
-            output.toLowerCase(Locale.getDefault()).contains("No HTTP resource".toLowerCase(Locale.getDefault())) -> NetworkResponse(
+            output_.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
+            output_.toLowerCase(Locale.getDefault()).contains("No HTTP resource".toLowerCase(Locale.getDefault())) -> NetworkResponse(
                 false,
                 "No Data Found",
                 "URL Not Found"
             )
-            output.toLowerCase(Locale.getDefault()).contains("Failed to connect".toLowerCase(Locale.getDefault())) -> NetworkResponse(
+            output_.toLowerCase(Locale.getDefault()).contains("Failed to connect".toLowerCase(Locale.getDefault())) -> NetworkResponse(
                 false,
                 "",
                 "Failed to connect"
             )
-            output.toLowerCase(Locale.getDefault()).contains("Server Data Not Found") -> NetworkResponse(
+            output_.toLowerCase(Locale.getDefault()).contains("Server Data Not Found") -> NetworkResponse(
                 false,
                 "",
                 "Data On Server Not Found"
             )
             else -> try {
-                val jsonObject = JSONObject(output)
+                val jsonObject = JSONObject(output_)
                 NetworkResponse(
                     jsonObject.getBoolean("status"),
                     jsonObject.getString("data"),
@@ -113,9 +114,10 @@ open class NetworkRequest @JvmOverloads constructor(
                 )
             } catch (e: JSONException) {
                 e.printStackTrace()
-                NetworkResponse(false, output, "Data Conversion Error")
+                NetworkResponse(false, output_, "Data Conversion Error")
             }
         }
-        listener.invoke(response)
+        output?.invoke(output_)
+        listener?.invoke(response)
     }
 }
