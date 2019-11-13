@@ -71,8 +71,7 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
         toast!!.setGravity(Gravity.BOTTOM, 0, 100)
         toast!!.duration = Toast.LENGTH_LONG
         toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
-        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text =
-            Common.capitalize(message)
+        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text = capitalize(message)
         toast!!.show()
     }
 
@@ -84,8 +83,7 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
         toast!!.setGravity(Gravity.BOTTOM, 0, 100)
         toast!!.duration = Toast.LENGTH_LONG
         toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
-        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text =
-            Common.capitalize(message)
+        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text = capitalize(message)
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
             .setTextColor(ContextCompat.getColor(context, R.color.white))
         toast!!.view.findViewById<CardView>(R.id.cardView)
