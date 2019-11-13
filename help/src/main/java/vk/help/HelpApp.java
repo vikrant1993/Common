@@ -24,13 +24,11 @@ public class HelpApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS);
-
 
         builder.addInterceptor(interceptor);
         client = builder.build();
