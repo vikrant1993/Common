@@ -1,4 +1,4 @@
 package vk.help.network
 
-typealias ResultsListener = (result: NetworkResponse) -> Unit
-typealias SimpleResultListener = (output: String) -> Unit
+public typealias ResultsListener = (result: NetworkResponse) -> Unit
+public typealias SimpleResultListener = (output: String) -> Unit
