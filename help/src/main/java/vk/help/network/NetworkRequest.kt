@@ -17,8 +17,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 open class NetworkRequest @JvmOverloads constructor(
-    private val listener: ResultsListener? = null,
-    private val output: SimpleResultListener? = null,
+    private val listener: ResultsListener,
     private val requestJSON: String = "",
     private var requestBody: RequestBody? = null,
     private val requestMap: HashMap<String, String>? = null
@@ -87,9 +86,8 @@ open class NetworkRequest @JvmOverloads constructor(
     override fun onPostExecute(output_: String) {
         super.onPostExecute(output_)
         Log.i(OUTPUT, output_)
-        try {
-            val response: NetworkResponse
-            response = when {
+        val response = try {
+            when {
                 output_.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
                 output_.toLowerCase(Locale.getDefault()).contains(
                     "No HTTP resource".toLowerCase(
@@ -127,9 +125,8 @@ open class NetworkRequest @JvmOverloads constructor(
                 }
             }
         } catch (ignored: java.lang.Exception) {
-
+            NetworkResponse(false, ignored.toString(), ignored.message!!)
         }
-        output?.invoke(output_)
-        listener?.invoke(response)
+        listener.invoke(response)
     }
 }
