@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_4dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/dimen_4dp"
+        app:srcCompat="@drawable/left_arrow" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/month_name"
+        style="?android:attr/textAppearanceMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        tools:text="August 2018" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_4dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/dimen_4dp"
+        app:srcCompat="@drawable/right_arrow" />
+
+</LinearLayout>

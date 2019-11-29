@@ -15,19 +15,25 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-                <activity
-                    android:name="imagepicker.features.ImagePickerActivity"
-                    android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="imagepicker.features.ImagePickerActivity"
+            android:configChanges="orientation|screenSize" />
 
-                <provider
-                    android:name=".imagepicker.helper.ImagePickerFileProvider"
-                    android:authorities="${applicationId}.imagepicker.provider"
-                    android:exported="false"
-                    android:grantUriPermissions="true">
-                    <meta-data
-                        android:name="android.support.FILE_PROVIDER_PATHS"
-                        android:resource="@xml/image_picker_provider_paths"/>
-                </provider>
+        <provider
+            android:name=".imagepicker.helper.ImagePickerFileProvider"
+            android:authorities="${applicationId}.imagepicker.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/image_picker_provider_paths" />
+        </provider>
+
+        <provider
+            android:name=".calender.MaterialCalendarViewInitProvider"
+            android:authorities="${applicationId}.materialcalender.provider"
+            android:enabled="true"
+            android:exported="false" />
 
     </application>
 

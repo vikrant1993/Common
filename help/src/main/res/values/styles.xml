@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="CalendarDefault">
-        <item name="CalendarViewLayout">@style/CalendarDefaultCalendarViewLayout</item>
-        <item name="CalendarGridView">@style/CalendarDefaultGridView</item>
-        <item name="CalendarNormalCell">@style/CalendarDefaultNormalCell</item>
-        <item name="CalendarSquareCell">@style/CalendarDefaultSquareCell</item>
-        <item name="CalendarWeekdayView">@style/CalendarDefaultWeekday</item>
-    </style>
-
-    <style name="CalendarDefaultCalendarViewLayout">
-        <item name="android:background">@color/white</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="CalendarDefaultGridView">
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:listSelector">@null</item>
-        <item name="android:background">@color/lighter_gray</item>
-        <item name="android:horizontalSpacing">1dp</item>
-        <item name="android:padding">1dp</item>
-        <item name="android:verticalSpacing">1dp</item>
-    </style>
-
-    <style name="CalendarDefaultCell">
-        <item name="android:textColor">@color/cell_text_color</item>
-        <item name="android:background">@drawable/cell_bg</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="CalendarDefaultNormalCell" parent="CalendarDefaultCell">
-        <item name="android:padding">5dp</item>
-    </style>
-
-    <style name="CalendarDefaultSquareCell" parent="CalendarDefaultCell" />
-
-    <style name="CalendarDefaultWeekday">
-        <item name="android:textColor">@color/middle_gray</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:paddingBottom">5dp</item>
-    </style>
-
     <style name="crop_ImageViewWidgetIcon">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -103,6 +57,22 @@
     <style name="customToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColorPrimary">@color/ef_colorTextPrimary</item>
         <item name="actionMenuTextColor">@color/ef_colorTextPrimary</item>
+    </style>
+
+    <style name="TextAppearance.MaterialCalendarWidget.Header"
+        parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.MaterialCalendarWidget.Date"
+        parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/mcv_text_date_light</item>
+    </style>
+
+    <style name="TextAppearance.MaterialCalendarWidget.WeekDay"
+        parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textSize">12sp</item>
     </style>
 
 </resources>
