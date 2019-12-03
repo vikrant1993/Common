@@ -22,7 +22,15 @@ class InitialScreenActivity : MasterActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
         updateDate.setOnClickListener {
-            startActivity(Intent(context, ActivityFullScreenImage::class.java).putExtra(DATA, "https://api.learn2crack.com/android/images/donut.png"))
+            startActivity(
+                Intent(
+                    context,
+                    ActivityFullScreenImage::class.java
+                ).putExtra("enableDownload", true).putExtra(
+                    DATA,
+                    "https://api.learn2crack.com/android/images/donut.png"
+                )
+            )
         }
         calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 25)), true)
         calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 15)), true)

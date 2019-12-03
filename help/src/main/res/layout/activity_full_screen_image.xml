@@ -5,8 +5,8 @@
     android:layout_height="match_parent">
 
     <com.otaliastudios.zoom.ZoomImageView
-        android:layout_width="match_parent"
         android:id="@+id/imageView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical|horizontal"
         app:alignment="center"
@@ -28,5 +28,19 @@
         app:twoFingersScrollEnabled="true"
         app:verticalPanEnabled="true"
         app:zoomEnabled="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/saveImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#77000000"
+        android:gravity="center"
+        android:minHeight="?actionBarSize"
+        android:padding="12dp"
+        android:text="SAVE"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
