@@ -1,9 +1,14 @@
 package vk.help.common
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.ConstraintSet.*
+import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.temp.*
 import org.threeten.bp.LocalDate
+import vk.help.ActivityFullScreenImage
 import vk.help.MasterActivity
 import vk.help.calender.CalendarDay
 import vk.help.calender.MaterialCalendarView
@@ -17,10 +22,7 @@ class InitialScreenActivity : MasterActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
         updateDate.setOnClickListener {
-            calendarView.clearSelection()
-            calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 22)), true)
-            calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 12)), true)
-            calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 2)), true)
+            startActivity(Intent(context, ActivityFullScreenImage::class.java).putExtra(DATA, "https://api.learn2crack.com/android/images/donut.png"))
         }
         calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 25)), true)
         calendarView.setDateSelected(CalendarDay.from(LocalDate.of(2019, 11, 15)), true)
@@ -36,7 +38,6 @@ class InitialScreenActivity : MasterActivity() {
                 loadData(startDate, endDate)
             }
         })
-
 
         calendarView.setOnDateClickListener(object : OnDateClickListener {
             override fun onDateClick(date: CalendarDay) {
