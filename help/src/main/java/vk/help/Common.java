@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.util.Base64;
 import android.view.View;
-import android.widget.CalendarView;
 
 import com.google.gson.Gson;
 
