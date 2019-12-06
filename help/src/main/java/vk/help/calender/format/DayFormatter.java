@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 
-import vk.help.calender.CalendarDay;
-import vk.help.calender.MaterialCalendarView;
-
 /**
  * Supply labels for a given day. Default implementation is to format using a {@linkplain SimpleDateFormat}
  */

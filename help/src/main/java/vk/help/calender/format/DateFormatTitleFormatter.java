@@ -2,8 +2,6 @@ package vk.help.calender.format;
 
 import org.threeten.bp.format.DateTimeFormatter;
 
-import vk.help.calender.CalendarDay;
-
 /**
  * Format using a {@linkplain java.text.DateFormat} instance.
  */

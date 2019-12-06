@@ -7,8 +7,6 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.text.DateFormat;
 import java.util.Locale;
 
-import vk.help.calender.CalendarDay;
-
 /**
  * Format using a {@linkplain DateFormat} instance.
  */

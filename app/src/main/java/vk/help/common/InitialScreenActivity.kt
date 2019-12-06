@@ -3,17 +3,10 @@ package vk.help.common
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.constraintlayout.widget.ConstraintSet.*
-import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.temp.*
 import org.threeten.bp.LocalDate
 import vk.help.ActivityFullScreenImage
 import vk.help.MasterActivity
-import vk.help.calender.CalendarDay
-import vk.help.calender.MaterialCalendarView
-import vk.help.calender.OnDateClickListener
-import vk.help.calender.OnMonthChangedListener
 import java.util.*
 
 class InitialScreenActivity : MasterActivity() {

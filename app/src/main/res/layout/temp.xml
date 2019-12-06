@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <vk.help.common.calendar.CalendarView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <vk.help.calender.MaterialCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"

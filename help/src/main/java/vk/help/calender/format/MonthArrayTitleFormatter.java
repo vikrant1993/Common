@@ -2,8 +2,6 @@ package vk.help.calender.format;
 
 import android.text.SpannableStringBuilder;
 
-import vk.help.calender.CalendarDay;
-
 /**
  * Use an array to generate a month/year label
  */
