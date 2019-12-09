@@ -52,10 +52,7 @@ public class WeekPagerAdapter extends CalendarPagerAdapter<WeekView> {
          */
         private final DayOfWeek firstDayOfWeek;
 
-        public Weekly(
-                @NonNull final CalendarDay min,
-                @NonNull final CalendarDay max,
-                final DayOfWeek firstDayOfWeek) {
+        public Weekly(@NonNull final CalendarDay min, @NonNull final CalendarDay max, final DayOfWeek firstDayOfWeek) {
             this.firstDayOfWeek = firstDayOfWeek;
             this.min = getFirstDayOfWeek(min);
             this.count = indexOf(max) + 1;

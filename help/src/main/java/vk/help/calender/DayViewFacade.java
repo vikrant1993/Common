@@ -30,9 +30,6 @@ public class DayViewFacade {
      * @param drawable Drawable to draw behind everything
      */
     public void setBackgroundDrawable(@NonNull Drawable drawable) {
-        if (drawable == null) {
-            throw new IllegalArgumentException("Cannot be null");
-        }
         this.backgroundDrawable = drawable;
         isDecorated = true;
     }
@@ -44,9 +41,6 @@ public class DayViewFacade {
      * @param drawable the drawable for selection
      */
     public void setSelectionDrawable(@NonNull Drawable drawable) {
-        if (drawable == null) {
-            throw new IllegalArgumentException("Cannot be null");
-        }
         selectionDrawable = drawable;
         isDecorated = true;
     }
@@ -57,10 +51,8 @@ public class DayViewFacade {
      * @param span text span instance
      */
     public void addSpan(@NonNull Object span) {
-        if (spans != null) {
-            this.spans.add(new Span(span));
-            isDecorated = true;
-        }
+        this.spans.add(new Span(span));
+        isDecorated = true;
     }
 
     /**

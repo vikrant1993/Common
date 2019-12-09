@@ -10,7 +10,6 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:mcv_selectionColor="#00F"
         app:mcv_showOtherDates="all" />

@@ -1,6 +1,8 @@
 package vk.help.calender.format;
 
 
+import vk.help.calender.CalendarDay;
+
 /**
  * Used to format a {@linkplain CalendarDay} to a string for the month/year title
  */

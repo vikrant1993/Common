@@ -1,5 +1,6 @@
 package vk.help.calender;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -18,6 +19,10 @@ public final class CalendarDay implements Parcelable {
      */
     @NonNull
     private final LocalDate date;
+
+    private Color dotColor;
+
+    private boolean isDot;
 
     /**
      * @param year  new instance's year
@@ -108,6 +113,22 @@ public final class CalendarDay implements Parcelable {
         return date;
     }
 
+    public Color getDotColor() {
+        return dotColor;
+    }
+
+    public void setDotColor(Color dotColor) {
+        this.dotColor = dotColor;
+    }
+
+    public boolean isDot() {
+        return isDot;
+    }
+
+    public void setDot(boolean dot) {
+        isDot = dot;
+    }
+
     /**
      * Determine if this day is within a specified range
      *
@@ -116,8 +137,7 @@ public final class CalendarDay implements Parcelable {
      * @return true if the between (inclusive) the min and max dates.
      */
     public boolean isInRange(@Nullable CalendarDay minDate, @Nullable CalendarDay maxDate) {
-        return !(minDate != null && minDate.isAfter(this)) &&
-                !(maxDate != null && maxDate.isBefore(this));
+        return !(minDate != null && minDate.isAfter(this)) && !(maxDate != null && maxDate.isBefore(this));
     }
 
     /**

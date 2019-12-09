@@ -16,8 +16,12 @@ class MasterAdapter(
 
     private var _list = ArrayList<Any>()
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return adapterView.createChildView(parent)
+        return adapterView.createChildView(parent, viewType)
     }
 
     override fun getItemCount(): Int {
@@ -69,6 +73,6 @@ class MasterAdapter(
 }
 
 interface AdapterView {
-    fun createChildView(parent: ViewGroup): RecyclerView.ViewHolder
+    fun createChildView(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     fun getChildView(holder: RecyclerView.ViewHolder, position: Int)
 }

@@ -54,17 +54,12 @@ class DayView extends AppCompatCheckedTextView {
 
     public DayView(Context context, CalendarDay day) {
         super(context);
-
         fadeTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
         setSelectionColor(this.selectionColor);
-
         setGravity(Gravity.CENTER);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             setTextAlignment(TEXT_ALIGNMENT_CENTER);
         }
-
         setDay(day);
     }
 
@@ -79,8 +74,7 @@ class DayView extends AppCompatCheckedTextView {
      * @param formatter new label formatter
      */
     public void setDayFormatter(DayFormatter formatter) {
-        this.contentDescriptionFormatter = contentDescriptionFormatter == this.formatter ?
-                formatter : contentDescriptionFormatter;
+        this.contentDescriptionFormatter = contentDescriptionFormatter == this.formatter ? formatter : contentDescriptionFormatter;
         this.formatter = formatter == null ? DayFormatter.DEFAULT : formatter;
         CharSequence currentLabel = getText();
         Object[] spans = null;
@@ -113,8 +107,7 @@ class DayView extends AppCompatCheckedTextView {
 
     @NonNull
     public String getContentDescriptionLabel() {
-        return contentDescriptionFormatter == null ? formatter.format(date)
-                : contentDescriptionFormatter.format(date);
+        return contentDescriptionFormatter == null ? formatter.format(date) : contentDescriptionFormatter.format(date);
     }
 
     public void setSelectionColor(int color) {
@@ -153,7 +146,6 @@ class DayView extends AppCompatCheckedTextView {
     private void setEnabled() {
         boolean enabled = isInMonth && isInRange && !isDecoratedDisabled;
         super.setEnabled(isInRange && !isDecoratedDisabled);
-
         boolean showOtherMonths = showOtherMonths(showOtherDates);
         boolean showOutOfRange = showOutOfRange(showOtherDates) || showOtherMonths;
         boolean showDecoratedDisabled = showDecoratedDisabled(showOtherDates);
@@ -173,16 +165,12 @@ class DayView extends AppCompatCheckedTextView {
         }
 
         if (!isInMonth && shouldBeVisible) {
-            setTextColor(getTextColors().getColorForState(
-                    new int[]{-android.R.attr.state_enabled}, Color.GRAY));
+            setTextColor(getTextColors().getColorForState(new int[]{-android.R.attr.state_enabled}, Color.GRAY));
         }
         setVisibility(shouldBeVisible ? View.VISIBLE : View.INVISIBLE);
     }
 
-    protected void setupSelection(
-            @MaterialCalendarView.ShowOtherDates int showOtherDates,
-            boolean inRange,
-            boolean inMonth) {
+    protected void setupSelection(@MaterialCalendarView.ShowOtherDates int showOtherDates, boolean inRange, boolean inMonth) {
         this.showOtherDates = showOtherDates;
         this.isInMonth = inMonth;
         this.isInRange = inRange;
@@ -199,9 +187,7 @@ class DayView extends AppCompatCheckedTextView {
             customBackground.setState(getDrawableState());
             customBackground.draw(canvas);
         }
-
         mCircleDrawable.setBounds(circleDrawableRect);
-
         super.onDraw(canvas);
     }
 
@@ -218,17 +204,8 @@ class DayView extends AppCompatCheckedTextView {
         StateListDrawable drawable = new StateListDrawable();
         drawable.setExitFadeDuration(fadeTime);
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(color));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawable.addState(
-                    new int[]{android.R.attr.state_pressed},
-                    generateRippleDrawable(color, bounds)
-            );
-        } else {
-            drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(color));
-        }
-
+        drawable.addState(new int[]{android.R.attr.state_pressed}, Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? generateRippleDrawable(color, bounds) : generateCircleDrawable(color));
         drawable.addState(new int[]{}, generateCircleDrawable(Color.TRANSPARENT));
-
         return drawable;
     }
 
@@ -263,10 +240,8 @@ class DayView extends AppCompatCheckedTextView {
     void applyFacade(DayViewFacade facade) {
         this.isDecoratedDisabled = facade.areDaysDisabled();
         setEnabled();
-
         setCustomBackground(facade.getBackgroundDrawable());
         setSelectionDrawable(facade.getSelectionDrawable());
-
         // Facade has spans
         List<DayViewFacade.Span> spans = facade.getSpans();
         if (!spans.isEmpty()) {
@@ -295,9 +270,7 @@ class DayView extends AppCompatCheckedTextView {
         final int offset = Math.abs(height - width) / 2;
 
         // Lollipop platform bug. Circle drawable offset needs to be half of normal offset
-        final int circleOffset =
-                Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ? offset / 2 : offset;
-
+        final int circleOffset = Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ? offset / 2 : offset;
         if (width >= height) {
             tempRect.set(offset, 0, radius + offset, height);
             circleDrawableRect.set(circleOffset, 0, radius + circleOffset, height);

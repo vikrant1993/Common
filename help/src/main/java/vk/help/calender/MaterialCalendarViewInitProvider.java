@@ -18,8 +18,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 public final class MaterialCalendarViewInitProvider extends ContentProvider {
 
     //TODO Change Below String
-    private static final String MCV_AUTHORITY =
-            "vk.help.common.materialcalender.materialcalendarviewinitprovider";
+    private static final String MCV_AUTHORITY = "vk.help.common.materialcalender.materialcalendarviewinitprovider";
 
     public MaterialCalendarViewInitProvider() {
     }

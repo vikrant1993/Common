@@ -12,10 +12,7 @@ import vk.help.calender.format.WeekDayFormatter
  * Display a day of the week
  */
 @SuppressLint("ViewConstructor")
-internal class WeekDayView(
-    context: Context?,
-    dayOfWeek: DayOfWeek?
-) : AppCompatTextView(context) {
+internal class WeekDayView(context: Context?, dayOfWeek: DayOfWeek?) : AppCompatTextView(context) {
     private var formatter = WeekDayFormatter.DEFAULT
     private var dayOfWeek: DayOfWeek? = null
 

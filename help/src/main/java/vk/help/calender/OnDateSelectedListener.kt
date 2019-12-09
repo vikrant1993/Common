@@ -12,9 +12,5 @@ interface OnDateSelectedListener {
      * @param date the date that was selected or unselected
      * @param selected true if the day is now selected, false otherwise
      */
-    fun onDateSelected(
-        widget: MaterialCalendarView,
-        date: CalendarDay,
-        selected: Boolean
-    )
+    fun onDateSelected(widget: MaterialCalendarView, date: CalendarDay, selected: Boolean)
 }

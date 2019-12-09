@@ -43,11 +43,7 @@ abstract class CalendarPagerView extends ViewGroup
 
     private final Collection<DayView> dayViews = new ArrayList<>();
 
-    public CalendarPagerView(
-            @NonNull MaterialCalendarView view,
-            CalendarDay firstViewDay,
-            DayOfWeek firstDayOfWeek,
-            boolean showWeekDays) {
+    public CalendarPagerView(@NonNull MaterialCalendarView view, CalendarDay firstViewDay, DayOfWeek firstDayOfWeek, boolean showWeekDays) {
         super(view.getContext());
 
         this.mcv = view;
@@ -247,17 +243,8 @@ abstract class CalendarPagerView extends ViewGroup
 
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
-
-            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    measureTileWidth,
-                    MeasureSpec.EXACTLY
-            );
-
-            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(
-                    measureTileHeight,
-                    MeasureSpec.EXACTLY
-            );
-
+            int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(measureTileWidth, MeasureSpec.EXACTLY);
+            int childHeightMeasureSpec = MeasureSpec.makeMeasureSpec(measureTileHeight, MeasureSpec.EXACTLY);
             child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
         }
     }

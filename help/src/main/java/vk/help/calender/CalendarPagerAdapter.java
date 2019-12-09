@@ -311,6 +311,13 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         }
     }
 
+    public void setDateSelected(@NonNull CalendarDay day) {
+        if (!selectedDates.contains(day)) {
+            selectedDates.add(day);
+            invalidateSelectedDates();
+        }
+    }
+
     /**
      * Clear the previous selection, select the range of days from first to last, and finally
      * invalidate. First day should be before last day, otherwise the selection won't happen.
@@ -347,8 +354,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         for (int i = 0; i < selectedDates.size(); i++) {
             CalendarDay date = selectedDates.get(i);
 
-            if ((minDate != null && minDate.isAfter(date)) || (maxDate != null
-                    && maxDate.isBefore(date))) {
+            if ((minDate != null && minDate.isAfter(date)) || (maxDate != null && maxDate.isBefore(date))) {
                 selectedDates.remove(i);
                 mcv.onDateUnselected(date);
                 i -= 1;

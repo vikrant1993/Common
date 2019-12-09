@@ -11,8 +11,5 @@ interface OnRangeSelectedListener {
      * @param widget the view associated with this listener
      * @param dates the dates in the range, in ascending order
      */
-    fun onRangeSelected(
-        widget: MaterialCalendarView,
-        dates: List<CalendarDay?>
-    )
+    fun onRangeSelected(widget: MaterialCalendarView, dates: List<CalendarDay?>)
 }
