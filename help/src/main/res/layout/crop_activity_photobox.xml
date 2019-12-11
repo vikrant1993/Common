@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/crop_photobox"
     android:layout_width="match_parent"
@@ -29,12 +30,12 @@
         android:layout_above="@+id/controls_wrapper"
         android:layout_below="@+id/toolbar">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_view_logo"
             android:layout_width="@dimen/crop_default_crop_logo_size"
             android:layout_height="@dimen/crop_default_crop_logo_size"
             android:layout_gravity="center"
-            android:src="@drawable/ic_crop"
+            app:srcCompat="@drawable/ic_crop"
             tools:background="@drawable/ic_crop"
             tools:ignore="ContentDescription,MissingPrefix" />
 

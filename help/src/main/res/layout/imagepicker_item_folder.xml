@@ -19,7 +19,7 @@
         android:layout_gravity="bottom"
         android:background="@color/ef_black_alpha_50"
         android:orientation="vertical"
-        android:padding="@dimen/ef_padding_small">
+        android:padding="@dimen/dimen_4dp">
 
         <TextView
             android:id="@+id/tv_name"
