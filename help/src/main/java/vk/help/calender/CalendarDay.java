@@ -8,62 +8,29 @@ import androidx.annotation.Nullable;
 
 import org.threeten.bp.LocalDate;
 
-/**
- * An imputable representation of a day on a calendar, based on {@link LocalDate}.
- */
 public final class CalendarDay implements Parcelable {
 
-    /**
-     * Everything is based on this variable for {@link CalendarDay}.
-     */
     @NonNull
     private final LocalDate date;
 
-    /**
-     * @param year  new instance's year
-     * @param month new instance's month as defined by {@linkplain java.util.Calendar}
-     * @param day   new instance's day of month
-     */
     private CalendarDay(final int year, final int month, final int day) {
         date = LocalDate.of(year, month, day);
     }
 
-    /**
-     * @param date {@link LocalDate} instance
-     */
     private CalendarDay(@NonNull final LocalDate date) {
         this.date = date;
     }
 
-    /**
-     * Get a new instance set to drawable_rectangular
-     *
-     * @return CalendarDay set to drawable_rectangular's date
-     */
     @NonNull
     static CalendarDay today() {
         return from(LocalDate.now());
     }
 
-    /**
-     * Get a new instance set to the specified day
-     *
-     * @param year  new instance's year
-     * @param month new instance's month as defined by {@linkplain java.util.Calendar}
-     * @param day   new instance's day of month
-     * @return CalendarDay set to the specified date
-     */
     @NonNull
     public static CalendarDay from(int year, int month, int day) {
         return new CalendarDay(year, month, day);
     }
 
-    /**
-     * Get a new instance set to the specified day
-     *
-     * @param date {@linkplain LocalDate} to pull date information from. Passing null will return null
-     * @return CalendarDay set to the specified date
-     */
     public static CalendarDay from(@Nullable LocalDate date) {
         if (date == null) {
             return null;
@@ -71,11 +38,6 @@ public final class CalendarDay implements Parcelable {
         return new CalendarDay(date);
     }
 
-    /**
-     * Get the year
-     *
-     * @return the year for this day
-     */
     public int getYear() {
         return date.getYear();
     }
