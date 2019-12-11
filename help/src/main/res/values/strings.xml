@@ -6,7 +6,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="and">and</string>
-    <string name="calendar">Calendar</string>
 
     <string name="no_menu_view">No view for menu provided. You must either call .withMenuView(View) or pass a valid resource id to .withMenuLayout(int)</string>
     <string name="bad_content_view">Your content view must contain exactly one child. Make sure you call inject() after setContentView().</string>
@@ -22,21 +21,16 @@
     <string name="error_input_data_is_absent" translatable="false">Both input and output Uri must be specified</string>
     <string name="mutate_exception_hint" translatable="false">Therefore, override color resource (color_toolbar_widget) in your app to make it work on pre-L devices</string>
 
-    <string name="ef_permission_write_external_rationale">Allow access external storage to select images</string>
-
     <string name="done">DONE</string>
     <string name="ef_camera">CAMERA</string>
 
     <string name="ef_title_folder">Folder</string>
     <string name="ef_title_select_image">Tap to select images</string>
-    <string name="ef_ltitle_permission_denied">Permission denied</string>
 
     <string name="ef_selected">%d selected</string>
     <string name="ef_selected_with_limit">%1$d/%2$d selected</string>
 
     <string name="ef_error_create_image_file">Failed to create image file</string>
-    <string name="ef_error_no_camera">No camera found</string>
-    <string name="ef_error_null_cursor">Oops, something went wrong!</string>
 
     <string name="ef_msg_empty_images">No images found</string>
     <string name="ef_msg_no_write_external_permission">Please grant storage permission to select images</string>

@@ -6,14 +6,12 @@
     <color name="lighter_gray">#ddd</color>
     <color name="darker_gray">#aaa</color>
     <color name="middle_gray">#888</color>
-    <color name="holo_blue_light">#ff33b5e5</color>
     <color name="blue">#1565C0</color>
     <color name="material_black">#33333D</color>
     <color name="material_red">#F44336</color>
 
     <color name="orange">#FF6300</color>
     <color name="clay">#20242F</color>
-    <color name="heather">#B3BECE</color>
 
     <!--uCrop Activity-->
     <color name="crop_color_toolbar">@color/white</color>
@@ -22,7 +20,6 @@
     <color name="crop_color_widget">@color/black</color>
     <color name="crop_color_widget_active">@color/white</color>
     <color name="crop_color_active_controls_color">@color/orange</color>
-    <color name="crop_color_inactive_controls_color">@color/heather</color>
     <color name="crop_color_widget_rotate_mid_line">@color/orange</color>
     <color name="crop_color_widget_rotate_angle">@color/clay</color>
     <color name="crop_color_active_aspect_ratio">@color/orange</color>
@@ -41,9 +38,5 @@
     <color name="ef_black_alpha_50">#80000000</color>
     <color name="ef_black_alpha_aa">#AA000000</color>
     <color name="grey">#9E9E9E</color>
-    <color name="ef_colorPrimary" tools:override="true">#3F51B5</color>
-    <color name="ef_colorPrimaryDark" tools:override="true">#303F9F</color>
-    <color name="ef_colorAccent" tools:override="true">#FF4081</color>
-    <color name="ef_colorTextPrimary" tools:override="true">#FFFFFF</color>
 
 </resources>
