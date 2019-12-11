@@ -153,9 +153,6 @@ public class MaterialCalendarView extends ViewGroup {
     private CalendarDay minDate = null;
     private CalendarDay maxDate = null;
 
-    private OnDateSelectedListener listener;
-    private OnMonthChangedListener monthListener;
-
     CharSequence calendarContentDescription;
     private int accentColor = 0;
     private int tileHeight = INVALID_TILE_DIMENSION;
@@ -165,8 +162,6 @@ public class MaterialCalendarView extends ViewGroup {
     private boolean showWeekDays;
 
     private State state;
-
-    private OnDateClickListener clickListener;
 
     public MaterialCalendarView(Context context) {
         this(context, null);
@@ -472,17 +467,6 @@ public class MaterialCalendarView extends ViewGroup {
         adapter.setWeekDayTextAppearance(resourceId);
     }
 
-    /**
-     * Get the currently selected date, or null if no selection. Depending on the selection mode,
-     * you might get different results.
-     *
-     * <p>For {@link #SELECTION_MODE_SINGLE}, returns the selected date.</p>
-     * should probably be using {@link #getSelectedDates()}.</p>
-     *
-     * @return The selected day, or null if no selection. If in multiple selection mode, this
-     * will return the last date of the list of selected dates.
-     * @see MaterialCalendarView#getSelectedDates()
-     */
     @Nullable
     public CalendarDay getSelectedDate() {
         List<CalendarDay> dates = adapter.getSelectedDates();
@@ -835,9 +819,7 @@ public class MaterialCalendarView extends ViewGroup {
      * @param day the day that was selected
      */
     protected void dispatchOnDateSelected(final CalendarDay day) {
-        if (listener != null) {
-            listener.onDateSelected(MaterialCalendarView.this, day, false);
-        }
+
     }
 
     /**
@@ -846,9 +828,6 @@ public class MaterialCalendarView extends ViewGroup {
      * @param day first day of the new month
      */
     protected void dispatchOnMonthChanged(final CalendarDay day) {
-        if (monthListener != null) {
-            monthListener.onMonthChanged(MaterialCalendarView.this, day);
-        }
     }
 
     /**
@@ -866,9 +845,6 @@ public class MaterialCalendarView extends ViewGroup {
             } else if (currentDate.isBefore(selectedDate)) {
                 goToNext();
             }
-        }
-        if (clickListener != null) {
-            clickListener.onDateClick(dayView.getDate());
         }
     }
 
