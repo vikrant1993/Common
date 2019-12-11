@@ -29,7 +29,7 @@ public class DayViewFacade {
      *
      * @param drawable Drawable to draw behind everything
      */
-    public void setBackgroundDrawable(@NonNull Drawable drawable) {
+    private void setBackgroundDrawable(@NonNull Drawable drawable) {
         this.backgroundDrawable = drawable;
         isDecorated = true;
     }
@@ -40,31 +40,9 @@ public class DayViewFacade {
      *
      * @param drawable the drawable for selection
      */
-    public void setSelectionDrawable(@NonNull Drawable drawable) {
+    private void setSelectionDrawable(@NonNull Drawable drawable) {
         selectionDrawable = drawable;
         isDecorated = true;
-    }
-
-    /**
-     * Add a span to the entire text of a day
-     *
-     * @param span text span instance
-     */
-    public void addSpan(@NonNull Object span) {
-        this.spans.add(new Span(span));
-        isDecorated = true;
-    }
-
-    /**
-     * <p>Set days to be in a disabled state, or re-enabled.</p>
-     * <p>Note, passing true here will <b>not</b> override minimum and maximum dates, if set.
-     * This will only re-enable disabled dates.</p>
-     *
-     * @param daysDisabled true to disable days, false to re-enable days
-     */
-    public void setDaysDisabled(boolean daysDisabled) {
-        this.daysDisabled = daysDisabled;
-        this.isDecorated = true;
     }
 
     void reset() {
@@ -113,7 +91,7 @@ public class DayViewFacade {
      *
      * @return true if disabled, false if not re-enabled
      */
-    public boolean areDaysDisabled() {
+    boolean areDaysDisabled() {
         return daysDisabled;
     }
 

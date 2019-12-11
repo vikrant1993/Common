@@ -12,12 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
+
 import vk.help.calender.format.TitleFormatter;
 
 class TitleChanger {
 
-    public static final int DEFAULT_ANIMATION_DELAY = 400;
-    public static final int DEFAULT_Y_TRANSLATION_DP = 20;
+    private static final int DEFAULT_ANIMATION_DELAY = 400;
+    private static final int DEFAULT_Y_TRANSLATION_DP = 20;
 
     private final TextView title;
     @NonNull
@@ -33,7 +35,7 @@ class TitleChanger {
     private long lastAnimTime = 0;
     private CalendarDay previousMonth = null;
 
-    public TitleChanger(TextView title) {
+    TitleChanger(TextView title) {
         this.title = title;
         Resources res = title.getResources();
         animDelay = DEFAULT_ANIMATION_DELAY;
@@ -41,7 +43,7 @@ class TitleChanger {
         translate = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_Y_TRANSLATION_DP, res.getDisplayMetrics());
     }
 
-    public void change(final CalendarDay currentMonth) {
+    void change(final CalendarDay currentMonth) {
         long currentTime = System.currentTimeMillis();
         if (currentMonth == null) {
             return;
@@ -75,13 +77,13 @@ class TitleChanger {
             viewPropertyAnimator.alpha(0).setDuration(animDuration).setInterpolator(interpolator).setListener(new AnimatorListener() {
 
                 @Override
-                public void onAnimationCancel(Animator animator) {
+                public void onAnimationCancel(@NotNull Animator animator) {
                     doTranslation(title, 0);
                     title.setAlpha(1);
                 }
 
                 @Override
-                public void onAnimationEnd(Animator animator) {
+                public void onAnimationEnd(@NotNull Animator animator) {
                     title.setText(newTitle);
                     doTranslation(title, translation);
 
@@ -108,7 +110,7 @@ class TitleChanger {
         }
     }
 
-    public void setTitleFormatter(@Nullable final TitleFormatter titleFormatter) {
+    void setTitleFormatter(@Nullable final TitleFormatter titleFormatter) {
         this.titleFormatter = titleFormatter == null ? TitleFormatter.DEFAULT : titleFormatter;
     }
 
@@ -120,7 +122,7 @@ class TitleChanger {
         return orientation;
     }
 
-    public void setPreviousMonth(CalendarDay previousMonth) {
+    void setPreviousMonth(CalendarDay previousMonth) {
         this.previousMonth = previousMonth;
     }
 }

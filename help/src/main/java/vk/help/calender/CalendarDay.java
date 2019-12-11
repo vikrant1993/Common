@@ -1,6 +1,5 @@
 package vk.help.calender;
 
-import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -19,10 +18,6 @@ public final class CalendarDay implements Parcelable {
      */
     @NonNull
     private final LocalDate date;
-
-    private Color dotColor;
-
-    private boolean isDot;
 
     /**
      * @param year  new instance's year
@@ -46,7 +41,7 @@ public final class CalendarDay implements Parcelable {
      * @return CalendarDay set to drawable_rectangular's date
      */
     @NonNull
-    public static CalendarDay today() {
+    static CalendarDay today() {
         return from(LocalDate.now());
     }
 
@@ -113,22 +108,6 @@ public final class CalendarDay implements Parcelable {
         return date;
     }
 
-    public Color getDotColor() {
-        return dotColor;
-    }
-
-    public void setDotColor(Color dotColor) {
-        this.dotColor = dotColor;
-    }
-
-    public boolean isDot() {
-        return isDot;
-    }
-
-    public void setDot(boolean dot) {
-        isDot = dot;
-    }
-
     /**
      * Determine if this day is within a specified range
      *
@@ -136,7 +115,7 @@ public final class CalendarDay implements Parcelable {
      * @param maxDate the latest day, may be null
      * @return true if the between (inclusive) the min and max dates.
      */
-    public boolean isInRange(@Nullable CalendarDay minDate, @Nullable CalendarDay maxDate) {
+    boolean isInRange(@Nullable CalendarDay minDate, @Nullable CalendarDay maxDate) {
         return !(minDate != null && minDate.isAfter(this)) && !(maxDate != null && maxDate.isBefore(this));
     }
 
@@ -146,7 +125,7 @@ public final class CalendarDay implements Parcelable {
      * @param other the other day to test
      * @return true if this is before other, false if equal or after
      */
-    public boolean isBefore(@NonNull final CalendarDay other) {
+    boolean isBefore(@NonNull final CalendarDay other) {
         return date.isBefore(other.getDate());
     }
 
@@ -156,7 +135,7 @@ public final class CalendarDay implements Parcelable {
      * @param other the other day to test
      * @return true if this is after other, false if equal or before
      */
-    public boolean isAfter(@NonNull final CalendarDay other) {
+    boolean isAfter(@NonNull final CalendarDay other) {
         return date.isAfter(other.getDate());
     }
 

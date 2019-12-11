@@ -262,11 +262,10 @@ abstract class CalendarPagerView extends ViewGroup
         final int parentWidth = getWidth();
         final int count = getChildCount();
         final int parentLeft = 0;
-        final int parentRight = parentWidth;
 
         int childTop = 0;
         int childLeft = parentLeft;
-        int childRight = parentRight;
+        int childRight = parentWidth;
 
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -285,7 +284,7 @@ abstract class CalendarPagerView extends ViewGroup
             //We should warp every so many children
             if (i % DEFAULT_DAYS_IN_WEEK == (DEFAULT_DAYS_IN_WEEK - 1)) {
                 childLeft = parentLeft;
-                childRight = parentRight;
+                childRight = parentWidth;
                 childTop += height;
             }
         }
@@ -341,7 +340,7 @@ abstract class CalendarPagerView extends ViewGroup
         /**
          * {@inheritDoc}
          */
-        public LayoutParams() {
+        LayoutParams() {
             super(WRAP_CONTENT, WRAP_CONTENT);
         }
     }

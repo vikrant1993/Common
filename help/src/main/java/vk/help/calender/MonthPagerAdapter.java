@@ -46,7 +46,7 @@ class MonthPagerAdapter extends CalendarPagerAdapter<MonthView> {
          */
         private final int count;
 
-        public Monthly(@NonNull final CalendarDay min, @NonNull final CalendarDay max) {
+        Monthly(@NonNull final CalendarDay min, @NonNull final CalendarDay max) {
             this.min = CalendarDay.from(min.getYear(), min.getMonth(), 1);
             this.count = indexOf(max) + 1;
         }

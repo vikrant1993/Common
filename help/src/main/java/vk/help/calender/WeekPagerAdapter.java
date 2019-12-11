@@ -10,7 +10,7 @@ import org.threeten.bp.temporal.WeekFields;
 
 public class WeekPagerAdapter extends CalendarPagerAdapter<WeekView> {
 
-    public WeekPagerAdapter(MaterialCalendarView mcv) {
+    WeekPagerAdapter(MaterialCalendarView mcv) {
         super(mcv);
     }
 
@@ -52,7 +52,7 @@ public class WeekPagerAdapter extends CalendarPagerAdapter<WeekView> {
          */
         private final DayOfWeek firstDayOfWeek;
 
-        public Weekly(@NonNull final CalendarDay min, @NonNull final CalendarDay max, final DayOfWeek firstDayOfWeek) {
+        Weekly(@NonNull final CalendarDay min, @NonNull final CalendarDay max, final DayOfWeek firstDayOfWeek) {
             this.firstDayOfWeek = firstDayOfWeek;
             this.min = getFirstDayOfWeek(min);
             this.count = indexOf(max) + 1;

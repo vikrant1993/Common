@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 
 import java.util.List;
+import java.util.Objects;
 
 import vk.help.calender.format.DayFormatter;
 
@@ -122,7 +123,7 @@ class DayView extends AppCompatCheckedTextView {
         if (drawable == null) {
             this.selectionDrawable = null;
         } else {
-            this.selectionDrawable = drawable.getConstantState().newDrawable(getResources());
+            this.selectionDrawable = Objects.requireNonNull(drawable.getConstantState()).newDrawable(getResources());
         }
         regenerateBackground();
     }
@@ -134,7 +135,7 @@ class DayView extends AppCompatCheckedTextView {
         if (drawable == null) {
             this.customBackground = null;
         } else {
-            this.customBackground = drawable.getConstantState().newDrawable(getResources());
+            this.customBackground = Objects.requireNonNull(drawable.getConstantState()).newDrawable(getResources());
         }
         invalidate();
     }
