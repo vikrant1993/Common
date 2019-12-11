@@ -8,6 +8,8 @@ import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 class AnimationHandler {
 
     private static final int HEIGHT_ANIM_DURATION_MILLIS = 650;
@@ -85,12 +87,12 @@ class AnimationHandler {
     private void setUpAnimationLisForExposeOpen(final Animator indicatorAnim, Animation heightAnim) {
         heightAnim.setAnimationListener(new AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void onAnimationStart(@NotNull Animation animation) {
                 compactCalendarController.setAnimationStatus(CompactCalendarController.EXPOSE_CALENDAR_ANIMATION);
             }
 
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(@NotNull Animation animation) {
                 indicatorAnim.start();
             }
         });
@@ -112,13 +114,13 @@ class AnimationHandler {
     private void setUpAnimationLisForExposeClose(final Animator indicatorAnim, Animation heightAnim) {
         heightAnim.setAnimationListener(new AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void onAnimationStart(@NotNull Animation animation) {
                 compactCalendarController.setAnimationStatus(CompactCalendarController.EXPOSE_CALENDAR_ANIMATION);
                 indicatorAnim.start();
             }
 
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(@NotNull Animation animation) {
                 compactCalendarController.setAnimationStatus(CompactCalendarController.IDLE);
                 onClose();
                 isAnimating = false;
@@ -154,12 +156,9 @@ class AnimationHandler {
         ValueAnimator animIndicator = ValueAnimator.ofFloat(from, to);
         animIndicator.setDuration(INDICATOR_ANIM_DURATION_MILLIS);
         animIndicator.setInterpolator(new OvershootInterpolator());
-        animIndicator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                compactCalendarController.setGrowFactorIndicator((Float) animation.getAnimatedValue());
-                compactCalendarView.invalidate();
-            }
+        animIndicator.addUpdateListener(animation -> {
+            compactCalendarController.setGrowFactorIndicator((Float) animation.getAnimatedValue());
+            compactCalendarView.invalidate();
         });
         return animIndicator;
     }
@@ -185,7 +184,7 @@ class AnimationHandler {
     private void setUpAnimationLisForOpen(Animation openAnimation) {
         openAnimation.setAnimationListener(new AnimationListener() {
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(@NotNull Animation animation) {
                 super.onAnimationEnd(animation);
                 onOpen();
                 isAnimating = false;
@@ -196,7 +195,7 @@ class AnimationHandler {
     private void setUpAnimationLisForClose(Animation openAnimation) {
         openAnimation.setAnimationListener(new AnimationListener() {
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(@NotNull Animation animation) {
                 super.onAnimationEnd(animation);
                 onClose();
                 isAnimating = false;

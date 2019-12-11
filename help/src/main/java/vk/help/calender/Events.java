@@ -1,5 +1,7 @@
 package vk.help.calender;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 class Events {
@@ -40,6 +42,7 @@ class Events {
         return result;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "Events{" +
