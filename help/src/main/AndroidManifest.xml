@@ -34,12 +34,6 @@
                 android:resource="@xml/image_picker_provider_paths" />
         </provider>
 
-        <provider
-            android:name=".calender.MaterialCalendarViewInitProvider"
-            android:authorities="${applicationId}.materialcalender.provider"
-            android:enabled="true"
-            android:exported="false" />
-
     </application>
 
 </manifest>
