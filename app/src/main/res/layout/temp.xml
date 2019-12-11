@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <vk.help.calender.MaterialCalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:mcv_selectionColor="#00F"
-        app:mcv_showOtherDates="all" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/updateDate"

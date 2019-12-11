@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FastScroller">
-        <attr name="bubbleColor" format="color"  />
+        <attr name="bubbleColor" format="color" />
         <attr name="handleColor" format="color" />
         <attr name="bubbleTextAppearance" format="reference" />
-    </declare-styleable>
-
-    <attr name="CalendarViewLayout" format="reference"/>
-    <attr name="CalendarSquareCell" format="reference"/>
-    <attr name="CalendarNormalCell" format="reference"/>
-    <attr name="CalendarGridView" format="reference"/>
-    <attr name="CalendarWeekdayView" format="reference"/>
-    <declare-styleable name="CalendarCell" >
-        <attr name="android:textColor" />
-        <attr name="android:background" />
-    </declare-styleable>
-    <!-- Custom states -->
-    <declare-styleable name="DateState">
-        <attr name="state_date_today" format="boolean"/>
-        <attr name="state_date_selected" format="boolean"/>
-        <attr name="state_date_disabled" format="boolean"/>
-        <attr name="state_date_prev_next_month" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="signature">
@@ -54,32 +37,32 @@
     <declare-styleable name="CropView">
 
         <!--Crop image view-->
-        <attr name="aspect_ratio_x" format="float"/>
-        <attr name="aspect_ratio_y" format="float"/>
+        <attr name="aspect_ratio_x" format="float" />
+        <attr name="aspect_ratio_y" format="float" />
 
         <!--Overlay view-->
-        <attr name="show_oval_crop_frame" format="boolean"/>
-        <attr name="circle_dimmed_layer" format="boolean"/>
-        <attr name="dimmed_color" format="color"/>
+        <attr name="show_oval_crop_frame" format="boolean" />
+        <attr name="circle_dimmed_layer" format="boolean" />
+        <attr name="dimmed_color" format="color" />
 
-        <attr name="grid_stroke_size" format="dimension"/>
-        <attr name="grid_color" format="color"/>
-        <attr name="grid_row_count" format="integer"/>
-        <attr name="grid_column_count" format="integer"/>
-        <attr name="show_grid" format="boolean"/>
+        <attr name="grid_stroke_size" format="dimension" />
+        <attr name="grid_color" format="color" />
+        <attr name="grid_row_count" format="integer" />
+        <attr name="grid_column_count" format="integer" />
+        <attr name="show_grid" format="boolean" />
 
-        <attr name="frame_stroke_size" format="dimension"/>
-        <attr name="frame_color" format="color"/>
-        <attr name="show_frame" format="boolean"/>
+        <attr name="frame_stroke_size" format="dimension" />
+        <attr name="frame_color" format="color" />
+        <attr name="show_frame" format="boolean" />
 
     </declare-styleable>
 
     <declare-styleable name="crop_AspectRatioTextView">
 
-        <attr name="ratio_title" format="string"/>
+        <attr name="ratio_title" format="string" />
 
-        <attr name="ratio_x" format="float"/>
-        <attr name="ratio_y" format="float"/>
+        <attr name="ratio_x" format="float" />
+        <attr name="ratio_y" format="float" />
 
     </declare-styleable>
 
@@ -147,6 +130,39 @@
             <enum name="vertical" value="0" />
             <enum name="horizontal" value="1" />
         </attr>
+    </declare-styleable>
+
+    <!--New Calendar-->
+
+    <attr name="compactCalendarEventIndicatorStyle" format="enum">
+        <enum name="fill_large_indicator" value="1" />
+        <enum name="no_fill_large_indicator" value="2" />
+        <enum name="small_indicator" value="3" />
+    </attr>
+    <attr name="compactCalendarCurrentDayIndicatorStyle" format="enum">
+        <enum name="fill_large_indicator" value="1" />
+        <enum name="no_fill_large_indicator" value="2" />
+    </attr>
+    <attr name="compactCalendarCurrentSelectedDayIndicatorStyle" format="enum">
+        <enum name="fill_large_indicator" value="1" />
+        <enum name="no_fill_large_indicator" value="2" />
+    </attr>
+    <declare-styleable name="CompactCalendarView">
+        <attr name="compactCalendarTextSize" format="dimension" />
+        <attr name="compactCalendarBackgroundColor" format="color" />
+        <attr name="compactCalendarCurrentDayBackgroundColor" format="color" />
+        <attr name="compactCalendarCurrentDayTextColor" format="color" />
+        <attr name="compactCalendarCurrentSelectedDayBackgroundColor" format="color" />
+        <attr name="compactCalendarCurrentSelectedDayTextColor" format="color" />
+        <attr name="compactCalendarTextColor" format="color" />
+        <attr name="compactCalendarMultiEventIndicatorColor" format="color" />
+        <attr name="compactCalendarTargetHeight" format="dimension" />
+        <attr name="compactCalendarEventIndicatorStyle" />
+        <attr name="compactCalendarCurrentDayIndicatorStyle" />
+        <attr name="compactCalendarCurrentSelectedDayIndicatorStyle" />
+        <attr name="compactCalendarDisplayOtherMonthDays" format="boolean" />
+        <attr name="compactCalendarShouldSelectFirstDayOfMonthOnScroll" format="boolean" />
+        <attr name="compactCalendarOtherMonthDaysTextColor" format="color" />
     </declare-styleable>
 
 </resources>
