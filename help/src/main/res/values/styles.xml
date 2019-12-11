@@ -55,8 +55,8 @@
     </style>
 
     <style name="customToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/ef_colorTextPrimary</item>
-        <item name="actionMenuTextColor">@color/ef_colorTextPrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
     </style>
 
 </resources>

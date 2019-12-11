@@ -21,8 +21,8 @@ class Utils {
         }
 
         fun getValueInRange(max: Float, value: Float): Float {
-            val minimum = Math.max(0.toFloat(), value)
-            return Math.min(minimum, max)
+            val minimum = 0.toFloat().coerceAtLeast(value)
+            return minimum.coerceAtMost(max)
         }
 
         fun setBackground(view: View, drawable: Drawable) {

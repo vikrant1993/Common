@@ -1,4 +1,4 @@
-package apps.vk.fastscroll
+package vk.help.fastscroll
 
 import android.animation.Animator
 import android.animation.AnimatorInflater

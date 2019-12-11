@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import apps.vk.fastscroll.SectionTitleProvider;
 import vk.help.R;
 import vk.help.fastscroll.viewprovider.DefaultScrollerViewProvider;
 import vk.help.fastscroll.viewprovider.ScrollerViewProvider;
