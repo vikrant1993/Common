@@ -43,44 +43,6 @@ public class CompactCalendarView extends View {
         public void onClosed();
     }
 
-    private final GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
-        @Override
-        public void onLongPress(MotionEvent e) {
-        }
-
-        @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            compactCalendarController.onSingleTapUp(e);
-            invalidate();
-            return super.onSingleTapUp(e);
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return true;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            if (horizontalScrollEnabled) {
-                if (Math.abs(distanceX) > 0) {
-                    getParent().requestDisallowInterceptTouchEvent(true);
-
-                    compactCalendarController.onScroll(e1, e2, distanceX, distanceY);
-                    invalidate();
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    };
-
     public CompactCalendarView(Context context) {
         this(context, null);
     }
@@ -96,6 +58,43 @@ public class CompactCalendarView extends View {
                 Color.argb(255, 64, 64, 64), Color.argb(255, 219, 219, 219), VelocityTracker.obtain(),
                 Color.argb(255, 100, 68, 65), new EventsContainer(Calendar.getInstance()),
                 Locale.getDefault(), TimeZone.getDefault());
+        GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public void onLongPress(MotionEvent e) {
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                compactCalendarController.onSingleTapUp(e);
+                invalidate();
+                return super.onSingleTapUp(e);
+            }
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                return true;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                if (horizontalScrollEnabled) {
+                    if (Math.abs(distanceX) > 0) {
+                        getParent().requestDisallowInterceptTouchEvent(true);
+
+                        compactCalendarController.onScroll(e1, e2, distanceX, distanceY);
+                        invalidate();
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        };
         gestureDetector = new GestureDetectorCompat(getContext(), gestureListener);
         animationHandler = new AnimationHandler(compactCalendarController, this);
     }
