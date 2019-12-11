@@ -207,7 +207,7 @@ public class MaterialCalendarView extends ViewGroup {
                 currentMonth = adapter.getItem(position);
                 updateUi();
 
-                dispatchOnMonthChanged(currentMonth);
+                dispatchOnMonthChanged();
             }
 
             @Override
@@ -490,11 +490,7 @@ public class MaterialCalendarView extends ViewGroup {
      * Clear the currently selected date(s)
      */
     public void clearSelection() {
-        List<CalendarDay> dates = getSelectedDates();
         adapter.clearSelections();
-        for (CalendarDay day : dates) {
-            dispatchOnDateSelected(day);
-        }
     }
 
     /**
@@ -788,51 +784,21 @@ public class MaterialCalendarView extends ViewGroup {
         return firstDayOfWeek;
     }
 
-    /**
-     * By default, the calendar will take up all the space needed to show any month (6 rows).
-     * By enabling dynamic height, the view will change height dependant on the visible month.
-     * <p>
-     * This means months that only need 5 or 4 rows to show the entire month will only take up
-     * that many rows, and will grow and shrink as necessary.
-     *
-     * @param useDynamicHeight true to have the view different heights based on the visible month
-     */
     public void setDynamicHeightEnabled(boolean useDynamicHeight) {
         this.mDynamicHeightEnabled = useDynamicHeight;
     }
 
-    /**
-     * Invalidate decorators after one has changed internally. That is, if a decorator mutates, you
-     * should call this method to update the widget.
-     */
     public void invalidateDecorators() {
         adapter.invalidateDecorators();
     }
 
-    /*
-     * Listener/Callback Code
-     */
-
-    /**
-     * Dispatch date change events to a listener, if set
-     *
-     * @param day the day that was selected
-     */
-    protected void dispatchOnDateSelected(final CalendarDay day) {
+    protected void dispatchOnDateSelected() {
 
     }
 
-    /**
-     * Dispatch date change events to a listener, if set
-     *
-     * @param day first day of the new month
-     */
-    protected void dispatchOnMonthChanged(final CalendarDay day) {
+    protected void dispatchOnMonthChanged() {
     }
 
-    /**
-     * Call by {@link CalendarPagerView} to indicate that a day was clicked and we should handle it
-     */
     protected void onDateClicked(final DayView dayView) {
         final CalendarDay currentDate = getCurrentDate();
         final CalendarDay selectedDate = dayView.getDate();
@@ -848,58 +814,27 @@ public class MaterialCalendarView extends ViewGroup {
         }
     }
 
-    /**
-     * Called by the adapter for cases when changes in state result in dates being unselected
-     *
-     * @param date date that should be de-selected
-     */
-    protected void onDateUnselected(CalendarDay date) {
-        dispatchOnDateSelected(date);
+    protected void onDateUnselected() {
+        dispatchOnDateSelected();
     }
 
-    /*
-     * Show Other Dates Utils
-     */
-
-    /**
-     * @param showOtherDates int flag for show other dates
-     * @return true if the other months flag is set
-     */
     public static boolean showOtherMonths(@ShowOtherDates int showOtherDates) {
         return (showOtherDates & SHOW_OTHER_MONTHS) != 0;
     }
 
-    /**
-     * @param showOtherDates int flag for show other dates
-     * @return true if the out of range flag is set
-     */
     public static boolean showOutOfRange(@ShowOtherDates int showOtherDates) {
         return (showOtherDates & SHOW_OUT_OF_RANGE) != 0;
     }
 
-    /**
-     * @param showOtherDates int flag for show other dates
-     * @return true if the decorated disabled flag is set
-     */
     public static boolean showDecoratedDisabled(@ShowOtherDates int showOtherDates) {
         return (showOtherDates & SHOW_DECORATED_DISABLED) != 0;
     }
 
-    /*
-     * Custom ViewGroup Code
-     */
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams(1);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         final int specWidthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -1029,9 +964,6 @@ public class MaterialCalendarView extends ViewGroup {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         final int count = getChildCount();
@@ -1059,9 +991,6 @@ public class MaterialCalendarView extends ViewGroup {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(1);
@@ -1072,9 +1001,6 @@ public class MaterialCalendarView extends ViewGroup {
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
         return p instanceof LayoutParams;
@@ -1097,31 +1023,17 @@ public class MaterialCalendarView extends ViewGroup {
         info.setClassName(MaterialCalendarView.class.getName());
     }
 
-    /**
-     * Simple layout params for MaterialCalendarView. The only variation for layout is height.
-     */
     protected static class LayoutParams extends MarginLayoutParams {
 
-        /**
-         * Create a layout that matches parent width, and is X number of tiles high
-         *
-         * @param tileHeight view height in number of tiles
-         */
         LayoutParams(int tileHeight) {
             super(MATCH_PARENT, tileHeight);
         }
     }
 
-    /**
-     * Preserve the current parameters of the Material Calendar View.
-     */
     public State state() {
         return state;
     }
 
-    /**
-     * Initialize the parameters from scratch.
-     */
     public StateBuilder newState() {
         return new StateBuilder();
     }
@@ -1143,9 +1055,6 @@ public class MaterialCalendarView extends ViewGroup {
             showWeekDays = builder.showWeekDays;
         }
 
-        /**
-         * Modify parameters from current state.
-         */
         StateBuilder edit() {
             return new StateBuilder(this);
         }
@@ -1173,63 +1082,31 @@ public class MaterialCalendarView extends ViewGroup {
             showWeekDays = state.showWeekDays;
         }
 
-        /**
-         * Sets the first day of the week.
-         * <p>
-         * Uses the {@link DayOfWeek} day constants.
-         *
-         * @param day The first day of the week as a {@link DayOfWeek} enum.
-         * @see Calendar
-         */
         StateBuilder setFirstDayOfWeek(DayOfWeek day) {
             this.firstDayOfWeek = day;
             return this;
         }
 
-        /**
-         * Set calendar display mode. The default mode is Months.
-         * When switching between modes will select todays date, or the selected date,
-         * if selection mode is single.
-         *
-         * @param mode - calendar mode
-         */
         StateBuilder setCalendarDisplayMode(CalendarMode mode) {
             this.calendarMode = mode;
             return this;
         }
 
-        /**
-         * @param calendar set the minimum selectable date, null for no minimum
-         */
         StateBuilder setMinimumDate(@Nullable CalendarDay calendar) {
             minDate = calendar;
             return this;
         }
 
-        /**
-         * @param calendar set the maximum selectable date, null for no maximum
-         */
         StateBuilder setMaximumDate(@Nullable CalendarDay calendar) {
             maxDate = calendar;
             return this;
         }
 
-        /**
-         * @param showWeekDays true to show week days names
-         */
         StateBuilder setShowWeekDays(boolean showWeekDays) {
             this.showWeekDays = showWeekDays;
             return this;
         }
 
-        /**
-         * Use this method to enable saving the current position when switching
-         * between week and month mode. By default, the calendar update to the latest selected date
-         * or the current date. When set to true, the view will used the month that the calendar is
-         * currently on.
-         *
-         * @param cacheCurrentPosition Set to true to cache the current position, false otherwise.
-         */
         StateBuilder isCacheCalendarPositionEnabled(final boolean cacheCurrentPosition) {
             this.cacheCurrentPosition = cacheCurrentPosition;
             return this;
@@ -1241,7 +1118,6 @@ public class MaterialCalendarView extends ViewGroup {
     }
 
     private void commit(State state) {
-        // Use the calendarDayToShow to determine which date to focus on for the case of switching between month and week views
         CalendarDay calendarDayToShow = null;
         if (adapter != null && state.cacheCurrentPosition) {
             calendarDayToShow = adapter.getItem(pager.getCurrentItem());
@@ -1312,12 +1188,6 @@ public class MaterialCalendarView extends ViewGroup {
         updateUi();
     }
 
-    /**
-     * Used for enabling or disabling views, while also changing the alpha.
-     *
-     * @param view   The view to enable or disable.
-     * @param enable Whether to enable or disable the view.
-     */
     private static void enableView(final View view, final boolean enable) {
         view.setEnabled(enable);
         view.setAlpha(enable ? 1f : 0.1f);

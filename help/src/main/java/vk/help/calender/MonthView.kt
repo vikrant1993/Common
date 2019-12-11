@@ -4,10 +4,6 @@ import android.annotation.SuppressLint
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 
-/**
- * Display a month of [DayView]s and
- * seven [WeekDayView]s.
- */
 @SuppressLint("ViewConstructor")
 internal class MonthView(
     view: MaterialCalendarView,

@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 
 import org.threeten.bp.Period;
 
-/**
- * Pager adapter backing the calendar view
- */
 class MonthPagerAdapter extends CalendarPagerAdapter<MonthView> {
 
     MonthPagerAdapter(MaterialCalendarView mcv) {
@@ -36,14 +33,8 @@ class MonthPagerAdapter extends CalendarPagerAdapter<MonthView> {
 
     public static class Monthly implements DateRangeIndex {
 
-        /**
-         * Minimum date with the first month to display.
-         */
         private final CalendarDay min;
 
-        /**
-         * Number of months to display.
-         */
         private final int count;
 
         Monthly(@NonNull final CalendarDay min, @NonNull final CalendarDay max) {
