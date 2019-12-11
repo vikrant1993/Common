@@ -16,9 +16,6 @@ import vk.help.calender.format.DayFormatter;
 import vk.help.calender.format.TitleFormatter;
 import vk.help.calender.format.WeekDayFormatter;
 
-/**
- * Pager adapter backing the calendar view
- */
 abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAdapter {
 
     private final ArrayDeque<V> currentViews;
@@ -263,12 +260,6 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         invalidateSelectedDates();
     }
 
-    /**
-     * Select or un-select a day.
-     *
-     * @param day      Day to select or un-select
-     * @param selected Whether to select or un-select the day from the list.
-     */
     void setDateSelected(CalendarDay day, boolean selected) {
         if (selected) {
             if (!selectedDates.contains(day)) {

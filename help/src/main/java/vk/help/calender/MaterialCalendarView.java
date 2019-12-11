@@ -43,37 +43,10 @@ import vk.help.calender.format.MonthArrayTitleFormatter;
 import vk.help.calender.format.TitleFormatter;
 import vk.help.calender.format.WeekDayFormatter;
 
-/**
- * <p>
- * This class is a calendar widget for displaying and selecting dates.
- * The range of dates supported by this calendar is configurable.
- * A user can select a date by taping on it and can page the calendar to a desired date.
- * </p>
- * <p>
- * By default, the range of dates shown is from 200 years in the past to 200 years in the future.
- * This can be extended or shortened by configuring the minimum and maximum dates.
- * </p>
- * <p>
- * When selecting a date out of range, or when the range changes so the selection becomes outside,
- * The date closest to the previous selection will become selected. This will also trigger the
- * </p>
- * <p>
- * <strong>Note:</strong> if this view's size isn't divisible by 7,
- * the contents will be centered inside such that the days in the calendar are equally square.
- * For example, 600px isn't divisible by 7, so a tile size of 85 is choosen, making the calendar
- * 595px wide. The extra 5px are distributed left and right to get to 600px.
- * </p>
- */
 public class MaterialCalendarView extends ViewGroup {
 
     public static final int INVALID_TILE_DIMENSION = -10;
 
-    /**
-     * {@linkplain IntDef} annotation for showOtherDates.
-     *
-     * @see #setShowOtherDates(int)
-     * @see #getShowOtherDates()
-     */
     @SuppressLint("UniqueConstants")
     @Retention(RetentionPolicy.SOURCE)
     @IntDef(flag = true, value = {
@@ -83,54 +56,22 @@ public class MaterialCalendarView extends ViewGroup {
     @interface ShowOtherDates {
     }
 
-    /**
-     * Do not show any non-enabled dates
-     */
     public static final int SHOW_NONE = 0;
 
-    /**
-     * Show dates from the proceeding and successive months, in a disabled state.
-     * This flag also enables the {@link #SHOW_OUT_OF_RANGE} flag to prevent odd blank areas.
-     */
     public static final int SHOW_OTHER_MONTHS = 1;
 
-    /**
-     * Show dates that are outside of the min-max range.
-     * This will only show days from the current month unless {@link #SHOW_OTHER_MONTHS} is enabled.
-     */
     public static final int SHOW_OUT_OF_RANGE = 1 << 1;
 
-    /**
-     * Show days that are individually disabled with decorators.
-     * This will only show dates in the current month and inside the minimum and maximum date range.
-     */
     public static final int SHOW_DECORATED_DISABLED = 1 << 2;
 
-    /**
-     * The default flags for showing non-enabled dates. Currently only shows {@link
-     * #SHOW_DECORATED_DISABLED}
-     */
     public static final int SHOW_DEFAULTS = SHOW_DECORATED_DISABLED;
 
-    /**
-     * Show all the days
-     */
     public static final int SHOW_ALL = SHOW_OTHER_MONTHS | SHOW_OUT_OF_RANGE | SHOW_DECORATED_DISABLED;
 
-    /**
-     * Use this orientation to animate the title vertically
-     */
     public static final int VERTICAL = 0;
 
-    /**
-     * Use this orientation to animate the title horizontally
-     */
     public static final int HORIZONTAL = 1;
 
-    /**
-     * Default tile size in DIPs. This is used in cases where there is no tile size specificed and the
-     * view is set to {@linkplain ViewGroup.LayoutParams#WRAP_CONTENT WRAP_CONTENT}
-     */
     public static final int DEFAULT_TILE_SIZE_DP = 44;
     private static final int DEFAULT_DAYS_IN_WEEK = 7;
     private static final int DAY_NAMES_ROW = 1;
@@ -145,9 +86,6 @@ public class MaterialCalendarView extends ViewGroup {
     private CalendarDay currentMonth;
     private LinearLayout topbar;
     private CalendarMode calendarMode;
-    /**
-     * Used for the dynamic calendar height.
-     */
     private boolean mDynamicHeightEnabled;
 
     private CalendarDay minDate = null;
@@ -320,11 +258,6 @@ public class MaterialCalendarView extends ViewGroup {
         }
     }
 
-    /**
-     * Go to next month or week without using the button {@link #buttonFuture}. Should only go to
-     * next if {@link #canGoForward()} is enabled, meaning it's possible to go to the next month or
-     * week.
-     */
     public void goToNext() {
         if (canGoForward()) {
             pager.setCurrentItem(pager.getCurrentItem() + 1, true);
@@ -337,34 +270,17 @@ public class MaterialCalendarView extends ViewGroup {
         return Math.max(tileHeight, tileWidth);
     }
 
-    /**
-     * Set the size of each tile that makes up the calendar.
-     * Each day is 1 tile, so the widget is 7 tiles wide and 7 or 8 tiles tall
-     * depending on the visibility of the {@link #topbar}.
-     *
-     * @param size the new size for each tile in pixels
-     */
     public void setTileSize(int size) {
         this.tileWidth = size;
         this.tileHeight = size;
         requestLayout();
     }
 
-    /**
-     * Set the height of each tile that makes up the calendar.
-     *
-     * @param height the new height for each tile in pixels
-     */
     public void setTileHeight(int height) {
         this.tileHeight = height;
         requestLayout();
     }
 
-    /**
-     * Set the width of each tile that makes up the calendar.
-     *
-     * @param width the new width for each tile in pixels
-     */
     public void setTileWidth(int width) {
         this.tileWidth = width;
         requestLayout();
@@ -374,42 +290,23 @@ public class MaterialCalendarView extends ViewGroup {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MaterialCalendarView.DEFAULT_TILE_SIZE_DP, getResources().getDisplayMetrics());
     }
 
-    /**
-     * Whether the pager can page forward, meaning the future month is enabled.
-     *
-     * @return true if there is a future month that can be shown
-     */
     public boolean canGoForward() {
         return pager.getCurrentItem() < (adapter.getCount() - 1);
     }
 
-    /**
-     * Whether the pager can page backward, meaning the previous month is enabled.
-     *
-     * @return true if there is a previous month that can be shown
-     */
     public boolean canGoBack() {
         return pager.getCurrentItem() > 0;
     }
 
-    /**
-     * Pass all touch events to the pager so scrolling works on the edges of the calendar view.
-     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return pager.dispatchTouchEvent(event);
     }
 
-    /**
-     * @return the color used for the selection
-     */
     public int getSelectionColor() {
         return accentColor;
     }
 
-    /**
-     * @param color The selection color
-     */
     public void setSelectionColor(int color) {
         if (color == 0) {
             if (!isInEditMode()) {
@@ -423,46 +320,26 @@ public class MaterialCalendarView extends ViewGroup {
         invalidate();
     }
 
-    /**
-     * Get content description for calendar
-     *
-     * @return calendar's content description
-     */
     public CharSequence getCalendarContentDescription() {
         return calendarContentDescription != null ? calendarContentDescription : getContext().getString(R.string.calendar);
     }
 
-    /**
-     * @param icon the new icon to use for the left paging arrow
-     */
     public void setLeftArrow(@DrawableRes final int icon) {
         buttonPast.setImageResource(icon);
     }
 
-    /**
-     * @param icon the new icon to use for the right paging arrow
-     */
     public void setRightArrow(@DrawableRes final int icon) {
         buttonFuture.setImageResource(icon);
     }
 
-    /**
-     * @param resourceId The text appearance resource id.
-     */
     public void setHeaderTextAppearance(int resourceId) {
         title.setTextAppearance(getContext(), resourceId);
     }
 
-    /**
-     * @param resourceId The text appearance resource id.
-     */
     public void setDateTextAppearance(int resourceId) {
         adapter.setDateTextAppearance(resourceId);
     }
 
-    /**
-     * @param resourceId The text appearance resource id.
-     */
     public void setWeekDayTextAppearance(int resourceId) {
         adapter.setWeekDayTextAppearance(resourceId);
     }

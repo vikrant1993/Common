@@ -23,8 +23,7 @@ import vk.help.calender.format.WeekDayFormatter;
 import static vk.help.calender.MaterialCalendarView.SHOW_DEFAULTS;
 import static vk.help.calender.MaterialCalendarView.showOtherMonths;
 
-abstract class CalendarPagerView extends ViewGroup
-        implements View.OnClickListener {
+abstract class CalendarPagerView extends ViewGroup implements View.OnClickListener {
 
     protected static final int DEFAULT_DAYS_IN_WEEK = 7;
     protected static final int DEFAULT_MAX_WEEKS = 6;
@@ -86,7 +85,6 @@ abstract class CalendarPagerView extends ViewGroup
         final LocalDate temp = getFirstViewDay().getDate().with(firstDayOfWeek, 1);
         int dow = temp.getDayOfWeek().getValue();
         int delta = getFirstDayOfWeek().getValue() - dow;
-        //If the delta is positive, we want to remove a week
         boolean removeRow = showOtherMonths(showOtherDates) ? delta >= 0 : delta > 0;
         if (removeRow) {
             delta -= DEFAULT_DAYS_IN_WEEK;
@@ -205,21 +203,11 @@ abstract class CalendarPagerView extends ViewGroup
         }
     }
 
-    /*
-     * Custom ViewGroup Code
-     */
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
         return new LayoutParams();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         final int specWidthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -227,16 +215,13 @@ abstract class CalendarPagerView extends ViewGroup
         final int specHeightSize = MeasureSpec.getSize(heightMeasureSpec);
         final int specHeightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        //We expect to be somewhere inside a MaterialCalendarView, which should measure EXACTLY
         if (specHeightMode == MeasureSpec.UNSPECIFIED || specWidthMode == MeasureSpec.UNSPECIFIED) {
             throw new IllegalStateException("CalendarPagerView should never be left to decide it's size");
         }
 
-        //The spec width should be a correct multiple
         final int measureTileWidth = specWidthSize / DEFAULT_DAYS_IN_WEEK;
         final int measureTileHeight = specHeightSize / getRows();
 
-        //Just use the spec sizes
         setMeasuredDimension(specWidthSize, specHeightSize);
 
         int count = getChildCount();
@@ -249,14 +234,8 @@ abstract class CalendarPagerView extends ViewGroup
         }
     }
 
-    /**
-     * Return the number of rows to display per page
-     */
     protected abstract int getRows();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         final int parentWidth = getWidth();
@@ -281,7 +260,6 @@ abstract class CalendarPagerView extends ViewGroup
                 childLeft += width;
             }
 
-            //We should warp every so many children
             if (i % DEFAULT_DAYS_IN_WEEK == (DEFAULT_DAYS_IN_WEEK - 1)) {
                 childLeft = parentLeft;
                 childRight = parentWidth;
@@ -290,9 +268,6 @@ abstract class CalendarPagerView extends ViewGroup
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams();
@@ -303,9 +278,6 @@ abstract class CalendarPagerView extends ViewGroup
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
         return p instanceof LayoutParams;
@@ -332,14 +304,7 @@ abstract class CalendarPagerView extends ViewGroup
         return firstViewDay;
     }
 
-    /**
-     * Simple layout params class for MonthView, since every child is the same size
-     */
     protected static class LayoutParams extends MarginLayoutParams {
-
-        /**
-         * {@inheritDoc}
-         */
         LayoutParams() {
             super(WRAP_CONTENT, WRAP_CONTENT);
         }
