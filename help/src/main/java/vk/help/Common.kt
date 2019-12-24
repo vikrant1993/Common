@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import android.util.Base64
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import java.lang.reflect.Type
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.floor
 
 object Common {
 
@@ -102,6 +104,41 @@ object Common {
             }
         }
         return ret.toString()
+    }
+
+    fun setOnClickListener(listener: View.OnClickListener?, vararg views: View) {
+        for (view in views) {
+            view.setOnClickListener(listener)
+        }
+    }
+
+    fun formatSeconds(timeInSeconds: Long): String? {
+        val secondsLeft = timeInSeconds % 3600 % 60
+        val minutes: Long = floor(timeInSeconds % 3600 / 60.toDouble()).toLong()
+        val hours: Long = floor(timeInSeconds / 3600.toDouble()).toLong()
+        val hh = if (hours < 10) "0$hours" else "" + hours
+        val mm = if (minutes < 10) "0$minutes" else "" + minutes
+        val ss = if (secondsLeft < 10) "0$secondsLeft" else "" + secondsLeft
+        return "$hh:$mm:$ss"
+    }
+
+    fun formatSecondsInMinutes(timeInSeconds: Long): String? {
+        val secondsLeft = timeInSeconds % 3600 % 60
+        val minutes: Long = floor(timeInSeconds % 3600 / 60.toDouble()).toLong()
+        val mm = if (minutes < 10) "0$minutes" else "" + minutes
+        val ss = if (secondsLeft < 10) "0$secondsLeft" else "" + secondsLeft
+        return "$mm:$ss"
+    }
+
+    private fun longLog(str: String) {
+        try {
+            if (str.length > 4000) {
+                Log.d("", str.substring(0, 4000))
+                longLog(str.substring(4000))
+            } else Log.d("", str)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun getJSON(obj: Any): String {
