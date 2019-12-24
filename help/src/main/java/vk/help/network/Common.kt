@@ -11,7 +11,6 @@ import com.google.gson.Gson
 import vk.help.Common
 import vk.help.R
 import java.io.*
-import java.lang.Exception
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,6 +51,15 @@ object Common {
         toast!!.duration = Toast.LENGTH_LONG
         toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text = capitalize(message)
+        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
+            .setTextColor(ContextCompat.getColor(context, R.color.normal_toast_text_color))
+        toast!!.view.findViewById<CardView>(R.id.cardView)
+            .setCardBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.normal_toast_background
+                )
+            )
         toast!!.show()
     }
 
@@ -65,9 +73,9 @@ object Common {
         toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text = capitalize(message)
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
-            .setTextColor(ContextCompat.getColor(context, R.color.white))
+            .setTextColor(ContextCompat.getColor(context, R.color.error_toast_text_color))
         toast!!.view.findViewById<CardView>(R.id.cardView)
-            .setCardBackgroundColor(ContextCompat.getColor(context, R.color.material_red))
+            .setCardBackgroundColor(ContextCompat.getColor(context, R.color.error_toast_background))
         toast!!.show()
     }
 
