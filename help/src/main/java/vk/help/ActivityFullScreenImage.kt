@@ -57,10 +57,7 @@ class ActivityFullScreenImage : MasterActivity() {
                     .setDestinationUri(Uri.fromFile(file))
                     .setAllowedOverMetered(true)
                     .setAllowedOverRoaming(true)
-
-            downloadID =
-                (getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
-
+            downloadID = (getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
         }
     }
 
