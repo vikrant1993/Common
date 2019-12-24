@@ -39,4 +39,10 @@
     <color name="ef_black_alpha_aa">#AA000000</color>
     <color name="grey">#9E9E9E</color>
 
+    <!--Toast Colors--><!-- Override These Color to Your Application Will Make Toast Theme as Same as Your App-->
+    <color name="normal_toast_background">#FFFFFF</color>
+    <color name="error_toast_background">#F44336</color>
+    <color name="normal_toast_text_color">#33333D</color>
+    <color name="error_toast_text_color">#FFFFFF</color>
+
 </resources>
