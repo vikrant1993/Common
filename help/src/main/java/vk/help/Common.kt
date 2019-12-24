@@ -153,7 +153,7 @@ object Common {
         var bytes: ByteArray? = null
         try {
             val bos = ByteArrayOutputStream()
-            val out = ObjectOutputStream(ByteArrayOutputStream())
+            val out = ObjectOutputStream(bos)
             out.writeObject(obj)
             out.flush()
             bytes = bos.toByteArray()
