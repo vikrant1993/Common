@@ -1,9 +1,7 @@
 package vk.help
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.lang.reflect.Type
 
@@ -17,15 +15,10 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
     }
 
     public lateinit var context: Context
-    private var toast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun convertDate(formatFrom: String, formatTo: String, value: String): String {

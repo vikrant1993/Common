@@ -1,20 +1,24 @@
 package vk.help
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import java.lang.reflect.Type
 
-open class MasterFragment : Fragment(), CommonTask {
+open class Fragment : Fragment(), CommonTask {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    companion object {
+        const val DATA = "DATA"
+        const val KEY = "KEY"
+        const val ID = "ID"
+        const val PHONE_NUMBER = "PHONE_NUMBER"
+    }
+
+    public lateinit var ctx: Context
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ctx = context!!
     }
 
     override fun convertDate(formatFrom: String, formatTo: String, value: String): String {

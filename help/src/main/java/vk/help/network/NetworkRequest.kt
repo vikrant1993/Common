@@ -14,7 +14,6 @@ import vk.help.HelpApp
 import java.io.IOException
 import java.net.ConnectException
 import java.util.*
-import kotlin.collections.HashMap
 
 open class NetworkRequest @JvmOverloads constructor(
     private val listener: ResultsListener,
@@ -27,6 +26,7 @@ open class NetworkRequest @JvmOverloads constructor(
         private const val RequestURL = "Request URL"
         private const val RequestDATA = "Request Data"
         private const val OUTPUT = "ouput"
+        var MEDIA_TYPE = "multipart/form-data"
     }
 
     private var call: Call? = null
@@ -44,6 +44,10 @@ open class NetworkRequest @JvmOverloads constructor(
         }
     }
 
+    public fun setMediaType(type: String) {
+        MEDIA_TYPE = type
+    }
+
     override fun doInBackground(vararg urls: String?): String {
         return try {
             val url = urls[0]
@@ -56,7 +60,7 @@ open class NetworkRequest @JvmOverloads constructor(
                     request = Request.Builder().url(url).get().build()
                 } else {
                     request = Request.Builder().url(url).post(
-                        requestJSON.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+                        requestJSON.toRequestBody(MEDIA_TYPE.toMediaTypeOrNull())
                     ).build()
                     Log.i(RequestDATA, requestJSON)
                 }
