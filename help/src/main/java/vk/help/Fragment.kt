@@ -21,6 +21,8 @@ open class Fragment : Fragment(), CommonTask {
         ctx = context!!
     }
 
+    override val TAG: String = this.javaClass.simpleName
+
     override fun convertDate(formatFrom: String, formatTo: String, value: String): String {
         return Common.convertDate(formatFrom, formatTo, value)
     }
@@ -51,5 +53,9 @@ open class Fragment : Fragment(), CommonTask {
 
     override fun getObject(bytes: ByteArray): Any {
         return Common.getObject(bytes)
+    }
+
+    override fun log(value: String) {
+
     }
 }

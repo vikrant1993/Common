@@ -130,12 +130,12 @@ object Common {
         return "$mm:$ss"
     }
 
-    private fun longLog(str: String) {
+    fun longLog(tag: String, str: String) {
         try {
             if (str.length > 4000) {
-                Log.d("", str.substring(0, 4000))
-                longLog(str.substring(4000))
-            } else Log.d("", str)
+                Log.d(tag, str.substring(0, 4000))
+                longLog(tag, str.substring(4000))
+            } else Log.d(tag, str)
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }

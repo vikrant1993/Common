@@ -16,6 +16,8 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
 
     public lateinit var context: Context
 
+    override val TAG: String = this.javaClass.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
@@ -51,5 +53,9 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
 
     override fun getObject(bytes: ByteArray): Any {
         return Common.getObject(bytes)
+    }
+
+    override fun log(value: String) {
+        Common.longLog(TAG, value)
     }
 }
