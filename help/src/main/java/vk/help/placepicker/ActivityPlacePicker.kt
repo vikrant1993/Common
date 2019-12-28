@@ -249,7 +249,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 if (nowLocation != null) {
                     getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
                 } else {
-                    showErrorToast("can't pick this location")
+                    //showErrorToast("can't pick this location")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -461,26 +461,26 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 addressModel = _userAddress
                 if (_userAddress != null) {
                     fullAddressTemp.text = _userAddress.fullAddress
-                    addressTitle.setText(_userAddress.fullAddress)
-                    localAddress.setText(_userAddress.localAddress)
-                    state.setText(_userAddress.state)
-                    postalCode.setText(_userAddress.postalCode)
-                    description.setText(_userAddress.countryName)
+                    addressTitle.text = _userAddress.fullAddress
+                    localAddress.text = _userAddress.localAddress
+                    state.text = _userAddress.state
+                    postalCode.text = _userAddress.postalCode
+                    description.text = _userAddress.countryName
                 } else {
                     fullAddressTemp.text = ""
-                    addressTitle.setText("")
-                    localAddress.setText("")
-                    state.setText("")
-                    postalCode.setText("")
-                    description.setText("")
+                    addressTitle.text = ""
+                    localAddress.text = ""
+                    state.text = ""
+                    postalCode.text = ""
+                    description.text = ""
                 }
             } catch (e: Exception) {
                 fullAddressTemp.text = ""
-                addressTitle.setText("")
-                localAddress.setText("")
-                state.setText("")
-                postalCode.setText("")
-                description.setText("")
+                addressTitle.text = ""
+                localAddress.text = ""
+                state.text = ""
+                postalCode.text = ""
+                description.text = ""
             }
         }
     }

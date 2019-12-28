@@ -102,7 +102,7 @@
             android:padding="16dp"
             android:visibility="visible">
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/addressTitle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -117,7 +117,7 @@
                 android:textColor="@color/material_black"
                 android:textSize="@dimen/text_size_regular" />
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/localAddress"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -139,7 +139,7 @@
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/state"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -156,7 +156,7 @@
                     android:textColor="@color/material_black"
                     android:textSize="@dimen/text_size_regular" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/postalCode"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -175,7 +175,7 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
