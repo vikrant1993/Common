@@ -26,22 +26,32 @@ open class NetworkRequest @JvmOverloads constructor(
         private const val RequestURL = "Request URL"
         private const val RequestDATA = "Request Data"
         private const val OUTPUT = "ouput"
-        var MEDIA_TYPE = "multipart/form-data"
+        private var MEDIA_TYPE = "multipart/form-data"
     }
 
     private var call: Call? = null
 
     override fun onPreExecute() {
         super.onPreExecute()
+
+        val requestLogJSON = JSONObject()
+
         if (requestMap != null) {
             val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             val iterator = requestMap.entries.iterator()
+
             while (iterator.hasNext()) {
                 val temp = iterator.next()
                 builder.addFormDataPart(temp.key, temp.value)
+                requestLogJSON.put(temp.key, temp.value)
             }
             requestBody = builder.build()
         }
+//        if (requestJSON.isNotEmpty()) {
+//            Log.i("Request Data", requestJSON)
+//        } else if (requestMap != null) {
+//            Log.i("Request Data", requestLogJSON.toString())
+//        }
     }
 
     public fun setMediaType(type: String) {
@@ -50,8 +60,8 @@ open class NetworkRequest @JvmOverloads constructor(
 
     override fun doInBackground(vararg urls: String?): String {
         return try {
-            val url = urls[0]
-            Log.i(RequestURL, url!!)
+            val url = urls[0]!!
+            Log.i(RequestURL, url)
             val request: Request
             if (requestBody != null) {
                 request = Request.Builder().url(url).post(requestBody!!).build()

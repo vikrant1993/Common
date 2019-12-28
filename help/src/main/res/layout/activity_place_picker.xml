@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="84dp"
+        android:animateLayoutChanges="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Pick Address"
+            app:titleTextColor="@color/white" />
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/centralMarker"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/center"
+            app:layout_constraintLeft_toLeftOf="@id/map"
+            app:layout_constraintRight_toRightOf="@id/map"
+            app:srcCompat="@drawable/ic_pin" />
+
+        <View
+            android:id="@+id/center"
+            android:layout_width="0.1dp"
+            android:layout_height="0.1dp"
+            app:layout_constraintBottom_toBottomOf="@id/map"
+            app:layout_constraintEnd_toEndOf="@id/map"
+            app:layout_constraintStart_toStartOf="@id/map"
+            app:layout_constraintTop_toTopOf="@id/map" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aim"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:alpha="0"
+            app:layout_constraintBottom_toBottomOf="@id/map"
+            app:layout_constraintLeft_toLeftOf="@id/map"
+            app:layout_constraintRight_toRightOf="@id/map"
+            app:layout_constraintTop_toTopOf="@id/map"
+            app:srcCompat="@drawable/ic_aim" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/myLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            app:backgroundTint="@color/white"
+            app:elevation="@dimen/dimen_2dp"
+            app:fabCustomSize="?actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_my_location_black_24dp"
+            app:useCompatPadding="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@drawable/toolbar_elevation"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutBottomSheetForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="80dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_insetEdge="bottom">
+
+        <LinearLayout
+            android:id="@+id/layoutAddressFormExpanded"
+            android:layout_width="match_parent"
+            android:layout_height="336dp"
+            android:alpha="0"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/addressTitle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/border_field"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:paddingLeft="@dimen/dimen_16dp"
+                android:paddingTop="@dimen/dimen_12dp"
+                android:paddingRight="@dimen/dimen_16dp"
+                android:paddingBottom="@dimen/dimen_12dp"
+                android:singleLine="true"
+                android:textColor="@color/material_black"
+                android:textSize="@dimen/text_size_regular" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/localAddress"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/border_field"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:paddingLeft="@dimen/dimen_16dp"
+                android:paddingTop="@dimen/dimen_12dp"
+                android:paddingRight="@dimen/dimen_16dp"
+                android:paddingBottom="@dimen/dimen_12dp"
+                android:singleLine="true"
+                android:textColor="@color/material_black"
+                android:textSize="@dimen/text_size_regular" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/state"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/dimen_8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_field"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:paddingLeft="@dimen/dimen_16dp"
+                    android:paddingTop="@dimen/dimen_12dp"
+                    android:paddingRight="@dimen/dimen_16dp"
+                    android:paddingBottom="@dimen/dimen_12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/text_size_regular" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/postalCode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dimen_8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_field"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:paddingLeft="@dimen/dimen_16dp"
+                    android:paddingTop="@dimen/dimen_12dp"
+                    android:paddingRight="@dimen/dimen_16dp"
+                    android:paddingBottom="@dimen/dimen_12dp"
+                    android:singleLine="true"
+                    android:textColor="@color/material_black"
+                    android:textSize="@dimen/text_size_regular" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/border_field"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
+                android:paddingLeft="@dimen/dimen_16dp"
+                android:paddingTop="@dimen/dimen_12dp"
+                android:paddingRight="@dimen/dimen_16dp"
+                android:paddingBottom="@dimen/dimen_12dp"
+                android:singleLine="true"
+                android:textColor="@color/material_black"
+                android:textSize="@dimen/text_size_regular" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/selectAddress"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@drawable/background_button"
+                android:text="Pick Address"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_regular" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutAddressCollapsed"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fullAddressTemp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/dimen_16dp"
+                android:layout_toStartOf="@id/buttonDone"
+                android:background="@drawable/border_field"
+                android:imeOptions="actionDone"
+                android:padding="@dimen/dimen_16dp"
+                android:singleLine="true"
+                android:textColor="@color/material_black"
+                android:textSize="@dimen/text_size_regular" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/buttonDone"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dimen_16dp"
+                android:background="@drawable/background_button"
+                app:srcCompat="@drawable/ic_round_check_24px" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
