@@ -73,6 +73,6 @@ class MasterAdapter(
 }
 
 interface AdapterView {
-    fun createChildView(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+    fun createChildView(parent: ViewGroup, position: Int): RecyclerView.ViewHolder
     fun getChildView(holder: RecyclerView.ViewHolder, position: Int)
 }
