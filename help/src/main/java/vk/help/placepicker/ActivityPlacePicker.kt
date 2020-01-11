@@ -312,8 +312,8 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
                 mMap.setOnCameraMoveStartedListener {
                     aim.animate().alpha(1f).duration = 500
-                    ObjectAnimator.ofFloat(centralMarker, "translationY", -100f).setDuration(250)
-                        .start()
+                    ObjectAnimator.ofFloat(centralMarker, "translationY", -100f)
+                        .setDuration(250).start()
                 }
 
                 mMap.setOnCameraIdleListener {

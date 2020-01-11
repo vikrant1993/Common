@@ -106,7 +106,7 @@ object Common {
         return ret.toString()
     }
 
-    fun setOnClickListener(listener: View.OnClickListener?, vararg views: View) {
+    fun setOnClickListener(listener: View.OnClickListener, vararg views: View) {
         for (view in views) {
             view.setOnClickListener(listener)
         }
