@@ -56,6 +56,6 @@ open class Fragment : Fragment(), CommonTask {
     }
 
     override fun log(value: String) {
-
+        Common.longLog(TAG, value)
     }
 }

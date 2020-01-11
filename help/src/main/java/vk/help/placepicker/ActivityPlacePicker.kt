@@ -249,7 +249,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 if (nowLocation != null) {
                     getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
                 } else {
-                    //showErrorToast("can't pick this location")
+                    log("can't pick this location")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
