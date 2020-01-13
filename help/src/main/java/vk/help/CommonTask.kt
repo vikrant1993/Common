@@ -1,5 +1,6 @@
 package vk.help
 
+import android.view.View
 import java.lang.reflect.Type
 
 interface CommonTask {
@@ -15,4 +16,5 @@ interface CommonTask {
     fun getBytes(obj: Any): ByteArray
     fun getObject(bytes: ByteArray): Any
     fun log(value: String)
+    fun setOnClickListeners(listener: View.OnClickListener, vararg views: View)
 }

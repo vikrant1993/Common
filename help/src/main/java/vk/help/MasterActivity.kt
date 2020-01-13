@@ -2,6 +2,7 @@ package vk.help
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import java.lang.reflect.Type
 
@@ -57,5 +58,17 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
 
     override fun log(value: String) {
         Common.longLog(TAG, value)
+    }
+
+    override fun setOnClickListeners(listener: View.OnClickListener, vararg views: View) {
+        Common.setOnClickListener(listener, *views)
+    }
+
+    fun setOnClickListeners(vararg views: View) {
+        if (this is View.OnClickListener) {
+            setOnClickListeners(this, *views)
+        } else {
+            showErrorToast("no listener found")
+        }
     }
 }

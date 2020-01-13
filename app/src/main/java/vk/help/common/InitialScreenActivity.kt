@@ -1,17 +1,21 @@
 package vk.help.common
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.temp.*
 import vk.help.MasterActivity
-import vk.help.placepicker.ActivityPlacePicker
 
 class InitialScreenActivity : MasterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
-        updateDate.setOnClickListener {
-            startActivity(Intent(context, ActivityPlacePicker::class.java))
-        }
+
+        setOnClickListeners(View.OnClickListener {
+
+        }, updateDate)
+
+//        updateDate.setOnClickListener {
+//            startActivity(Intent(context, ActivityPlacePicker::class.java))
+//        }
     }
 }
