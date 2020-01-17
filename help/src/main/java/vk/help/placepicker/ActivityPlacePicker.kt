@@ -379,13 +379,15 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
     @SuppressLint("StaticFieldLeak")
     private inner class GetAddressFromLatLng : AsyncTask<Double, Void, AddressModel?>() {
-        var latitude: Double = 00.00
-        var longitude: Double = 0.00
+        var latitude: Double = 0.0
+        var longitude: Double = 0.0
 
         override fun doInBackground(vararg doubles: Double?): AddressModel? {
             try {
                 latitude = doubles[0]!!
                 longitude = doubles[1]!!
+
+                log("lat $latitude lng $longitude")
 
                 val addresses: List<Address>? =
                     Geocoder(context, Locale.getDefault()).getFromLocation(
@@ -394,11 +396,8 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                         1
                     )
 
-
                 if (addresses != null && addresses.isNotEmpty()) {
-
                     val addressWeGet: Address? = addresses[0]
-
                     addressModel = AddressModel()
                     addressModel!!.latitude = roundAvoid(latitude)
                     addressModel!!.longitude = roundAvoid(longitude)
@@ -451,6 +450,9 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
+
+
+
                 return null
             }
         }

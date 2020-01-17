@@ -19,10 +19,7 @@ class ActivityFullScreenImage : MasterActivity() {
     private var downloadID: Long = 0
 
     private val onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(
-            context: Context?,
-            intent: Intent
-        ) {
+        override fun onReceive(context: Context, intent: Intent) {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             //Checking if the received broadcast is for our enqueued download by matching download id
             if (downloadID == id) {
@@ -57,7 +54,8 @@ class ActivityFullScreenImage : MasterActivity() {
                     .setDestinationUri(Uri.fromFile(file))
                     .setAllowedOverMetered(true)
                     .setAllowedOverRoaming(true)
-            downloadID = (getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
+            downloadID =
+                (getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
         }
     }
 
@@ -65,5 +63,4 @@ class ActivityFullScreenImage : MasterActivity() {
         super.onDestroy()
         unregisterReceiver(onDownloadComplete)
     }
-
 }

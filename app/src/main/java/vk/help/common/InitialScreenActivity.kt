@@ -1,7 +1,6 @@
 package vk.help.common
 
 import android.os.Bundle
-import android.view.View
 import kotlinx.android.synthetic.main.temp.*
 import vk.help.MasterActivity
 
@@ -10,12 +9,8 @@ class InitialScreenActivity : MasterActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
 
-        setOnClickListeners(View.OnClickListener {
+        updateDate.setOnClickListener {
 
-        }, updateDate)
-
-//        updateDate.setOnClickListener {
-//            startActivity(Intent(context, ActivityPlacePicker::class.java))
-//        }
+        }
     }
 }
