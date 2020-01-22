@@ -23,6 +23,7 @@ public class ExtendedWebView extends WebView {
 
     private Context context;
     private ValueCallback<Uri[]> filePathCallback = null;
+    private String pickFileType = "*/*";
 
     public ExtendedWebView(Context context) {
         super(context);
@@ -54,6 +55,10 @@ public class ExtendedWebView extends WebView {
         });
     }
 
+    private void setFileType(String _type) {
+        pickFileType = _type;
+    }
+
     private boolean checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ArrayList<String> permissionList = new ArrayList<>();
@@ -75,7 +80,7 @@ public class ExtendedWebView extends WebView {
             }
         } else {
             Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-            i.setType("*/*");
+            i.setType(pickFileType);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             }

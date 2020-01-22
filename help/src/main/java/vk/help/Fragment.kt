@@ -2,6 +2,7 @@ package vk.help
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import java.lang.reflect.Type
@@ -23,17 +24,18 @@ open class Fragment : Fragment(), CommonTask {
     }
 
     override val TAG: String = this.javaClass.simpleName
+    override val handler: Handler = Handler()
 
     override fun convertDate(formatFrom: String, formatTo: String, value: String): String {
         return Common.convertDate(formatFrom, formatTo, value)
     }
 
     override fun showToast(message: String) {
-        Common.showToast(context!!, message)
+        Common.showToast(ctx, message)
     }
 
     override fun showErrorToast(message: String) {
-        Common.showErrorToast(context!!, message)
+        Common.showErrorToast(ctx, message)
     }
 
     override fun capitalize(value: String): String {

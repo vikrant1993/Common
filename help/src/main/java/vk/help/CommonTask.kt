@@ -1,11 +1,13 @@
 package vk.help
 
+import android.os.Handler
 import android.view.View
 import java.lang.reflect.Type
 
 interface CommonTask {
 
     val TAG: String
+    val handler: Handler
 
     fun convertDate(formatFrom: String, formatTo: String, value: String): String
     fun showToast(message: String)

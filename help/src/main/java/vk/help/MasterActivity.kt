@@ -2,6 +2,7 @@ package vk.help
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import java.lang.reflect.Type
@@ -18,6 +19,7 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
     public lateinit var context: Context
 
     override val TAG: String = this.javaClass.simpleName
+    override val handler: Handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
