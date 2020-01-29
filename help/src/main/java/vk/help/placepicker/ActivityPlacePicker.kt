@@ -10,7 +10,6 @@ import android.location.Address
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -35,7 +34,6 @@ import kotlin.math.roundToInt
 class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
     private var googleMap: GoogleMap? = null
-    private val handler = Handler()
     private val filterTaskList: ArrayList<GetAddressFromLatLng> = ArrayList()
     private var addressModel: AddressModel? = null
 
