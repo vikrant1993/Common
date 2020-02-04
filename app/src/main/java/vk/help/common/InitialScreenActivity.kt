@@ -9,6 +9,8 @@ class InitialScreenActivity : MasterActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.temp)
 
+        imageView.setImage("https://image.shutterstock.com/image-photo/colorful-flower-on-dark-tropical-260nw-721703848.jpg")
+
         updateDate.setOnClickListener {
 
         }

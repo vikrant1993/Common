@@ -2,12 +2,16 @@ package vk.help
 
 import android.os.Handler
 import android.view.View
+import android.widget.ImageView
 import java.lang.reflect.Type
 
 interface CommonTask {
 
     val TAG: String
     val handler: Handler
+
+    fun ImageView.setImage(url: String)
+    fun View.text():String
 
     fun convertDate(formatFrom: String, formatTo: String, value: String): String
     fun showToast(message: String)

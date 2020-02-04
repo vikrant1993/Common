@@ -4,7 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import java.lang.reflect.Type
 
 open class MasterActivity : AppCompatActivity(), CommonTask {
@@ -71,6 +75,28 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
             setOnClickListeners(this, *views)
         } else {
             showErrorToast("no listener found")
+        }
+    }
+
+    override fun ImageView.setImage(url: String) {
+        Glide.with(context).load(url).into(this)
+    }
+
+    override fun View.text(): String {
+        return try {
+            when (this) {
+                is TextView -> {
+                    this.text.toString()
+                }
+                is Button -> {
+                    this.text.toString()
+                }
+                else -> {
+                    ""
+                }
+            }
+        } catch (e: Exception) {
+            ""
         }
     }
 }
