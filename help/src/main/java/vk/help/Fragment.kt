@@ -95,6 +95,9 @@ open class Fragment : Fragment(), CommonTask {
                 is Button -> {
                     this.text.toString()
                 }
+                is RadioButton -> {
+                    this.text.toString()
+                }
                 else -> {
                     ""
                 }
@@ -103,5 +106,4 @@ open class Fragment : Fragment(), CommonTask {
             ""
         }
     }
-
 }

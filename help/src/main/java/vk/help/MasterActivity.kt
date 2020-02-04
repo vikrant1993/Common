@@ -95,6 +95,9 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
                 is Button -> {
                     this.text.toString()
                 }
+                is RadioButton -> {
+                    this.text.toString()
+                }
                 else -> {
                     ""
                 }
