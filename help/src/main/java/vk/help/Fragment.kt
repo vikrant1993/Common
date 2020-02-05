@@ -95,6 +95,9 @@ open class Fragment : Fragment(), CommonTask {
                 is RadioButton -> {
                     this.text.toString()
                 }
+                is CheckBox -> {
+                    this.text.toString()
+                }
                 else -> {
                     ""
                 }
