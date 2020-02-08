@@ -29,7 +29,7 @@
             android:theme="@style/ef_AppTheme" />
 
         <provider
-            android:name=".helper.ImagePickerFileProvider"
+            android:name=".imagepicker.helper.ImagePickerFileProvider"
             android:authorities="${applicationId}.imagepicker.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -37,7 +37,5 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/image_picker_provider_paths" />
         </provider>
-
     </application>
-
 </manifest>
