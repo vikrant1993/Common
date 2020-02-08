@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="vk.help">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,16 +9,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <application>
-
-        <activity
-            android:name=".crop.CropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <activity
-            android:name="imagepicker.features.ImagePickerActivity"
-            android:configChanges="orientation|screenSize" />
+    <application
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="q">
 
         <activity
             android:name=".ActivityFullScreenImage"
@@ -28,16 +22,6 @@
             android:name=".placepicker.ActivityPlacePicker"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-        <provider
-            android:name=".imagepicker.helper.ImagePickerFileProvider"
-            android:authorities="${applicationId}.imagepicker.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/image_picker_provider_paths" />
-        </provider>
 
     </application>
 

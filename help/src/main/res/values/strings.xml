@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">fastScroll</string>
+
     <string name="please_wait_">Please Wait…</string>
 
     <string name="ok">OK</string>
@@ -10,37 +10,6 @@
     <string name="no_menu_view">No view for menu provided. You must either call .withMenuView(View) or pass a valid resource id to .withMenuLayout(int)</string>
     <string name="bad_content_view">Your content view must contain exactly one child. Make sure you call inject() after setContentView().</string>
 
-    <string name="crop">Crop</string>
-    <string name="rotate">Rotate</string>
-    <string name="scale">Scale</string>
-    <string name="original">Original</string>
-    <string name="edit_photo">Edit Photo</string>
-
-    <string name="no_camera">No camera found</string>
-
-    <string name="error_input_data_is_absent" translatable="false">Both input and output Uri must be specified</string>
-    <string name="mutate_exception_hint" translatable="false">Therefore, override color resource (color_toolbar_widget) in your app to make it work on pre-L devices</string>
-
     <string name="done">DONE</string>
-    <string name="ef_camera">CAMERA</string>
-
-    <string name="ef_title_folder">Folder</string>
-    <string name="ef_title_select_image">Tap to select images</string>
-
-    <string name="ef_selected">%d selected</string>
-    <string name="ef_selected_with_limit">%1$d/%2$d selected</string>
-
-    <string name="ef_error_create_image_file">Failed to create image file</string>
-
-    <string name="ef_msg_empty_images">No images found</string>
-    <string name="ef_msg_no_write_external_permission">Please grant storage permission to select images</string>
-    <string name="ef_msg_no_camera_permission">Please grant camera permission to capture image</string>
-    <string name="ef_msg_limit_images">Image selection limit</string>
-
-    <!--Don't Translate-->
-    <string name="ef_gif" translatable="false">GIF</string>
-    <string name="ef_video" translatable="false">Video</string>
-    <string name="ef_content_desc_folder" translatable="false">Folder</string>
-    <string name="ef_content_desc_image" translatable="false">Image</string>
 
 </resources>
