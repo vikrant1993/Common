@@ -2,6 +2,7 @@ package vk.help.common
 
 import android.content.Intent
 import android.os.Bundle
+import kotlinx.android.synthetic.main.temp.*
 import vk.help.MasterActivity
 import vk.help.imagepicker.features.ImagePicker
 
@@ -12,9 +13,9 @@ class InitialScreenActivity : MasterActivity() {
 
 //        imageView.setImage("https://image.shutterstock.com/image-photo/colorful-flower-on-dark-tropical-260nw-721703848.jpg")
 
-//        updateDate.setOnClickListener {
-//            ImagePicker.create(this).single().showCamera(true).start()
-//        }
+        submit.setOnClickListener {
+            ImagePicker.create(this).single().showCamera(true).start()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

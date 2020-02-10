@@ -23,6 +23,7 @@
     <color name="error_toast_text_color">#FFFFFF</color>
 
 
+    <color name="ef_image_picker_done_text">#D81B60</color>
     <color name="ef_colorPrimary" tools:override="true">#3F51B5</color>
     <color name="ef_colorPrimaryDark" tools:override="true">#303F9F</color>
     <color name="ef_colorAccent" tools:override="true">#FF4081</color>

@@ -5,8 +5,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -14,6 +13,7 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
@@ -104,12 +104,8 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
         MenuItem menuDone = menu.findItem(R.id.menu_done);
         if (menuDone != null) {
 //            menuDone.setTitle(ConfigUtils.getDoneButtonText(this, config));
-
-            SpannableString s = new SpannableString(ConfigUtils.getDoneButtonText(this, config));
-            s.setSpan(new ForegroundColorSpan(ConfigUtils.getDoneButtonColor(this, config)), 0, s.length(), 0);
-            menuDone.setTitle(s);
-
-            menuDone.setTitle(ConfigUtils.getDoneButtonText(this, config));
+            menuDone.setTitle(Html.fromHtml("<font color='" + ContextCompat.getColor
+                    (this, R.color.ef_image_picker_done_text) + "'>" + ConfigUtils.getDoneButtonText(this, config) + "</font>"));
             menuDone.setVisible(imagePickerFragment.isShowDoneButton());
         }
         return super.onPrepareOptionsMenu(menu);

@@ -27,7 +27,7 @@ public class ImagePickerUtils {
         return str == null || str.length() == 0;
     }
 
-     public static File createImageFile(ImagePickerSavePath savePath) {
+    public static File createImageFile(ImagePickerSavePath savePath) {
         // External sdcard location
         final String path = savePath.getPath();
         File mediaStorageDir = savePath.isFullPath()
