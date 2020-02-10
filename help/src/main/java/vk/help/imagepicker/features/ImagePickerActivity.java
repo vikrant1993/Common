@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -101,6 +103,12 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
 
         MenuItem menuDone = menu.findItem(R.id.menu_done);
         if (menuDone != null) {
+//            menuDone.setTitle(ConfigUtils.getDoneButtonText(this, config));
+
+            SpannableString s = new SpannableString(ConfigUtils.getDoneButtonText(this, config));
+            s.setSpan(new ForegroundColorSpan(ConfigUtils.getDoneButtonColor(this, config)), 0, s.length(), 0);
+            menuDone.setTitle(s);
+
             menuDone.setTitle(ConfigUtils.getDoneButtonText(this, config));
             menuDone.setVisible(imagePickerFragment.isShowDoneButton());
         }

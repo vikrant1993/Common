@@ -2,6 +2,8 @@ package vk.help.imagepicker.helper;
 
 import android.content.Context;
 
+import androidx.core.content.ContextCompat;
+
 import vk.help.R;
 import vk.help.imagepicker.features.ImagePickerConfig;
 import vk.help.imagepicker.features.IpCons;
@@ -50,5 +52,10 @@ public class ConfigUtils {
         return ImagePickerUtils.isStringEmpty(doneButtonText)
                 ? context.getString(R.string.done)
                 : doneButtonText;
+    }
+
+    public static int getDoneButtonColor(Context context, ImagePickerConfig config) {
+        final int doneButtonColor = config.getDoneButtonColor();
+        return (doneButtonColor == 0) ? ContextCompat.getColor(context, R.color.white) : doneButtonColor;
     }
 }
