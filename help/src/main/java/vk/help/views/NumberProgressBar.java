@@ -1,4 +1,4 @@
-package vk.help;
+package vk.help.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import vk.help.R;
 
 public class NumberProgressBar extends View {
 
