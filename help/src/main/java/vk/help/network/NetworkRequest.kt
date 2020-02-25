@@ -10,10 +10,12 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONException
 import org.json.JSONObject
+import vk.help.Common
 import vk.help.HelpApp
 import java.io.IOException
 import java.net.ConnectException
 import java.util.*
+import kotlin.collections.HashMap
 
 open class NetworkRequest @JvmOverloads constructor(
     private val listener: ResultsListener,
@@ -30,6 +32,7 @@ open class NetworkRequest @JvmOverloads constructor(
     }
 
     private var call: Call? = null
+    private var headerMap = HashMap<String, String>()
 
     override fun onPreExecute() {
         super.onPreExecute()
@@ -54,6 +57,11 @@ open class NetworkRequest @JvmOverloads constructor(
 //        }
     }
 
+    public fun setHeader(_headerMap: HashMap<String, String>): NetworkRequest {
+        headerMap = _headerMap
+        return this
+    }
+
     public fun setMediaType(type: String) {
         MEDIA_TYPE = type
     }
@@ -63,13 +71,22 @@ open class NetworkRequest @JvmOverloads constructor(
             val url = urls[0]!!
             Log.i(RequestURL, url)
             val request: Request
+            val builder = Request.Builder().url(url)
+
+            if (headerMap.isNotEmpty()) {
+                for (singleHeader in headerMap) {
+                    builder.addHeader(singleHeader.key, singleHeader.value)
+                    Common.longLog("SOMETAG", singleHeader.key + "-" + singleHeader.value)
+                }
+            }
+
             if (requestBody != null) {
-                request = Request.Builder().url(url).post(requestBody!!).build()
+                request = builder.post(requestBody!!).build()
             } else {
                 if (requestJSON.isEmpty()) {
-                    request = Request.Builder().url(url).get().build()
+                    request = builder.get().build()
                 } else {
-                    request = Request.Builder().url(url).post(
+                    request = builder.post(
                         requestJSON.toRequestBody(MEDIA_TYPE.toMediaTypeOrNull())
                     ).build()
                     Log.i(RequestDATA, requestJSON)
