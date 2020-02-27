@@ -935,9 +935,6 @@ class CompactCalendarController {
                         // Display day month before
                         dayPaint.setStyle(Paint.Style.FILL);
                         dayPaint.setColor(otherMonthDaysTextColor);
-                        if (eventIndicatorStyle == FILL_LARGE_INDICATOR) {
-                            dayPaint.setColor(Color.WHITE);
-                        }
                         canvas.drawText(String.valueOf(maximumPreviousMonthDay + day), xPosition, yPosition, dayPaint);
                     }
                 } else if (day > maximumMonthDay) {
@@ -945,17 +942,11 @@ class CompactCalendarController {
                         // Display day month after
                         dayPaint.setStyle(Paint.Style.FILL);
                         dayPaint.setColor(otherMonthDaysTextColor);
-                        if (eventIndicatorStyle == FILL_LARGE_INDICATOR) {
-                            dayPaint.setColor(Color.WHITE);
-                        }
                         canvas.drawText(String.valueOf(day - maximumMonthDay), xPosition, yPosition, dayPaint);
                     }
                 } else {
                     dayPaint.setStyle(Paint.Style.FILL);
                     dayPaint.setColor(defaultCalenderTextColorToUse);
-                    if (eventIndicatorStyle == FILL_LARGE_INDICATOR) {
-                        dayPaint.setColor(Color.WHITE);
-                    }
                     canvas.drawText(String.valueOf(day), xPosition, yPosition, dayPaint);
                 }
             }
