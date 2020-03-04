@@ -39,7 +39,6 @@ public class CompactCalendarView extends View {
 
     public interface CompactCalendarAnimationListener {
         public void onOpened();
-
         public void onClosed();
     }
 
