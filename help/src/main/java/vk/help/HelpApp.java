@@ -1,5 +1,6 @@
 package vk.help;
 
+import android.content.Context;
 import android.graphics.Typeface;
 
 import androidx.multidex.MultiDexApplication;
@@ -24,6 +25,7 @@ public class HelpApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Common.sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))
                 .connectTimeout(30, TimeUnit.SECONDS)
@@ -57,4 +59,10 @@ public class HelpApp extends MultiDexApplication {
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
+    }
+
 }

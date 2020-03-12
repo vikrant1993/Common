@@ -2,6 +2,7 @@ package vk.help
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.StrictMode
@@ -25,6 +26,7 @@ import kotlin.math.floor
 
 object Common {
 
+    lateinit var sharedPreferences: SharedPreferences
     private var toast: Toast? = null
     const val OnlyDatePattern = "dd-MMM-yyyy"
     const val ServerCommonDateTimePattern = "yyyy-MM-dd'T'HH:mm:ss"
@@ -104,6 +106,16 @@ object Common {
             }
         }
         return ret.toString()
+    }
+
+    fun saveString(key: String, value: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
+
+    fun getString(key: String): String {
+        return sharedPreferences.getString(key, "")!!
     }
 
     fun setOnClickListener(listener: View.OnClickListener, vararg views: View) {
@@ -232,16 +244,19 @@ object Common {
             intent.setDataAndType(uri, "audio/x-wav")
         } else if (url.toString().contains(".gif")) {
             intent.setDataAndType(uri, "image/gif")
-        } else if (url.toString().contains(".jpg") || url.toString().contains(".jpeg") || url.toString().contains(
+        } else if (url.toString().contains(".jpg") || url.toString()
+                .contains(".jpeg") || url.toString().contains(
                 ".png"
             )
         ) {
             intent.setDataAndType(uri, "image/jpeg")
         } else if (url.toString().contains(".txt")) {
             intent.setDataAndType(uri, "text/plain")
-        } else if (url.toString().contains(".3gp") || url.toString().contains(".mpg") || url.toString().contains(
+        } else if (url.toString().contains(".3gp") || url.toString()
+                .contains(".mpg") || url.toString().contains(
                 ".mpeg"
-            ) || url.toString().contains(".mpe") || url.toString().contains(".mp4") || url.toString().contains(
+            ) || url.toString().contains(".mpe") || url.toString()
+                .contains(".mp4") || url.toString().contains(
                 ".avi"
             )
         ) {
