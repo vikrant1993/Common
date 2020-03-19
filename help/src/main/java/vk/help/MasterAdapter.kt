@@ -34,15 +34,10 @@ class MasterAdapter(
     }
 
     fun setData(data: ArrayList<*>) {
-        if (_list.isEmpty()) {
-            val diffResult = DiffUtil.calculateDiff(PostDiffCallback(_list, data))
-            _list.clear()
-            _list.addAll(data)
-            diffResult.dispatchUpdatesTo(this)
-        } else {
-            _list.addAll(data)
-            notifyDataSetChanged()
-        }
+        val diffResult = DiffUtil.calculateDiff(PostDiffCallback(_list, data))
+        _list.clear()
+        _list.addAll(data)
+        diffResult.dispatchUpdatesTo(this)
         updateUI()
     }
 
