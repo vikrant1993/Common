@@ -43,8 +43,6 @@ class MasterAdapter(
             _list.addAll(data)
             notifyDataSetChanged()
         }
-
-        notifyDataSetChanged()
         updateUI()
     }
 
