@@ -2,6 +2,7 @@ package vk.help
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class MasterAdapter(
@@ -33,8 +34,16 @@ class MasterAdapter(
     }
 
     fun setData(data: ArrayList<*>) {
-        _list.clear()
-        _list.addAll(data)
+        if (_list.isEmpty()) {
+            val diffResult = DiffUtil.calculateDiff(PostDiffCallback(_list, data))
+            _list.clear()
+            _list.addAll(data)
+            diffResult.dispatchUpdatesTo(this)
+        } else {
+            _list.addAll(data)
+            notifyDataSetChanged()
+        }
+
         notifyDataSetChanged()
         updateUI()
     }
@@ -70,6 +79,27 @@ class MasterAdapter(
             errorView?.visibility = View.GONE
         }
     }
+
+    inner class PostDiffCallback(private val oldPosts: List<*>, private val newPosts: List<*>) :
+        DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int {
+            return oldPosts.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newPosts.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldPosts[oldItemPosition].hashCode() == newPosts[newItemPosition].hashCode()
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldPosts[oldItemPosition] == newPosts[newItemPosition];
+        }
+    }
+
 }
 
 interface AdapterView {

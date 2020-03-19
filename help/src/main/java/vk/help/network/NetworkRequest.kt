@@ -36,13 +36,11 @@ open class NetworkRequest @JvmOverloads constructor(
 
     override fun onPreExecute() {
         super.onPreExecute()
-
         val requestLogJSON = JSONObject()
 
         if (requestMap != null) {
             val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             val iterator = requestMap.entries.iterator()
-
             while (iterator.hasNext()) {
                 val temp = iterator.next()
                 builder.addFormDataPart(temp.key, temp.value)
