@@ -34,10 +34,9 @@ class MasterAdapter(
     }
 
     fun setData(data: ArrayList<*>) {
-        val diffResult = DiffUtil.calculateDiff(PostDiffCallback(_list, data))
         _list.clear()
         _list.addAll(data)
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
         updateUI()
     }
 
@@ -72,27 +71,6 @@ class MasterAdapter(
             errorView?.visibility = View.GONE
         }
     }
-
-    inner class PostDiffCallback(private val oldPosts: List<*>, private val newPosts: List<*>) :
-        DiffUtil.Callback() {
-
-        override fun getOldListSize(): Int {
-            return oldPosts.size
-        }
-
-        override fun getNewListSize(): Int {
-            return newPosts.size
-        }
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldPosts[oldItemPosition].hashCode() == newPosts[newItemPosition].hashCode()
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldPosts[oldItemPosition] == newPosts[newItemPosition];
-        }
-    }
-
 }
 
 interface AdapterView {
