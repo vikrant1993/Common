@@ -2,10 +2,9 @@ package vk.help
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class MasterAdapter(
+open class MasterAdapter(
     private val recyclerView: RecyclerView,
     private val errorView: View?,
     private val adapterView: AdapterView
@@ -15,7 +14,7 @@ class MasterAdapter(
         recyclerView.adapter = this
     }
 
-    private var _list = ArrayList<Any>()
+    var _list = ArrayList<Any>()
 
     override fun getItemViewType(position: Int): Int {
         return position
@@ -33,7 +32,7 @@ class MasterAdapter(
         adapterView.getChildView(holder, position)
     }
 
-    fun setData(data: ArrayList<*>) {
+    open fun setData(data: ArrayList<*>) {
         _list.clear()
         _list.addAll(data)
         notifyDataSetChanged()
@@ -62,7 +61,7 @@ class MasterAdapter(
         return _list
     }
 
-    private fun updateUI() {
+    open fun updateUI() {
         if (_list.isEmpty()) {
             recyclerView.visibility = View.GONE
             errorView?.visibility = View.VISIBLE
