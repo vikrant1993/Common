@@ -21,6 +21,7 @@ public class HelpApp extends MultiDexApplication {
     public static OkHttpClient client;
     private static final int cacheSize = 10 * 1024 * 1024;
     private HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    private int timeout = 30;
 
     @Override
     public void onCreate() {
@@ -28,9 +29,9 @@ public class HelpApp extends MultiDexApplication {
         Common.sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS);
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .writeTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS);
 
         builder.addInterceptor(interceptor);
         client = builder.build();
@@ -46,6 +47,10 @@ public class HelpApp extends MultiDexApplication {
         } else {
             interceptor.level(HttpLoggingInterceptor.Level.NONE);
         }
+    }
+
+    public void setTimeout(int seconds) {
+        timeout = seconds;
     }
 
     public void setFont(Typeface typeface) {

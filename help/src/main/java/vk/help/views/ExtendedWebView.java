@@ -90,7 +90,7 @@ public class ExtendedWebView extends WebView {
                 return false;
             } else {
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.setType("*/*");
+                i.setType(pickFileType);
                 i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 ((AppCompatActivity) context).startActivityForResult(Intent.createChooser(i, "File Browser"), 101);
                 return true;
