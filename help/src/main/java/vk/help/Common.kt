@@ -31,6 +31,8 @@ object Common {
     const val OnlyDatePattern = "dd-MMM-yyyy"
     const val ServerCommonDateTimePattern = "yyyy-MM-dd'T'HH:mm:ss"
 
+    private val gson: Gson = Gson()
+
     fun convertDate(formatFrom: String, formatTo: String, value: String): String {
         try {
             val dateFormat = SimpleDateFormat(
@@ -154,11 +156,11 @@ object Common {
     }
 
     fun getJSON(obj: Any): String {
-        return Gson().toJson(obj)
+        return gson.toJson(obj)
     }
 
     fun getObject(jsonString: String, type: Type): Any {
-        return Gson().fromJson(jsonString, type)
+        return gson.fromJson(jsonString, type)
     }
 
     fun getBytes(obj: Any): ByteArray {
@@ -264,7 +266,6 @@ object Common {
         } else {
             intent.setDataAndType(uri, "*/*")
         }
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return intent
     }
 }

@@ -69,5 +69,4 @@ public class HelpApp extends MultiDexApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
     }
-
 }
