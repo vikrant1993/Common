@@ -1,5 +1,6 @@
 package vk.help.network
 
+import android.content.res.Resources
 import android.os.AsyncTask
 import android.util.Log
 import okhttp3.Call
@@ -12,6 +13,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import vk.help.Common
 import vk.help.HelpApp
+import vk.help.R
 import java.io.IOException
 import java.net.ConnectException
 import java.util.*
@@ -27,7 +29,7 @@ open class NetworkRequest @JvmOverloads constructor(
     companion object {
         private const val RequestURL = "Request URL"
         private const val RequestDATA = "Request Data"
-        private const val OUTPUT = "ouput"
+        private const val OUTPUT = "output"
         private var MEDIA_TYPE = "multipart/form-data"
     }
 
@@ -117,15 +119,16 @@ open class NetworkRequest @JvmOverloads constructor(
         Log.i(OUTPUT, output_)
         val response = try {
             when {
-                output_.isEmpty() -> NetworkResponse(false, "No Data Found", "URL Not Found")
-                output_.toLowerCase(Locale.getDefault()).contains(
-                    "No HTTP resource".toLowerCase(
-                        Locale.getDefault()
-                    )
-                ) -> NetworkResponse(
+                output_.isEmpty() -> NetworkResponse(
                     false,
-                    "No Data Found",
-                    "URL Not Found"
+                    Resources.getSystem().getString(R.string.no_data_found),
+                    Resources.getSystem().getString(R.string.url_not_found)
+                )
+                output_.toLowerCase(Locale.getDefault())
+                    .contains("No HTTP resource".toLowerCase(Locale.getDefault())) -> NetworkResponse(
+                    false,
+                    Resources.getSystem().getString(R.string.no_data_found),
+                    Resources.getSystem().getString(R.string.url_not_found)
                 )
                 output_.toLowerCase(Locale.getDefault()).contains(
                     "Failed to connect".toLowerCase(
@@ -134,12 +137,13 @@ open class NetworkRequest @JvmOverloads constructor(
                 ) -> NetworkResponse(
                     false,
                     "",
-                    "Failed to connect"
+                    Resources.getSystem().getString(R.string.failed_to_connect)
                 )
-                output_.toLowerCase(Locale.getDefault()).contains("Server Data Not Found") -> NetworkResponse(
+                output_.toLowerCase(Locale.getDefault())
+                    .contains("Server Data Not Found") -> NetworkResponse(
                     false,
                     "",
-                    "Data On Server Not Found"
+                    Resources.getSystem().getString(R.string.data_on_server_not_found)
                 )
                 else -> try {
                     val jsonObject = JSONObject(output_)
@@ -150,7 +154,11 @@ open class NetworkRequest @JvmOverloads constructor(
                     )
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                    NetworkResponse(false, output_, "Data Conversion Error")
+                    NetworkResponse(
+                        false,
+                        output_,
+                        Resources.getSystem().getString(R.string.data_conversion_error)
+                    )
                 }
             }
         } catch (ignored: java.lang.Exception) {

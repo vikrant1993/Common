@@ -1,11 +1,18 @@
 <resources>
-<string name="app_name">test</string>
+    <string name="app_name">test</string>
     <string name="please_wait_">Please Wait…</string>
 
     <string name="ok">OK</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="and">and</string>
+
+    <string name="no_data_found">No Data Found</string>
+    <string name="url_not_found">URL Not Found</string>
+    <string name="failed_to_connect">Failed to connect</string>
+    <string name="data_on_server_not_found">Data On Server Not Found</string>
+    <string name="data_conversion_error">Data Conversion Error</string>
+
 
     <string name="no_menu_view">No view for menu provided. You must either call .withMenuView(View) or pass a valid resource id to .withMenuLayout(int)</string>
     <string name="bad_content_view">Your content view must contain exactly one child. Make sure you call inject() after setContentView().</string>
