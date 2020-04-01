@@ -116,7 +116,7 @@ open class NetworkRequest @JvmOverloads constructor(
 
     override fun onPostExecute(output_: String) {
         super.onPostExecute(output_)
-        Log.i(OUTPUT, output_)
+        Common.longLog(OUTPUT, output_)
         val response = try {
             when {
                 output_.isEmpty() -> NetworkResponse(
