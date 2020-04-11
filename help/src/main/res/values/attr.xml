@@ -95,6 +95,7 @@
         <attr name="compactCalendarDisplayOtherMonthDays" format="boolean" />
         <attr name="compactCalendarShouldSelectFirstDayOfMonthOnScroll" format="boolean" />
         <attr name="compactCalendarOtherMonthDaysTextColor" format="color" />
+        <attr name="compactCalendarSundayColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">

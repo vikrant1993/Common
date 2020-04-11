@@ -39,6 +39,7 @@ public class CompactCalendarView extends View {
 
     public interface CompactCalendarAnimationListener {
         public void onOpened();
+
         public void onClosed();
     }
 
@@ -54,9 +55,10 @@ public class CompactCalendarView extends View {
         super(context, attrs, defStyleAttr);
         compactCalendarController = new CompactCalendarController(new Paint(), new OverScroller(getContext()),
                 new Rect(), attrs, getContext(), Color.argb(255, 233, 84, 81),
-                Color.argb(255, 64, 64, 64), Color.argb(255, 219, 219, 219), VelocityTracker.obtain(),
+                Color.argb(255, 64, 64, 64), Color.argb(255, 219, 219, 219), Color.argb(255, 219, 219, 219), VelocityTracker.obtain(),
                 Color.argb(255, 100, 68, 65), new EventsContainer(Calendar.getInstance()),
                 Locale.getDefault(), TimeZone.getDefault());
+
         GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
             @Override
             public void onLongPress(MotionEvent e) {

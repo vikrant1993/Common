@@ -10,12 +10,14 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
 import android.widget.OverScroller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -102,6 +104,7 @@ class CompactCalendarController {
     private int currentDayBackgroundColor;
     private int currentDayTextColor;
     private int calenderTextColor;
+    private int calenderSundayTextColor;
     private int currentSelectedDayBackgroundColor;
     private int currentSelectedDayTextColor;
     private int calenderBackgroundColor = Color.WHITE;
@@ -119,7 +122,7 @@ class CompactCalendarController {
 
     CompactCalendarController(Paint dayPaint, OverScroller scroller, Rect textSizeRect, AttributeSet attrs,
                               Context context, int currentDayBackgroundColor, int calenderTextColor,
-                              int currentSelectedDayBackgroundColor, VelocityTracker velocityTracker,
+                              int calenderSundayTextColor, int currentSelectedDayBackgroundColor, VelocityTracker velocityTracker,
                               int multiEventIndicatorColor, EventsContainer eventsContainer,
                               Locale locale, TimeZone timeZone) {
         this.dayPaint = dayPaint;
@@ -127,6 +130,7 @@ class CompactCalendarController {
         this.textSizeRect = textSizeRect;
         this.currentDayBackgroundColor = currentDayBackgroundColor;
         this.calenderTextColor = calenderTextColor;
+        this.calenderSundayTextColor = calenderSundayTextColor;
         this.currentSelectedDayBackgroundColor = currentSelectedDayBackgroundColor;
         this.otherMonthDaysTextColor = calenderTextColor;
         this.velocityTracker = velocityTracker;
@@ -145,6 +149,7 @@ class CompactCalendarController {
             try {
                 currentDayBackgroundColor = typedArray.getColor(R.styleable.CompactCalendarView_compactCalendarCurrentDayBackgroundColor, currentDayBackgroundColor);
                 calenderTextColor = typedArray.getColor(R.styleable.CompactCalendarView_compactCalendarTextColor, calenderTextColor);
+                calenderSundayTextColor = typedArray.getColor(R.styleable.CompactCalendarView_compactCalendarSundayColor, calenderSundayTextColor);
                 currentDayTextColor = typedArray.getColor(R.styleable.CompactCalendarView_compactCalendarCurrentDayTextColor, calenderTextColor);
                 otherMonthDaysTextColor = typedArray.getColor(R.styleable.CompactCalendarView_compactCalendarOtherMonthDaysTextColor, otherMonthDaysTextColor);
                 currentSelectedDayBackgroundColor = typedArray.getColor(R.styleable.CompactCalendarView_compactCalendarCurrentSelectedDayBackgroundColor, currentSelectedDayBackgroundColor);
@@ -912,10 +917,13 @@ class CompactCalendarController {
             if (dayRow == 0) {
                 // first row, so draw the first letter of the day
                 if (shouldDrawDaysHeader) {
-                    dayPaint.setColor(calenderTextColor);
                     dayPaint.setTypeface(Typeface.DEFAULT_BOLD);
                     dayPaint.setStyle(Paint.Style.FILL);
-                    dayPaint.setColor(calenderTextColor);
+                    if (dayColumnNames[colDirection].toLowerCase(Locale.getDefault()).equals("sun")) {
+                        dayPaint.setColor(calenderSundayTextColor);
+                    } else {
+                        dayPaint.setColor(calenderTextColor);
+                    }
                     canvas.drawText(dayColumnNames[colDirection], xPosition, paddingHeight, dayPaint);
                     dayPaint.setTypeface(Typeface.DEFAULT);
                 }
@@ -945,8 +953,15 @@ class CompactCalendarController {
                         canvas.drawText(String.valueOf(day - maximumMonthDay), xPosition, yPosition, dayPaint);
                     }
                 } else {
+                    Calendar tempCal = monthToDrawCalender;
+                    tempCal.set(Calendar.DAY_OF_MONTH, day);
+                    Log.i("vikrant", new SimpleDateFormat("EEEE dd-MMM-yyyy", Locale.getDefault()).format(tempCal.getTime()));
+                    if (new SimpleDateFormat("EEEE", Locale.getDefault()).format(tempCal.getTime()).toLowerCase(Locale.getDefault()).equals("sunday")) {
+                        dayPaint.setColor(calenderSundayTextColor);
+                    } else {
+                        dayPaint.setColor(defaultCalenderTextColorToUse);
+                    }
                     dayPaint.setStyle(Paint.Style.FILL);
-                    dayPaint.setColor(defaultCalenderTextColorToUse);
                     canvas.drawText(String.valueOf(day), xPosition, yPosition, dayPaint);
                 }
             }
