@@ -12,9 +12,7 @@ interface CommonTask {
 
     fun ImageView.setImage(url: String)
     fun View.text(): String
-
     fun String.toToast()
-
     fun convertDate(formatFrom: String, formatTo: String, value: String): String
     fun showToast(message: String)
     fun showErrorToast(message: String)
