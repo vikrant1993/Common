@@ -161,8 +161,8 @@ open class NetworkRequest @JvmOverloads constructor(
                     )
                 }
             }
-        } catch (ignored: java.lang.Exception) {
-            NetworkResponse(false, ignored.toString(), ignored.message!!)
+        } catch (ignored: Exception) {
+            NetworkResponse(false, output_, ignored.message!!)
         }
         listener.invoke(response)
     }
