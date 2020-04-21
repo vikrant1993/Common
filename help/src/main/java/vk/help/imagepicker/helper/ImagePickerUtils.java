@@ -100,7 +100,7 @@ public class ImagePickerUtils {
             return extension;
         }
         if (path.contains(".")) {
-            return path.substring(path.lastIndexOf(".") + 1, path.length());
+            return path.substring(path.lastIndexOf(".") + 1);
         } else {
             return "";
         }

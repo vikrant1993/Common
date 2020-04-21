@@ -11,7 +11,9 @@ interface CommonTask {
     val handler: Handler
 
     fun ImageView.setImage(url: String)
-    fun View.text():String
+    fun View.text(): String
+
+    fun String.toToast()
 
     fun convertDate(formatFrom: String, formatTo: String, value: String): String
     fun showToast(message: String)

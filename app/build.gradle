@@ -13,6 +13,7 @@ android {
         useLibrary 'org.apache.http.legacy'
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -29,4 +30,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':help')
+    implementation 'com.github.yalantis:ucrop:2.2.4'
 }

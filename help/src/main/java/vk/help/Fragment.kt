@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -15,10 +17,37 @@ open class Fragment : Fragment(), CommonTask {
         const val DATA = "DATA"
         const val KEY = "KEY"
         const val ID = "ID"
+        const val EXTRA = "EXTRA"
         const val PHONE_NUMBER = "PHONE_NUMBER"
     }
 
     public lateinit var ctx: Context
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
+        var animation = super.onCreateAnimation(transit, enter, nextAnim)
+        // HW layer support only exists on API 11+
+        // HW layer support only exists on API 11+
+        if (animation == null && nextAnim != 0) {
+            animation = AnimationUtils.loadAnimation(activity, nextAnim)
+        }
+        if (animation != null) {
+            if (view != null) {
+                view!!.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+            }
+
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
+                override fun onAnimationEnd(animation: Animation) {
+                    if (view != null) {
+                        view!!.setLayerType(View.LAYER_TYPE_NONE, null)
+                    }
+                }
+
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
+        }
+        return animation
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,5 +134,9 @@ open class Fragment : Fragment(), CommonTask {
         } catch (e: Exception) {
             ""
         }
+    }
+
+    override fun String.toToast() {
+        showToast(this)
     }
 }

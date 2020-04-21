@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
+        tools:replace="android:theme"
         tools:targetApi="q">
         <activity
             android:name=".InitialScreenActivity"
@@ -33,6 +34,8 @@
         <activity
             android:name="vk.help.imagepicker.features.ImagePickerActivity"
             android:configChanges="orientation|screenSize" />
+
+        <activity android:name="com.yalantis.ucrop.UCropActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

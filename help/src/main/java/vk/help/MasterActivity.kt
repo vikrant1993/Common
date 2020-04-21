@@ -15,6 +15,7 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
         const val DATA = "DATA"
         const val KEY = "KEY"
         const val ID = "ID"
+        const val EXTRA = "EXTRA"
         const val PHONE_NUMBER = "PHONE_NUMBER"
     }
 
@@ -105,6 +106,10 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
         } catch (e: Exception) {
             ""
         }
+    }
+
+    override fun String.toToast() {
+        showToast(this)
     }
 
     override fun attachBaseContext(base: Context) {

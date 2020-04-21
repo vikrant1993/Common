@@ -5,14 +5,31 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true">
 
-    <vk.help.calender.CompactCalendarView
-        android:id="@+id/calendarView"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/material_black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:compactCalendarTextColor="@color/material_black"
-        app:compactCalendarTextSize="16sp"
-        app:compactCalendarSundayColor="@color/material_red"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#33000000"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

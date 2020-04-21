@@ -24,12 +24,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import vk.help.Fragment;
 import vk.help.R;
 import vk.help.imagepicker.features.camera.CameraHelper;
 import vk.help.imagepicker.features.camera.DefaultCameraModule;
@@ -50,6 +50,7 @@ import static android.app.Activity.RESULT_OK;
 import static vk.help.imagepicker.helper.ImagePickerPreferences.PREF_WRITE_EXTERNAL_STORAGE_REQUESTED;
 
 public class ImagePickerFragment extends Fragment implements ImagePickerView {
+
     private static final String STATE_KEY_CAMERA_MODULE = "Key.CameraModule";
     private static final String STATE_KEY_RECYCLER = "Key.Recycler";
     private static final String STATE_KEY_SELECTED_IMAGES = "Key.SelectedImages";
@@ -83,8 +84,7 @@ public class ImagePickerFragment extends Fragment implements ImagePickerView {
         // Required empty public constructor.
     }
 
-    public static ImagePickerFragment newInstance(@Nullable ImagePickerConfig config,
-                                                  @Nullable CameraOnlyConfig cameraOnlyConfig) {
+    public static ImagePickerFragment newInstance(@Nullable ImagePickerConfig config, @Nullable CameraOnlyConfig cameraOnlyConfig) {
         ImagePickerFragment fragment = new ImagePickerFragment();
         Bundle args = new Bundle();
         if (config != null) {
@@ -148,9 +148,7 @@ public class ImagePickerFragment extends Fragment implements ImagePickerView {
     }
 
     private BaseConfig getBaseConfig() {
-        return isCameraOnly
-                ? getCameraOnlyConfig()
-                : getImagePickerConfig();
+        return isCameraOnly ? getCameraOnlyConfig() : getImagePickerConfig();
     }
 
     @Nullable
@@ -183,14 +181,9 @@ public class ImagePickerFragment extends Fragment implements ImagePickerView {
     }
 
     private void setupRecyclerView(ImagePickerConfig config, ArrayList<Image> selectedImages) {
-        recyclerViewManager = new RecyclerViewManager(
-                recyclerView,
-                config,
-                getResources().getConfiguration().orientation
-        );
+        recyclerViewManager = new RecyclerViewManager(recyclerView, config, getResources().getConfiguration().orientation);
 
-        recyclerViewManager.setupAdapters(selectedImages, (isSelected) -> recyclerViewManager.selectImage(isSelected)
-                , bucket -> setImageAdapter(bucket.getImages()));
+        recyclerViewManager.setupAdapters(selectedImages, (isSelected) -> recyclerViewManager.selectImage(isSelected), bucket -> setImageAdapter(bucket.getImages()));
 
         recyclerViewManager.setImageSelectedListener(selectedImage -> {
             updateTitle();

@@ -133,9 +133,7 @@ public class RecyclerViewManager {
         if (useDefaultTitle) {
             return ConfigUtils.getImageTitle(context, config);
         }
-        return config.getLimit() == MAX_LIMIT
-                ? String.format(context.getString(R.string.ef_selected), imageSize)
-                : String.format(context.getString(R.string.ef_selected_with_limit), imageSize, config.getLimit());
+        return config.getLimit() == MAX_LIMIT ? String.format(context.getString(R.string.ef_selected), imageSize) : String.format(context.getString(R.string.ef_selected_with_limit), imageSize, config.getLimit());
     }
 
     public void setImageAdapter(List<Image> images) {
@@ -194,5 +192,4 @@ public class RecyclerViewManager {
                 && !imageAdapter.getSelectedImages().isEmpty()
                 && (config.getReturnMode() != ReturnMode.ALL && config.getReturnMode() != ReturnMode.GALLERY_ONLY);
     }
-
 }
