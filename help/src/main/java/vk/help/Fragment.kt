@@ -23,32 +23,6 @@ open class Fragment : Fragment(), CommonTask {
 
     public lateinit var ctx: Context
 
-    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
-        var animation = super.onCreateAnimation(transit, enter, nextAnim)
-        // HW layer support only exists on API 11+
-        // HW layer support only exists on API 11+
-        if (animation == null && nextAnim != 0) {
-            animation = AnimationUtils.loadAnimation(activity, nextAnim)
-        }
-        if (animation != null) {
-            if (view != null) {
-                view!!.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-            }
-
-            animation.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
-                override fun onAnimationEnd(animation: Animation) {
-                    if (view != null) {
-                        view!!.setLayerType(View.LAYER_TYPE_NONE, null)
-                    }
-                }
-
-                override fun onAnimationRepeat(animation: Animation) {}
-            })
-        }
-        return animation
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ctx = context!!
