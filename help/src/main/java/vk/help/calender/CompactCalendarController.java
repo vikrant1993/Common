@@ -955,7 +955,6 @@ class CompactCalendarController {
                 } else {
                     Calendar tempCal = monthToDrawCalender;
                     tempCal.set(Calendar.DAY_OF_MONTH, day);
-                    Log.i("vikrant", new SimpleDateFormat("EEEE dd-MMM-yyyy", Locale.getDefault()).format(tempCal.getTime()));
                     if (new SimpleDateFormat("EEEE", Locale.getDefault()).format(tempCal.getTime()).toLowerCase(Locale.getDefault()).equals("sunday")) {
                         dayPaint.setColor(calenderSundayTextColor);
                     } else {
