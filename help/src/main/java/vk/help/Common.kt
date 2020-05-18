@@ -108,7 +108,7 @@ object Common {
             if (message.isNotEmpty()) {
                 return message.substring(0, 1).toUpperCase(Locale.getDefault()) + message.substring(
                     1
-                ).toUpperCase(Locale.getDefault())
+                ).toLowerCase(Locale.getDefault())
             }
         }
 
