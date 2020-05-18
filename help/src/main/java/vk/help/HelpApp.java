@@ -18,10 +18,15 @@ public class HelpApp extends MultiDexApplication {
         NONE, BASIC, HEADERS, BODY
     }
 
+    public enum ToastMessageStyle {
+        ALL_CAPITAL, FIRST_WORD_CAPITAL, WORDS_CAPITAL, NONE
+    }
+
     public static OkHttpClient client;
     private static final int cacheSize = 10 * 1024 * 1024;
     private HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
     private int timeout = 30;
+    public static ToastMessageStyle toastMessageStyle;
 
     @Override
     public void onCreate() {
@@ -35,6 +40,11 @@ public class HelpApp extends MultiDexApplication {
 
         builder.addInterceptor(interceptor);
         client = builder.build();
+        setToastMessageStyle(ToastMessageStyle.WORDS_CAPITAL);
+    }
+
+    public void setToastMessageStyle(ToastMessageStyle style) {
+        toastMessageStyle = style;
     }
 
     public void setLogLevel(Level level) {

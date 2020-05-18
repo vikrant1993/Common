@@ -64,8 +64,10 @@ object Common {
         toast!!.setGravity(Gravity.BOTTOM, 0, 100)
         toast!!.duration = Toast.LENGTH_LONG
         toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
+
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text =
-            capitalize(message)
+            toastMessageStyle(message)
+
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
             .setTextColor(ContextCompat.getColor(context, R.color.normal_toast_text_color))
         toast!!.view.findViewById<CardView>(R.id.cardView)
@@ -87,12 +89,37 @@ object Common {
         toast!!.duration = Toast.LENGTH_LONG
         toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text =
-            capitalize(message)
+            toastMessageStyle(message)
         toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
             .setTextColor(ContextCompat.getColor(context, R.color.error_toast_text_color))
         toast!!.view.findViewById<CardView>(R.id.cardView)
             .setCardBackgroundColor(ContextCompat.getColor(context, R.color.error_toast_background))
         toast!!.show()
+    }
+
+    private fun toastMessageStyle(message: String): String {
+        if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.NONE) {
+            return message
+        } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.WORDS_CAPITAL) {
+            return capitalize(message)
+        } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.ALL_CAPITAL) {
+            return message.toUpperCase(Locale.getDefault())
+        } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.FIRST_WORD_CAPITAL) {
+            if (message.isNotEmpty()) {
+                return message.substring(0, 1).toUpperCase(Locale.getDefault()) + message.substring(
+                    1
+                ).toUpperCase(Locale.getDefault())
+            }
+        }
+
+        var m = when (HelpApp.toastMessageStyle) {
+            HelpApp.ToastMessageStyle.ALL_CAPITAL -> message.toUpperCase(Locale.getDefault())
+            HelpApp.ToastMessageStyle.WORDS_CAPITAL -> capitalize(message)
+            HelpApp.ToastMessageStyle.FIRST_WORD_CAPITAL -> if (message.isNotBlank()) "" else message
+            HelpApp.ToastMessageStyle.NONE -> message
+            else -> message
+        }
+        return message
     }
 
     fun capitalize(value: String): String {
