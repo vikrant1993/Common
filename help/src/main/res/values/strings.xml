@@ -13,7 +13,6 @@
     <string name="data_on_server_not_found">Data On Server Not Found</string>
     <string name="data_conversion_error">Data Conversion Error</string>
 
-
     <string name="no_menu_view">No view for menu provided. You must either call .withMenuView(View) or pass a valid resource id to .withMenuLayout(int)</string>
     <string name="bad_content_view">Your content view must contain exactly one child. Make sure you call inject() after setContentView().</string>
 

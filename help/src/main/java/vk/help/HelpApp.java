@@ -27,10 +27,12 @@ public class HelpApp extends MultiDexApplication {
     private HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
     private int timeout = 30;
     public static ToastMessageStyle toastMessageStyle;
+    public static Context applicationContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        applicationContext = getApplicationContext();
         Common.sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))

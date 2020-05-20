@@ -1,6 +1,5 @@
 package vk.help.network
 
-import android.content.res.Resources
 import android.os.AsyncTask
 import android.util.Log
 import okhttp3.Call
@@ -121,14 +120,14 @@ open class NetworkRequest @JvmOverloads constructor(
             when {
                 output_.isEmpty() -> NetworkResponse(
                     false,
-                    Resources.getSystem().getString(R.string.no_data_found),
-                    Resources.getSystem().getString(R.string.url_not_found)
+                    HelpApp.applicationContext.getString(R.string.no_data_found),
+                    HelpApp.applicationContext.getString(R.string.url_not_found)
                 )
                 output_.toLowerCase(Locale.getDefault())
                     .contains("No HTTP resource".toLowerCase(Locale.getDefault())) -> NetworkResponse(
                     false,
-                    Resources.getSystem().getString(R.string.no_data_found),
-                    Resources.getSystem().getString(R.string.url_not_found)
+                    HelpApp.applicationContext.getString(R.string.no_data_found),
+                    HelpApp.applicationContext.getString(R.string.url_not_found)
                 )
                 output_.toLowerCase(Locale.getDefault()).contains(
                     "Failed to connect".toLowerCase(
@@ -137,13 +136,13 @@ open class NetworkRequest @JvmOverloads constructor(
                 ) -> NetworkResponse(
                     false,
                     "",
-                    Resources.getSystem().getString(R.string.failed_to_connect)
+                    HelpApp.applicationContext.getString(R.string.failed_to_connect)
                 )
                 output_.toLowerCase(Locale.getDefault())
                     .contains("Server Data Not Found") -> NetworkResponse(
                     false,
                     "",
-                    Resources.getSystem().getString(R.string.data_on_server_not_found)
+                    HelpApp.applicationContext.getString(R.string.data_on_server_not_found)
                 )
                 else -> try {
                     val jsonObject = JSONObject(output_)
@@ -157,7 +156,7 @@ open class NetworkRequest @JvmOverloads constructor(
                     NetworkResponse(
                         false,
                         output_,
-                        Resources.getSystem().getString(R.string.data_conversion_error)
+                        HelpApp.applicationContext.getString(R.string.data_conversion_error)
                     )
                 }
             }
