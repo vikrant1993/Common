@@ -33,7 +33,7 @@ public class HelpApp extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         applicationContext = getApplicationContext();
-        Common.sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        Common.sharedPreferences = getSharedPreferences(getString(R.string.shared_vk_offline), Context.MODE_PRIVATE);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))
                 .connectTimeout(timeout, TimeUnit.SECONDS)
