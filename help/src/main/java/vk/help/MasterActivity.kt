@@ -108,6 +108,14 @@ open class MasterActivity : AppCompatActivity(), CommonTask {
         }
     }
 
+    override fun saveString(key: String, value: String) {
+        Common.saveString(key, value)
+    }
+
+    override fun getSaveString(key: String): String {
+        return Common.getString(key)
+    }
+
     override fun String.toToast() {
         showToast(this)
     }

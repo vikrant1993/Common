@@ -23,4 +23,7 @@ interface CommonTask {
     fun getObject(bytes: ByteArray): Any
     fun log(value: String)
     fun setOnClickListeners(listener: View.OnClickListener, vararg views: View)
+    fun saveString(key: String, value: String)
+    fun getSaveString(key: String): String
+
 }

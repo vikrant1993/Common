@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -108,6 +106,14 @@ open class Fragment : Fragment(), CommonTask {
         } catch (e: Exception) {
             ""
         }
+    }
+
+    override fun saveString(key: String, value: String) {
+        Common.saveString(key, value)
+    }
+
+    override fun getSaveString(key: String): String {
+        return Common.getString(key)
     }
 
     override fun String.toToast() {
