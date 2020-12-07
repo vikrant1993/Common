@@ -147,9 +147,9 @@ open class NetworkRequest @JvmOverloads constructor(
                 else -> try {
                     val jsonObject = JSONObject(output_)
                     NetworkResponse(
-                        jsonObject.getBoolean("status"),
-                        jsonObject.getString("data"),
-                        jsonObject.getString("message")
+                        jsonObject.optBoolean("status", false),
+                        jsonObject.optString("data"),
+                        jsonObject.optString("message")
                     )
                 } catch (e: JSONException) {
                     e.printStackTrace()
