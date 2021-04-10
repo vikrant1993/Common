@@ -2,7 +2,6 @@ package vk.help.curvedBottomNavigation
 
 import android.content.Context
 import android.util.DisplayMetrics
-import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 

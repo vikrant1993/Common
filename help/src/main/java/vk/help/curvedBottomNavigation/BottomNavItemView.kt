@@ -8,7 +8,6 @@ import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
-
 class BottomNavItemView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

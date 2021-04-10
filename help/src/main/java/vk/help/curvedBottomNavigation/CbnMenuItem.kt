@@ -2,7 +2,6 @@ package vk.help.curvedBottomNavigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
-import androidx.annotation.NavigationRes
 
 data class CbnMenuItem(
     @DrawableRes
