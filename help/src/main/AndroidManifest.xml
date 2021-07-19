@@ -14,11 +14,6 @@
         tools:targetApi="q">
 
         <activity
-            android:name=".ActivityFullScreenImage"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-
-        <activity
             android:name=".placepicker.ActivityPlacePicker"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />

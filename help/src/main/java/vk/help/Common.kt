@@ -9,13 +9,8 @@ import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import android.util.Base64
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import java.io.*
 import java.lang.reflect.Type
@@ -60,41 +55,8 @@ object Common {
         if (toast != null) {
             toast?.cancel()
         }
-        toast = Toast(context)
-        toast!!.setGravity(Gravity.BOTTOM, 0, 100)
-        toast!!.duration = Toast.LENGTH_LONG
-        toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
-
-        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text =
-            toastMessageStyle(message)
-
-        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
-            .setTextColor(ContextCompat.getColor(context, R.color.normal_toast_text_color))
-        toast!!.view.findViewById<CardView>(R.id.cardView)
-            .setCardBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.normal_toast_background
-                )
-            )
-        toast!!.show()
-    }
-
-    fun showErrorToast(context: Context, message: String) {
-        if (toast != null) {
-            toast?.cancel()
-        }
-        toast = Toast(context)
-        toast!!.setGravity(Gravity.BOTTOM, 0, 100)
-        toast!!.duration = Toast.LENGTH_LONG
-        toast!!.view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
-        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message).text =
-            toastMessageStyle(message)
-        toast!!.view.findViewById<AppCompatTextView>(R.id.toast_message)
-            .setTextColor(ContextCompat.getColor(context, R.color.error_toast_text_color))
-        toast!!.view.findViewById<CardView>(R.id.cardView)
-            .setCardBackgroundColor(ContextCompat.getColor(context, R.color.error_toast_background))
-        toast!!.show()
+        toast = Toast.makeText(context, toastMessageStyle(message), Toast.LENGTH_LONG)
+        toast?.show()
     }
 
     private fun toastMessageStyle(message: String): String {
@@ -103,27 +65,19 @@ object Common {
         } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.WORDS_CAPITAL) {
             return capitalize(message)
         } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.ALL_CAPITAL) {
-            return message.toUpperCase(Locale.getDefault())
+            return message.uppercase(Locale.getDefault())
         } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.FIRST_WORD_CAPITAL) {
             if (message.isNotEmpty()) {
-                return message.substring(0, 1).toUpperCase(Locale.getDefault()) + message.substring(
+                return message.substring(0, 1).uppercase(Locale.getDefault()) + message.substring(
                     1
-                ).toLowerCase(Locale.getDefault())
+                ).lowercase(Locale.getDefault())
             }
-        }
-
-        var m = when (HelpApp.toastMessageStyle) {
-            HelpApp.ToastMessageStyle.ALL_CAPITAL -> message.toUpperCase(Locale.getDefault())
-            HelpApp.ToastMessageStyle.WORDS_CAPITAL -> capitalize(message)
-            HelpApp.ToastMessageStyle.FIRST_WORD_CAPITAL -> if (message.isNotBlank()) "" else message
-            HelpApp.ToastMessageStyle.NONE -> message
-            else -> message
         }
         return message
     }
 
     fun capitalize(value: String): String {
-        val words = value.toLowerCase(Locale.getDefault()).trim().split(" ")
+        val words = value.lowercase(Locale.getDefault()).trim().split(" ")
         val ret = StringBuilder()
         for (i in words.indices) {
             if (words[i].trim { it <= ' ' }.isNotEmpty()) {
@@ -153,7 +107,7 @@ object Common {
         }
     }
 
-    fun formatSeconds(timeInSeconds: Long): String? {
+    fun formatSeconds(timeInSeconds: Long): String {
         val secondsLeft = timeInSeconds % 3600 % 60
         val minutes: Long = floor(timeInSeconds % 3600 / 60.toDouble()).toLong()
         val hours: Long = floor(timeInSeconds / 3600.toDouble()).toLong()
@@ -163,7 +117,7 @@ object Common {
         return "$hh:$mm:$ss"
     }
 
-    fun formatSecondsInMinutes(timeInSeconds: Long): String? {
+    fun formatSecondsInMinutes(timeInSeconds: Long): String {
         val secondsLeft = timeInSeconds % 3600 % 60
         val minutes: Long = floor(timeInSeconds % 3600 / 60.toDouble()).toLong()
         val mm = if (minutes < 10) "0$minutes" else "" + minutes
@@ -205,15 +159,13 @@ object Common {
     }
 
     fun getObject(bytes: ByteArray): Any {
-        var obj: Any? = null
-        val bis = ByteArrayInputStream(bytes)
+        var temp: Any? = null
         try {
-            val inputStream = ObjectInputStream(bis)
-            obj = inputStream.readObject()
+            temp = ObjectInputStream(ByteArrayInputStream(bytes)).readObject()
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return obj!!
+        return temp!!
     }
 
     fun setEnableViews(value: Boolean, vararg views: View) {
@@ -251,7 +203,7 @@ object Common {
         }
     }
 
-    fun openFile(url: File): Intent? {
+    fun openFile(url: File): Intent {
         val builder = VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
         //StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitAll().build());

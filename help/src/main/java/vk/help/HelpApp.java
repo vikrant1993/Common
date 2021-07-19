@@ -32,7 +32,7 @@ public class HelpApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationContext = getApplicationContext();
+        applicationContext = this;
         Common.sharedPreferences = getSharedPreferences(getString(R.string.shared_vk_offline), Context.MODE_PRIVATE);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(new Cache(getCacheDir(), cacheSize))
@@ -77,8 +77,8 @@ public class HelpApp extends MultiDexApplication {
         }
     }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
-    }
+//    @Override
+//    protected void attachBaseContext(Context base) {
+//        super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
+//    }
 }

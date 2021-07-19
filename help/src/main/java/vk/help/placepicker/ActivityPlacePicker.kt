@@ -21,9 +21,9 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.activity_place_picker.*
 import vk.help.MasterActivity
 import vk.help.R
+import vk.help.databinding.ActivityPlacePickerBinding
 import java.io.IOException
 import java.text.DecimalFormat
 import java.util.*
@@ -40,7 +40,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
     private val setLocationButtonBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             ImageViewCompat.setImageTintList(
-                myLocation,
+                binding.myLocation,
                 ColorStateList.valueOf(
                     ContextCompat.getColor(
                         context,
@@ -83,14 +83,12 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         val fusedLocationProviderClient = FusedLocationProviderClient(context)
         fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) { location ->
             if (location != null) {
-                showToast(
-                    String.format(
-                        Locale.US,
-                        "%s -- %s",
-                        location.latitude,
-                        location.longitude
-                    )
-                )
+                String.format(
+                    Locale.US,
+                    "%s -- %s",
+                    location.latitude,
+                    location.longitude
+                ).toToast()
             }
         }
 
@@ -105,14 +103,12 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 }
                 for (location in locationResult.locations) {
                     if (location != null) {
-                        showToast(
-                            String.format(
-                                Locale.US,
-                                "%s -- %s",
-                                location.latitude,
-                                location.longitude
-                            )
-                        )
+                        String.format(
+                            Locale.US,
+                            "%s -- %s",
+                            location.latitude,
+                            location.longitude
+                        ).toToast()
                         fusedLocationProviderClient.removeLocationUpdates(this)
                     }
                 }
@@ -139,15 +135,19 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         }
     }
 
+    private val binding: ActivityPlacePickerBinding by lazy {
+        ActivityPlacePickerBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_place_picker)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_round_arrow_white_24px)
-        toolbar.setNavigationOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             setResult(RESULT_CANCELED)
             finish()
         }
@@ -160,18 +160,18 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
         (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).getMapAsync(this)
 
-        myLocation.setOnClickListener {
+        binding.myLocation.setOnClickListener {
             handler.postDelayed(showMyLocationRunnable, 1000)
             checkPermission()
         }
 
-        val bottomSheetBehavior = BottomSheetBehavior.from(layoutBottomSheetForm)
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutBottomSheetForm)
 
-        bottomSheetBehavior.setBottomSheetCallback(object :
+        bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                layoutAddressFormExpanded.alpha = slideOffset
-                layoutAddressCollapsed.alpha = 1 - slideOffset
+                binding.layoutAddressFormExpanded.alpha = slideOffset
+                binding.layoutAddressCollapsed.alpha = 1 - slideOffset
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -185,15 +185,14 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
             }
         })
 
-        fullAddressTemp.setOnClickListener {
+        binding.fullAddressTemp.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        buttonDone.setOnClickListener {
+        binding.buttonDone.setOnClickListener {
             val data = Intent()
-            val resultCode: Int
-            resultCode = if (addressModel != null) {
-                data.putExtra(DATA, getJSON(addressModel!!))
+            val resultCode: Int = if (addressModel != null) {
+                data.putExtra(DATA, addressModel?.toJSON())
                 RESULT_OK
             } else {
                 data.putExtra(DATA, "")
@@ -203,11 +202,10 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
             finish()
         }
 
-        selectAddress.setOnClickListener {
+        binding.selectAddress.setOnClickListener {
             val data = Intent()
-            val resultCode: Int
-            resultCode = if (addressModel != null) {
-                data.putExtra(DATA, getJSON(addressModel!!))
+            val resultCode: Int = if (addressModel != null) {
+                data.putExtra(DATA, addressModel?.toJSON())
                 RESULT_OK
             } else {
                 data.putExtra(DATA, "")
@@ -235,20 +233,19 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         googleMap = mMap
         checkPermission()
         googleMap!!.setOnCameraMoveStartedListener {
-            aim.animate().alpha(1f).duration = 500
-            ObjectAnimator.ofFloat(centralMarker, "translationY", -100f).setDuration(250).start()
+            binding.aim.animate().alpha(1f).duration = 500
+            ObjectAnimator.ofFloat(binding.centralMarker, "translationY", -100f).setDuration(250)
+                .start()
         }
 
         googleMap!!.setOnCameraIdleListener {
-            aim.animate().alpha(0f).duration = 500
-            ObjectAnimator.ofFloat(centralMarker, "translationY", 0f).setDuration(250).start()
+            binding.aim.animate().alpha(0f).duration = 500
+            ObjectAnimator.ofFloat(binding.centralMarker, "translationY", 0f).setDuration(250)
+                .start()
             try {
-                val nowLocation = googleMap!!.cameraPosition.target
-                if (nowLocation != null) {
+                googleMap?.cameraPosition?.target?.let { nowLocation ->
                     getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
-                } else {
-                    log("can't pick this location")
-                }
+                } ?: log("can't pick this location")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -275,7 +272,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
             }
 
             if (permissionList.size > 0) {
-                showToast("required location permission")
+                "required location permission".toToast()
                 ActivityCompat.requestPermissions(this, permissionList.toTypedArray(), 100)
             } else {
                 googleMap?.isMyLocationEnabled = true
@@ -289,13 +286,13 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
     }
 
     private fun createLocationRequest() {
-        val locationRequest = LocationRequest.create()?.apply {
+        val locationRequest = LocationRequest.create().apply {
             interval = 5000
             fastestInterval = 5000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest!!)
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         val client: SettingsClient = LocationServices.getSettingsClient(this)
         val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
 
@@ -309,28 +306,29 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 googleMap!!.uiSettings.isCompassEnabled = true
 
                 mMap.setOnCameraMoveStartedListener {
-                    aim.animate().alpha(1f).duration = 500
-                    ObjectAnimator.ofFloat(centralMarker, "translationY", -100f)
+                    binding.aim.animate().alpha(1f).duration = 500
+                    ObjectAnimator.ofFloat(binding.centralMarker, "translationY", -100f)
                         .setDuration(250).start()
                 }
 
                 mMap.setOnCameraIdleListener {
-                    aim.animate().alpha(0f).duration = 500
-                    ObjectAnimator.ofFloat(centralMarker, "translationY", 0f).setDuration(250)
+                    binding.aim.animate().alpha(0f).duration = 500
+                    ObjectAnimator.ofFloat(binding.centralMarker, "translationY", 0f)
+                        .setDuration(250)
                         .start()
                     try {
                         val nowLocation = mMap.cameraPosition.target
                         if (nowLocation != null) {
                             getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
                         } else {
-                            showErrorToast("can't pick this location")
+                            "can't pick this location".toToast()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
             }
-            myLocation.performClick()
+            binding.myLocation.performClick()
         }
 
         task.addOnFailureListener { exception ->
@@ -353,10 +351,10 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         if (requestCode == 100) {
             if (permissions.isNotEmpty()) {
                 if (grantResults.isEmpty()) {
-                    showErrorToast("Permission Required")
+                    "Permission Required".toToast()
                 }
             } else {
-                showErrorToast("Permission Required")
+                "Permission Required".toToast()
             }
         }
     }
@@ -371,7 +369,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
             filterTaskList.add(asyncTask)
             asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, lat, lng)
         } else {
-            showToast("location not fetch")
+            "location not fetch".toToast()
         }
     }
 
@@ -395,40 +393,40 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                     )
 
                 if (addresses != null && addresses.isNotEmpty()) {
-                    val addressWeGet: Address? = addresses[0]
+                    val addressWeGet: Address = addresses[0]
                     addressModel = AddressModel()
                     addressModel!!.latitude = roundAvoid(latitude)
                     addressModel!!.longitude = roundAvoid(longitude)
                     try {
-                        addressModel!!.localAddress = addressWeGet!!.getAddressLine(0)
+                        addressModel!!.localAddress = addressWeGet.getAddressLine(0)
                     } catch (e: Exception) {
                         e.printStackTrace()
                         addressModel!!.localAddress = ""
                     }
 
                     try {
-                        addressModel!!.city = addressWeGet!!.locality
+                        addressModel!!.city = addressWeGet.locality
                     } catch (e: Exception) {
                         e.printStackTrace()
                         addressModel!!.city = ""
                     }
 
                     try {
-                        addressModel!!.state = addressWeGet!!.adminArea
+                        addressModel!!.state = addressWeGet.adminArea
                     } catch (e: Exception) {
                         e.printStackTrace()
                         addressModel!!.state = ""
                     }
 
                     try {
-                        addressModel!!.countryName = addressWeGet!!.countryName
+                        addressModel!!.countryName = addressWeGet.countryName
                     } catch (e: Exception) {
                         e.printStackTrace()
                         addressModel!!.countryName = ""
                     }
 
                     try {
-                        addressModel!!.postalCode = addressWeGet!!.postalCode
+                        addressModel!!.postalCode = addressWeGet.postalCode
                     } catch (e: Exception) {
                         e.printStackTrace()
                         addressModel!!.postalCode = ""
@@ -448,9 +446,6 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
-
-
-
                 return null
             }
         }
@@ -460,27 +455,27 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
             try {
                 addressModel = _userAddress
                 if (_userAddress != null) {
-                    fullAddressTemp.text = _userAddress.fullAddress
-                    addressTitle.text = _userAddress.fullAddress
-                    localAddress.text = _userAddress.localAddress
-                    state.text = _userAddress.state
-                    postalCode.text = _userAddress.postalCode
-                    description.text = _userAddress.countryName
+                    binding.fullAddressTemp.text = _userAddress.fullAddress
+                    binding.addressTitle.text = _userAddress.fullAddress
+                    binding.localAddress.text = _userAddress.localAddress
+                    binding.state.text = _userAddress.state
+                    binding.postalCode.text = _userAddress.postalCode
+                    binding.description.text = _userAddress.countryName
                 } else {
-                    fullAddressTemp.text = ""
-                    addressTitle.text = ""
-                    localAddress.text = ""
-                    state.text = ""
-                    postalCode.text = ""
-                    description.text = ""
+                    binding.fullAddressTemp.text = ""
+                    binding.addressTitle.text = ""
+                    binding.localAddress.text = ""
+                    binding.state.text = ""
+                    binding.postalCode.text = ""
+                    binding.description.text = ""
                 }
             } catch (e: Exception) {
-                fullAddressTemp.text = ""
-                addressTitle.text = ""
-                localAddress.text = ""
-                state.text = ""
-                postalCode.text = ""
-                description.text = ""
+                binding.fullAddressTemp.text = ""
+                binding.addressTitle.text = ""
+                binding.localAddress.text = ""
+                binding.state.text = ""
+                binding.postalCode.text = ""
+                binding.description.text = ""
             }
         }
     }
@@ -494,13 +489,13 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
             try {
 
                 val geocoder = Geocoder(context, Locale.getDefault())
-                val addresses: List<Address>
                 //get location from lat long if address string is null
-                addresses = geocoder.getFromLocationName(
+                val addresses: List<Address> = geocoder.getFromLocationName(
                     "H Block, Sector 62, Noida, Uttar Pradesh 201301",
                     1
                 )
-                if (addresses != null && addresses.isNotEmpty()) {
+
+                if (addresses.isNotEmpty()) {
                     latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
                 }
             } catch (ignored: Exception) {
@@ -512,7 +507,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         override fun onPostExecute(latLng: LatLng) {
             super.onPostExecute(latLng)
             log(String.format("%s -- %s", latLng.latitude, latLng.longitude))
-            showToast(String.format("%s -- %s", latLng.latitude, latLng.longitude))
+            String.format("%s -- %s", latLng.latitude, latLng.longitude).toToast()
         }
     }
 
