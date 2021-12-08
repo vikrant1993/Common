@@ -99,6 +99,7 @@ public class PermissionsActivity extends MasterActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults.length == 0) {
             deny();
         } else {
