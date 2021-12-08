@@ -1,18 +1,17 @@
 package vk.help
 
-import android.os.Handler
 import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
+import vk.help.base.MasterApplication
 
 interface CommonTask {
 
     val TAG: String
-    val handler: Handler
 
     //String Related Start
     fun String.toToast() {
-        Common.showToast(HelpApp.applicationContext, this)
+        Common.showToast(MasterApplication.context, this)
     }
 
     fun String.capitalize(): String {
@@ -33,7 +32,7 @@ interface CommonTask {
 
     //String Related End
     fun ImageView.setImage(url: String) {
-        Glide.with(HelpApp.applicationContext).load(url).into(this)
+        Glide.with(MasterApplication.context).load(url).into(this)
     }
 
     fun View.text(): String {

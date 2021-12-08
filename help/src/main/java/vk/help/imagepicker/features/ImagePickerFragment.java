@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import vk.help.Fragment;
+import vk.help.base.MasterFragment;
 import vk.help.R;
 import vk.help.imagepicker.features.camera.CameraHelper;
 import vk.help.imagepicker.features.camera.DefaultCameraModule;
@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static vk.help.imagepicker.helper.ImagePickerPreferences.PREF_WRITE_EXTERNAL_STORAGE_REQUESTED;
 
-public class ImagePickerFragment extends Fragment implements ImagePickerView {
+public class ImagePickerFragment extends MasterFragment implements ImagePickerView {
 
     private static final String STATE_KEY_CAMERA_MODULE = "Key.CameraModule";
     private static final String STATE_KEY_RECYCLER = "Key.Recycler";

@@ -1,19 +1,18 @@
-package vk.help
+package vk.help.base
 
 import android.content.Context
-import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import vk.help.Common
+import vk.help.CommonTask
 
-open class MasterActivity : AppCompatActivity(), CommonTask {
+abstract class MasterActivity : AppCompatActivity(), CommonTask {
 
     public val context: Context by lazy {
         this
     }
 
     override val TAG: String = this.javaClass.simpleName
-    override val handler: Handler = Handler()
 
     override fun log(value: String) {
         Common.longLog(TAG, value)

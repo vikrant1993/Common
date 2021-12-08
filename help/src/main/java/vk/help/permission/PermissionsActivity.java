@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 
-import vk.help.MasterActivity;
+import vk.help.base.MasterActivity;
 
 public class PermissionsActivity extends MasterActivity {
 

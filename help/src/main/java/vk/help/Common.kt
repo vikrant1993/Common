@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.gson.Gson
+import vk.help.base.MasterApplication
 import java.io.*
 import java.lang.reflect.Type
 import java.text.DecimalFormat
@@ -60,13 +61,13 @@ object Common {
     }
 
     private fun toastMessageStyle(message: String): String {
-        if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.NONE) {
+        if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.NONE) {
             return message
-        } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.WORDS_CAPITAL) {
+        } else if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.WORDS_CAPITAL) {
             return capitalize(message)
-        } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.ALL_CAPITAL) {
+        } else if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.ALL_CAPITAL) {
             return message.uppercase(Locale.getDefault())
-        } else if (HelpApp.toastMessageStyle == HelpApp.ToastMessageStyle.FIRST_WORD_CAPITAL) {
+        } else if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.FIRST_WORD_CAPITAL) {
             if (message.isNotEmpty()) {
                 return message.substring(0, 1).uppercase(Locale.getDefault()) + message.substring(
                     1
@@ -98,7 +99,7 @@ object Common {
     }
 
     fun getString(key: String): String {
-        return sharedPreferences.getString(key, "")!!
+        return sharedPreferences.getString(key, "") ?: ""
     }
 
     fun setOnClickListener(listener: View.OnClickListener, vararg views: View) {

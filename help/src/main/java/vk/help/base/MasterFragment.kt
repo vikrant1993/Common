@@ -1,13 +1,13 @@
-package vk.help
+package vk.help.base
 
-import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
+import vk.help.Common
+import vk.help.CommonTask
 
-open class Fragment : Fragment(), CommonTask {
+open class MasterFragment : Fragment(), CommonTask {
 
     override val TAG: String = this.javaClass.simpleName
-    override val handler: Handler = Handler()
 
     override fun log(value: String) {
         Common.longLog(TAG, value)

@@ -340,7 +340,5 @@ public class VegaLayoutManager extends RecyclerView.LayoutManager {
         public View findSnapView(RecyclerView.LayoutManager layoutManager) {
             return ((VegaLayoutManager) layoutManager).findSnapView();
         }
-
     }
-
 }

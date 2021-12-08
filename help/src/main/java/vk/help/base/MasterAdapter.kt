@@ -1,4 +1,4 @@
-package vk.help
+package vk.help.base
 
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ open class MasterAdapter(
         recyclerView.adapter = this
     }
 
-    var _list = ArrayList<Any>()
+    private var _list = ArrayList<Any>()
 
     override fun getItemViewType(position: Int): Int {
         return position

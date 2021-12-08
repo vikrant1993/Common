@@ -21,7 +21,7 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import vk.help.MasterActivity
+import vk.help.base.MasterActivity
 import vk.help.R
 import vk.help.databinding.ActivityPlacePickerBinding
 import java.io.IOException
