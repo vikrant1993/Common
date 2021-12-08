@@ -229,7 +229,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         handler.removeCallbacks(showMyLocationRunnable)
     }
 
-    override fun onMapReady(mMap: GoogleMap?) {
+    override fun onMapReady(mMap: GoogleMap) {
         googleMap = mMap
         checkPermission()
         googleMap!!.setOnCameraMoveStartedListener {

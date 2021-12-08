@@ -1,5 +1,6 @@
 package vk.help
 
+import android.os.Handler
 import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
@@ -8,6 +9,7 @@ import vk.help.base.MasterApplication
 interface CommonTask {
 
     val TAG: String
+    val handler:Handler
 
     //String Related Start
     fun String.toToast() {

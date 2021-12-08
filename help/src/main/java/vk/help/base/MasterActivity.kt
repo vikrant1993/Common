@@ -1,6 +1,8 @@
 package vk.help.base
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import vk.help.Common
@@ -13,6 +15,7 @@ abstract class MasterActivity : AppCompatActivity(), CommonTask {
     }
 
     override val TAG: String = this.javaClass.simpleName
+    override val handler = Handler(Looper.getMainLooper())
 
     override fun log(value: String) {
         Common.longLog(TAG, value)

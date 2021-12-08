@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="vk.help">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -19,7 +19,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
-            android:name="imagepicker.features.ImagePickerActivity"
+            android:name="vk.help.imagepicker.features.ImagePickerActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/ef_AppTheme" />
 
