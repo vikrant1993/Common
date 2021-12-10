@@ -53,9 +53,7 @@ object Common {
     }
 
     fun showToast(context: Context, message: String) {
-        if (toast != null) {
-            toast?.cancel()
-        }
+        toast?.cancel()
         toast = Toast.makeText(context, toastMessageStyle(message), Toast.LENGTH_LONG)
         toast?.show()
     }
@@ -100,12 +98,6 @@ object Common {
 
     fun getString(key: String): String {
         return sharedPreferences.getString(key, "") ?: ""
-    }
-
-    fun setOnClickListener(listener: View.OnClickListener, vararg views: View) {
-        for (view in views) {
-            view.setOnClickListener(listener)
-        }
     }
 
     fun formatSeconds(timeInSeconds: Long): String {

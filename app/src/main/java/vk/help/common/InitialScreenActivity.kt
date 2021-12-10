@@ -1,14 +1,18 @@
 package vk.help.common
 
 import android.os.Bundle
+import android.view.View
 import vk.help.base.MasterActivity
-import vk.help.base.MasterApplication
 
-class InitialScreenActivity : MasterActivity() {
+class InitialScreenActivity : MasterActivity(),View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.temp)
-        MasterApplication.context
+        TAG.toToast()
     }
+
+    override fun onClick(view: View) {
+
+    }
+
 }

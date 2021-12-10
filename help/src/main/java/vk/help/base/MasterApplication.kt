@@ -3,14 +3,9 @@ package vk.help.base
 import android.content.Context
 import android.graphics.Typeface
 import androidx.multidex.MultiDexApplication
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.module.Module
-import org.koin.dsl.module
 import vk.help.Common
+import vk.help.LocaleHelper
 import vk.help.R
-import vk.help.networks.ApiClient
 
 open class MasterApplication : MultiDexApplication() {
 
@@ -21,31 +16,12 @@ open class MasterApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         mInstance = this
-        Common.sharedPreferences = getSharedPreferences(getString(R.string.shared_vk_offline), Context.MODE_PRIVATE)
-        setToastMessageStyle(ToastMessageStyle.WORDS_CAPITAL)
-
-        startKoin {
-            androidLogger()
-            androidContext(applicationContext)
-            modules(getAppModule())
-        }
+        Common.sharedPreferences =
+            getSharedPreferences(getString(R.string.shared_vk_offline), Context.MODE_PRIVATE)
+        setToastMessageStyle()
     }
 
-    open fun getAppModule(): Module {
-        return module {
-//            viewModel { NetworkViewModel() }
-//            viewModel { SignupViewModel() }
-//            viewModel { LoginViewModel() }
-//            viewModel { ForgotViewModel() }
-//            viewModel { HomeViewModel() }
-//            viewModel { AddressViewModel() }
-//            viewModel { CheckoutViewModel() }
-//            viewModel { ProductsViewModel() }
-            factory { ApiClient.NetworkConnectionInterceptor(get()) }
-        }
-    }
-
-    fun setToastMessageStyle(style: ToastMessageStyle?) {
+    fun setToastMessageStyle(style: ToastMessageStyle = ToastMessageStyle.WORDS_CAPITAL) {
         toastMessageStyle = style
     }
 
@@ -60,22 +36,22 @@ open class MasterApplication : MultiDexApplication() {
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         }
-    } //    @Override
+    }
 
-    //    protected void attachBaseContext(Context base) {
-    //        super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
-    //    }
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(base, "en"))
+    }
 
     companion object {
         var toastMessageStyle: ToastMessageStyle? = null
         val context: Context by lazy {
             instance.applicationContext
         }
-        private var mInstance: MasterApplication? = null
+        private lateinit var mInstance: MasterApplication
 
         @get:Synchronized
         val instance: MasterApplication
-            get() = mInstance ?: MasterApplication().also {
+            get() = mInstance.also {
                 mInstance = it
             }
     }

@@ -5,11 +5,15 @@ import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
 import vk.help.base.MasterApplication
+import java.util.*
 
 interface CommonTask {
 
-    val TAG: String
-    val handler:Handler
+    //    val TAG: String
+    val handler: Handler
+
+    val Any.TAG: String
+        get() = this.javaClass.simpleName
 
     //String Related Start
     fun String.toToast() {
@@ -72,7 +76,13 @@ interface CommonTask {
     }
 
     fun log(value: String)
-    fun setOnClickListeners(listener: View.OnClickListener, vararg views: View)
+
+    fun View.OnClickListener.setOnClickListeners(vararg views: View) {
+        for (view in views) {
+            view.setOnClickListener(this)
+        }
+    }
+
     fun saveString(key: String, value: String)
     fun getSaveString(key: String): String
 
