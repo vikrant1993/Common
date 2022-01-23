@@ -32,7 +32,7 @@ open class MasterAdapter(
         adapterView.getChildView(holder, position)
     }
 
-    open fun setData(data: ArrayList<*>) {
+    open fun setData(data: List<Any>) {
         _list.clear()
         _list.addAll(data)
         notifyDataSetChanged()
@@ -73,6 +73,6 @@ open class MasterAdapter(
 }
 
 interface AdapterView {
-    fun createChildView(parent: ViewGroup, position: Int): RecyclerView.ViewHolder
+    fun createChildView(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     fun getChildView(holder: RecyclerView.ViewHolder, position: Int)
 }

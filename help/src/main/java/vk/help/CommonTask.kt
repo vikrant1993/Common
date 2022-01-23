@@ -1,19 +1,27 @@
 package vk.help
 
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import vk.help.base.MasterApplication
-import java.util.*
+import kotlin.coroutines.CoroutineContext
 
-interface CommonTask {
+interface CommonTask : CoroutineScope {
 
     //    val TAG: String
     val handler: Handler
+        get() = Handler(Looper.getMainLooper())
 
     val Any.TAG: String
         get() = this.javaClass.simpleName
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
     //String Related Start
     fun String.toToast() {
@@ -75,7 +83,9 @@ interface CommonTask {
         return Common.convertDate(formatFrom, formatTo, value)
     }
 
-    fun log(value: String)
+    open fun String.log() {
+        Common.longLog(TAG, this)
+    }
 
     fun View.OnClickListener.setOnClickListeners(vararg views: View) {
         for (view in views) {

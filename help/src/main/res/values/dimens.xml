@@ -5,13 +5,24 @@
     <dimen name="dimen_4dp">4dp</dimen>
     <dimen name="dimen_6dp">6dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
     <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_14dp">14dp</dimen>
     <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
     <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_22dp">22dp</dimen>
     <dimen name="dimen_24dp">24dp</dimen>
 
+    <dimen name="dimen_9sp">9sp</dimen>
+    <dimen name="dimen_10sp">10sp</dimen>
+    <dimen name="dimen_12sp">12sp</dimen>
     <dimen name="dimen_14sp">14sp</dimen>
+    <dimen name="dimen_16sp">16sp</dimen>
     <dimen name="dimen_18sp">18sp</dimen>
+    <dimen name="dimen_20sp">20sp</dimen>
+    <dimen name="dimen_22sp">22sp</dimen>
+    <dimen name="dimen_24sp">24sp</dimen>
 
     <dimen name="bubble_corner">@dimen/dimen_20dp</dimen>
     <dimen name="handle_corner">@dimen/dimen_4dp</dimen>

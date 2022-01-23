@@ -15,13 +15,11 @@ public class LocaleHelper {
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
 
     public static Context onAttach(Context context) {
-        String lang = getPersistedData(context, Locale.getDefault().getLanguage());
-        return setLocale(context, lang);
+        return setLocale(context, getPersistedData(context, Locale.getDefault().getLanguage()));
     }
 
     public static Context onAttach(Context context, String defaultLanguage) {
-        String lang = getPersistedData(context, defaultLanguage);
-        return setLocale(context, lang);
+        return setLocale(context, getPersistedData(context, defaultLanguage));
     }
 
     public static String getLanguage(Context context) {

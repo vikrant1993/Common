@@ -97,10 +97,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         locationRequest.interval = 20 * 1000
 
         val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                if (locationResult == null) {
-                    return
-                }
+            override fun onLocationResult(locationResult: LocationResult) {
                 for (location in locationResult.locations) {
                     if (location != null) {
                         String.format(
@@ -191,10 +188,10 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
         binding.buttonDone.setOnClickListener {
             val data = Intent()
-            val resultCode: Int = if (addressModel != null) {
+            val resultCode: Int = addressModel?.let {
                 data.putExtra(DATA, addressModel?.toJSON())
                 RESULT_OK
-            } else {
+            } ?: run {
                 data.putExtra(DATA, "")
                 RESULT_NULL
             }
@@ -203,16 +200,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         }
 
         binding.selectAddress.setOnClickListener {
-            val data = Intent()
-            val resultCode: Int = if (addressModel != null) {
-                data.putExtra(DATA, addressModel?.toJSON())
-                RESULT_OK
-            } else {
-                data.putExtra(DATA, "")
-                RESULT_NULL
-            }
-            setResult(resultCode, data)
-            finish()
+            binding.buttonDone.performClick()
         }
     }
 
@@ -232,20 +220,20 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
     override fun onMapReady(mMap: GoogleMap) {
         googleMap = mMap
         checkPermission()
-        googleMap!!.setOnCameraMoveStartedListener {
+        googleMap?.setOnCameraMoveStartedListener {
             binding.aim.animate().alpha(1f).duration = 500
             ObjectAnimator.ofFloat(binding.centralMarker, "translationY", -100f).setDuration(250)
                 .start()
         }
 
-        googleMap!!.setOnCameraIdleListener {
+        googleMap?.setOnCameraIdleListener {
             binding.aim.animate().alpha(0f).duration = 500
             ObjectAnimator.ofFloat(binding.centralMarker, "translationY", 0f).setDuration(250)
                 .start()
             try {
                 googleMap?.cameraPosition?.target?.let { nowLocation ->
                     getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
-                } ?: log("can't pick this location")
+                } ?: "can't pick this location".log()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -299,11 +287,11 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
         task.addOnSuccessListener {
             val mapFragment =
                 supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-            mapFragment!!.getMapAsync { mMap ->
+            mapFragment?.getMapAsync { mMap ->
                 googleMap = mMap
-                googleMap!!.isMyLocationEnabled = true
-                googleMap!!.uiSettings.isMyLocationButtonEnabled = false
-                googleMap!!.uiSettings.isCompassEnabled = true
+                googleMap?.isMyLocationEnabled = true
+                googleMap?.uiSettings?.isMyLocationButtonEnabled = false
+                googleMap?.uiSettings?.isCompassEnabled = true
 
                 mMap.setOnCameraMoveStartedListener {
                     binding.aim.animate().alpha(1f).duration = 500
@@ -375,74 +363,49 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
     @SuppressLint("StaticFieldLeak")
     private inner class GetAddressFromLatLng : AsyncTask<Double, Void, AddressModel?>() {
-        var latitude: Double = 0.0
-        var longitude: Double = 0.0
+        var tempLatitude: Double = 0.0
+        var tempLongitude: Double = 0.0
 
         override fun doInBackground(vararg doubles: Double?): AddressModel? {
             try {
-                latitude = doubles[0]!!
-                longitude = doubles[1]!!
+                tempLatitude = doubles[0]!!
+                tempLongitude = doubles[1]!!
 
-                log("lat $latitude lng $longitude")
+                "lat $tempLatitude lng $tempLongitude".log()
 
-                val addresses: List<Address>? =
-                    Geocoder(context, Locale.getDefault()).getFromLocation(
-                        latitude,
-                        longitude,
-                        1
-                    )
+                return Geocoder(context, Locale.getDefault()).getFromLocation(
+                    tempLatitude, tempLongitude, 1
+                )?.firstOrNull()?.let { addressWeGet ->
+                    AddressModel().apply {
+                        latitude = roundAvoid(tempLatitude)
+                        longitude = roundAvoid(tempLongitude)
 
-                if (addresses != null && addresses.isNotEmpty()) {
-                    val addressWeGet: Address = addresses[0]
-                    addressModel = AddressModel()
-                    addressModel!!.latitude = roundAvoid(latitude)
-                    addressModel!!.longitude = roundAvoid(longitude)
-                    try {
-                        addressModel!!.localAddress = addressWeGet.getAddressLine(0)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        addressModel!!.localAddress = ""
+                        localAddress = try {
+                            addressWeGet.getAddressLine(0)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            ""
+                        }
+
+                        city = addressWeGet.locality ?: ""
+                        state = addressWeGet.adminArea ?: ""
+                        countryName = addressWeGet.countryName ?: ""
+                        postalCode = addressWeGet.postalCode ?: ""
+
+                        fullAddress = try {
+                            String.format(
+                                "%s, %s, %s(%s), %s",
+                                localAddress,
+                                city,
+                                state,
+                                postalCode,
+                                countryName
+                            )
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            ""
+                        }
                     }
-
-                    try {
-                        addressModel!!.city = addressWeGet.locality
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        addressModel!!.city = ""
-                    }
-
-                    try {
-                        addressModel!!.state = addressWeGet.adminArea
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        addressModel!!.state = ""
-                    }
-
-                    try {
-                        addressModel!!.countryName = addressWeGet.countryName
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        addressModel!!.countryName = ""
-                    }
-
-                    try {
-                        addressModel!!.postalCode = addressWeGet.postalCode
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        addressModel!!.postalCode = ""
-                    }
-
-                    try {
-                        addressModel!!.fullAddress =
-                            addressModel?.localAddress + ", " + addressModel!!.city + ", " + addressModel!!.state + "(" + addressModel!!.postalCode + "), " + addressModel!!.countryName
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        addressModel!!.fullAddress = ""
-                    }
-
-                    return addressModel
-                } else {
-                    return null
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -452,24 +415,15 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
         override fun onPostExecute(_userAddress: AddressModel?) {
             super.onPostExecute(_userAddress)
-            try {
-                addressModel = _userAddress
-                if (_userAddress != null) {
-                    binding.fullAddressTemp.text = _userAddress.fullAddress
-                    binding.addressTitle.text = _userAddress.fullAddress
-                    binding.localAddress.text = _userAddress.localAddress
-                    binding.state.text = _userAddress.state
-                    binding.postalCode.text = _userAddress.postalCode
-                    binding.description.text = _userAddress.countryName
-                } else {
-                    binding.fullAddressTemp.text = ""
-                    binding.addressTitle.text = ""
-                    binding.localAddress.text = ""
-                    binding.state.text = ""
-                    binding.postalCode.text = ""
-                    binding.description.text = ""
-                }
-            } catch (e: Exception) {
+            addressModel = _userAddress
+            _userAddress?.let {
+                binding.fullAddressTemp.text = it.fullAddress
+                binding.addressTitle.text = it.fullAddress
+                binding.localAddress.text = it.localAddress
+                binding.state.text = it.state
+                binding.postalCode.text = it.postalCode
+                binding.description.text = it.countryName
+            } ?: run {
                 binding.fullAddressTemp.text = ""
                 binding.addressTitle.text = ""
                 binding.localAddress.text = ""
@@ -506,7 +460,7 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
         override fun onPostExecute(latLng: LatLng) {
             super.onPostExecute(latLng)
-            log(String.format("%s -- %s", latLng.latitude, latLng.longitude))
+            String.format("%s -- %s", latLng.latitude, latLng.longitude).log()
             String.format("%s -- %s", latLng.latitude, latLng.longitude).toToast()
         }
     }

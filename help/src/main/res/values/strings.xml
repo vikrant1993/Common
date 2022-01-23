@@ -39,5 +39,4 @@
     <string name="cancel">Cancel</string>
     <string name="please_wait_while_downloading_file">Please Wait, While Downloading File</string>
     <string name="save_at_download">Save at Download</string>
-    <string name="failed">Failed</string>
 </resources>

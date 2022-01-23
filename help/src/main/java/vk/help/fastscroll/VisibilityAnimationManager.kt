@@ -8,10 +8,19 @@ import android.view.View
 import androidx.annotation.AnimatorRes
 import vk.help.R
 
-class VisibilityAnimationManager(private var view: View, @AnimatorRes showAnimator: Int, @AnimatorRes hideAnimator: Int, private var pivotXRelative: Float, private var pivotYRelative: Float, hideDelay: Int) {
+open class VisibilityAnimationManager(
+    private var view: View,
+    @AnimatorRes showAnimator: Int,
+    @AnimatorRes hideAnimator: Int,
+    private var pivotXRelative: Float,
+    private var pivotYRelative: Float,
+    hideDelay: Int
+) {
 
-    private var hideAnimator: AnimatorSet = AnimatorInflater.loadAnimator(view.context, hideAnimator) as AnimatorSet
-    private var showAnimator: AnimatorSet =AnimatorInflater.loadAnimator(view.context, showAnimator) as AnimatorSet
+    private var hideAnimator: AnimatorSet =
+        AnimatorInflater.loadAnimator(view.context, hideAnimator) as AnimatorSet
+    private var showAnimator: AnimatorSet =
+        AnimatorInflater.loadAnimator(view.context, showAnimator) as AnimatorSet
 
     init {
         this.hideAnimator.startDelay = hideDelay.toLong()
@@ -86,12 +95,20 @@ class VisibilityAnimationManager(private var view: View, @AnimatorRes showAnimat
                 this.pivotY = 1f
                 return this
             }
+
             abstract fun build(): T
         }
 
         class Builder(view: View) : AbsBuilder<VisibilityAnimationManager>(view) {
             override fun build(): VisibilityAnimationManager {
-                return VisibilityAnimationManager(view, showAnimatorResource, hideAnimatorResource, pivotX, pivotY, hideDelay)
+                return VisibilityAnimationManager(
+                    view,
+                    showAnimatorResource,
+                    hideAnimatorResource,
+                    pivotX,
+                    pivotY,
+                    hideDelay
+                )
             }
         }
     }
