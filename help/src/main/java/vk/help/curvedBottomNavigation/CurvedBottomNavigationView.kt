@@ -325,7 +325,7 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
             throw RuntimeException("initialize menu by calling setMenuItems() before setting up with NavController")
         }
         // the start destination and active index
-        if (navController.graph.startDestination != cbnMenuItems[selectedIndex].destinationId) {
+        if (navController.graph.startDestinationId != cbnMenuItems[selectedIndex].destinationId) {
             throw RuntimeException("startDestination in graph doesn't match the activeIndex set in setMenuItems()")
         }
 
@@ -381,7 +381,7 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
     private fun findStartDestination(graph: NavGraph): NavDestination {
         var startDestination: NavDestination = graph
         while (startDestination is NavGraph) {
-            startDestination = graph.findNode(graph.startDestination)!!
+            startDestination = graph.findNode(graph.startDestinationId)!!
         }
 
         return startDestination
