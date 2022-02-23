@@ -11,7 +11,6 @@
     <application
         android:icon="@drawable/ic_launcher_background"
         android:label="@string/app_name"
-        android:name=".BaseApplication"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -37,9 +36,9 @@
             android:name="vk.help.imagepicker.features.ImagePickerActivity"
             android:configChanges="orientation|screenSize" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAI54HMpcTDytcomEylkqGM1gp9Hurx08A" />
+<!--        <meta-data-->
+<!--            android:name="com.google.android.geo.API_KEY"-->
+<!--            android:value="AIzaSyAI54HMpcTDytcomEylkqGM1gp9Hurx08A" />-->
 
     </application>
 </manifest>
