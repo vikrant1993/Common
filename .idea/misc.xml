@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Common/app/src/main/res/drawable/ic_baseline_arrow_right_alt_24.xml" value="0.1655" />
+        <entry key="..\:/Projects/Common/app/src/main/res/drawable/ic_crop_black_24dp.xml" value="0.1655" />
+        <entry key="..\:/Projects/Common/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1445" />
         <entry key="..\:/Projects/Common/app/src/main/res/layout/temp.xml" value="0.20277777777777778" />
         <entry key="..\:/Projects/Common/help/src/main/res/drawable/background_button.xml" value="0.26205128205128203" />
       </map>

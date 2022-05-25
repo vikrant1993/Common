@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="vk.help.common">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name="vk.help.base.MasterApplication"
         android:icon="@drawable/ic_launcher_background"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -20,9 +18,9 @@
         tools:targetApi="q">
         <activity
             android:name=".InitialScreenActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -32,13 +30,17 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="com.huawei.hms.ml.DEPENDENCY"
+            android:value="skeleton" />
+
         <activity
             android:name="vk.help.imagepicker.features.ImagePickerActivity"
             android:configChanges="orientation|screenSize" />
 
-<!--        <meta-data-->
-<!--            android:name="com.google.android.geo.API_KEY"-->
-<!--            android:value="AIzaSyAI54HMpcTDytcomEylkqGM1gp9Hurx08A" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.geo.API_KEY"-->
+        <!--            android:value="AIzaSyAI54HMpcTDytcomEylkqGM1gp9Hurx08A" />-->
 
     </application>
 </manifest>

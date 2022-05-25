@@ -29,10 +29,10 @@ import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-class ExtendedWebView constructor(
+class ExtendedWebView @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet?,
-    defStyleAttr: Int
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
     private var filePathCallback: ValueCallback<Array<Uri?>>? = null
     private var pickFileType = "*/*"
@@ -244,7 +244,7 @@ class ExtendedWebView constructor(
         override fun onPostExecute(result: Boolean) {
             mBuilder.setContentText(if (result) "Download complete" else "Failed")
             mBuilder.setProgress(0, 0, false)
-                        mNotifyManager.notify(0, mBuilder.build())
+            mNotifyManager.notify(0, mBuilder.build())
         }
     }
 }

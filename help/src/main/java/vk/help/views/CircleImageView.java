@@ -95,9 +95,7 @@ public class CircleImageView extends AppCompatImageView {
         super.setScaleType(SCALE_TYPE);
         mReady = true;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setOutlineProvider(new OutlineProvider());
-        }
+        setOutlineProvider(new OutlineProvider());
 
         if (mSetupPending) {
             setup();
@@ -273,7 +271,6 @@ public class CircleImageView extends AppCompatImageView {
         return mColorFilter;
     }
 
-    @SuppressWarnings("ConstantConditions")
     private void applyColorFilter() {
         // This might be called from setColorFilter during ImageView construction
         // before member initialization has finished on API level <= 19.
@@ -418,7 +415,6 @@ public class CircleImageView extends AppCompatImageView {
         return Math.pow(x - mBorderRect.centerX(), 2) + Math.pow(y - mBorderRect.centerY(), 2) <= Math.pow(mBorderRadius, 2);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private class OutlineProvider extends ViewOutlineProvider {
 
         @Override

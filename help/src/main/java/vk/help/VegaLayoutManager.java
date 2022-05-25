@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class VegaLayoutManager extends RecyclerView.LayoutManager {
 
     private int scroll = 0;
-    private SparseArray<Rect> locationRects = new SparseArray<>();
-    private SparseBooleanArray attachedItems = new SparseBooleanArray();
-    private ArrayMap<Integer, Integer> viewTypeHeightMap = new ArrayMap<>();
+    private final SparseArray<Rect> locationRects = new SparseArray<>();
+    private final SparseBooleanArray attachedItems = new SparseBooleanArray();
+    private final ArrayMap<Integer, Integer> viewTypeHeightMap = new ArrayMap<>();
 
     private boolean needSnap = false;
     private int lastDy = 0;

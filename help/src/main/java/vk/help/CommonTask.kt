@@ -93,8 +93,13 @@ interface CommonTask : CoroutineScope {
         }
     }
 
-    fun saveString(key: String, value: String)
-    fun getSaveString(key: String): String
+    fun saveString(key: String, value: String) {
+        Common.saveString(key, value)
+    }
+
+    fun getSaveString(key: String): String {
+        return Common.getString(key)
+    }
 
     val DATA: String
         get() = "DATA"
