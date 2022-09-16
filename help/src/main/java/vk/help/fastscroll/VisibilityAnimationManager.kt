@@ -29,13 +29,13 @@ open class VisibilityAnimationManager(
 
             var wasCanceled: Boolean = false
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 if (!wasCanceled) view.visibility = View.INVISIBLE
                 wasCanceled = false
             }
 
-            override fun onAnimationCancel(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {
                 super.onAnimationCancel(animation)
                 wasCanceled = true
             }

@@ -12,6 +12,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
@@ -21,17 +22,20 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import vk.help.base.MasterActivity
+import vk.help.CommonTask
 import vk.help.R
 import vk.help.databinding.ActivityPlacePickerBinding
 import java.io.IOException
 import java.text.DecimalFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
+class ActivityPlacePicker : AppCompatActivity(), OnMapReadyCallback, CommonTask {
+
+    val context: Context by lazy {
+        this
+    }
 
     private var googleMap: GoogleMap? = null
     private val filterTaskList: ArrayList<GetAddressFromLatLng> = ArrayList()
@@ -121,10 +125,11 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
     private val showMyLocationRunnable = object : Runnable {
         override fun run() {
             try {
-                val latLng =
-                    LatLng(googleMap!!.myLocation.latitude, googleMap!!.myLocation.longitude)
-                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18f)
-                googleMap?.animateCamera(cameraUpdate)
+                googleMap?.let {
+                    val latLng = LatLng(it.myLocation.latitude, it.myLocation.longitude)
+                    val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18f)
+                    it.animateCamera(cameraUpdate)
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
                 handler.postDelayed(this, 1000)
@@ -444,13 +449,11 @@ class ActivityPlacePicker : MasterActivity(), OnMapReadyCallback {
 
                 val geocoder = Geocoder(context, Locale.getDefault())
                 //get location from lat long if address string is null
-                val addresses: List<Address> = geocoder.getFromLocationName(
+                geocoder.getFromLocationName(
                     "H Block, Sector 62, Noida, Uttar Pradesh 201301",
                     1
-                )
-
-                if (addresses.isNotEmpty()) {
-                    latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
+                )?.firstOrNull()?.let {
+                    latLng = LatLng(it.latitude, it.longitude)
                 }
             } catch (ignored: Exception) {
                 ignored.printStackTrace()

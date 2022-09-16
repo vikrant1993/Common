@@ -586,7 +586,7 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
         return ValueAnimator().apply {
             setValues(propertyCenterYReverse)
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     // set the callback before starting the animation as the Drawable class
                     // internally uses WeakReference. So settings the callback only during initialization
                     // will result in callback being cleared after certain time. This is a good place
@@ -595,7 +595,7 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
                     menuAVDs[index].start()
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     // disable the clicks in the target view
                     bottomNavItemViews[index].visibility = INVISIBLE
                 }
@@ -606,7 +606,7 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
                 invalidate()
             }
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     isAnimating = false
                 }
             })
@@ -624,7 +624,7 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
                 invalidate()
             }
             addListener(object: AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     fabIconIndex = selectedIndex
                 }
             })

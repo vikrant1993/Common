@@ -1,10 +1,6 @@
 package vk.help.common
 
-import android.os.Bundle
-import vk.help.base.MasterActivity
+import androidx.appcompat.app.AppCompatActivity
 
-class InitialScreenActivity : MasterActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+class InitialScreenActivity : AppCompatActivity() {
 }

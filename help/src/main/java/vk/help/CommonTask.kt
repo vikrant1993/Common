@@ -55,18 +55,6 @@ interface CommonTask : CoroutineScope {
                 is TextView -> {
                     this.text.toString()
                 }
-                is EditText -> {
-                    this.text.toString()
-                }
-                is Button -> {
-                    this.text.toString()
-                }
-                is RadioButton -> {
-                    this.text.toString()
-                }
-                is CheckBox -> {
-                    this.text.toString()
-                }
                 is CharSequence -> {
                     this.toString()
                 }

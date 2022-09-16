@@ -22,6 +22,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import vk.help.Common.showToast
 import vk.help.R
 import java.io.File
@@ -173,7 +177,6 @@ class ExtendedWebView @JvmOverloads constructor(
         private lateinit var mBuilder: NotificationCompat.Builder
         private var savePath: String? = null
 
-
         override fun onPreExecute() {
             super.onPreExecute()
             mBuilder = NotificationCompat.Builder(context, channelID)
@@ -226,7 +229,7 @@ class ExtendedWebView @JvmOverloads constructor(
         override fun onCancelled() {
             super.onCancelled()
             try {
-                if (File(savePath).delete()) {
+                if (savePath?.let { File(it).delete() } == true) {
                     showToast(context, "Canceled")
                 }
             } catch (e: Exception) {
@@ -247,4 +250,6 @@ class ExtendedWebView @JvmOverloads constructor(
             mNotifyManager.notify(0, mBuilder.build())
         }
     }
+
+
 }
