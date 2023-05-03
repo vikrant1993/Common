@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.location.Address
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
@@ -311,11 +310,7 @@ class ActivityPlacePicker : AppCompatActivity(), OnMapReadyCallback, CommonTask 
                         .start()
                     try {
                         val nowLocation = mMap.cameraPosition.target
-                        if (nowLocation != null) {
-                            getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
-                        } else {
-                            "can't pick this location".toToast()
-                        }
+                        getAddressByGeoCodingLatLng(nowLocation.latitude, nowLocation.longitude)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }

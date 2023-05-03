@@ -497,7 +497,7 @@ public class NumberProgressBar extends View {
         mListener = listener;
     }
 
-    interface OnProgressBarListener {
+    public interface OnProgressBarListener {
 
         void onProgressChange(int current, int max);
     }

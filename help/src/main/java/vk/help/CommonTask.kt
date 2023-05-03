@@ -28,10 +28,6 @@ interface CommonTask : CoroutineScope {
         Common.showToast(MasterApplication.context, this)
     }
 
-    fun String.capitalize(): String {
-        return Common.capitalize(this)
-    }
-
     fun Any.toJSON(): String {
         return Common.getJSON(this)
     }
@@ -42,29 +38,6 @@ interface CommonTask : CoroutineScope {
 
     fun ByteArray.getObject(): Any {
         return Common.getObject(this)
-    }
-
-    //String Related End
-    fun ImageView.setImage(url: String) {
-        Glide.with(MasterApplication.context).load(url).into(this)
-    }
-
-    fun View.text(): String {
-        return try {
-            when (this) {
-                is TextView -> {
-                    this.text.toString()
-                }
-                is CharSequence -> {
-                    this.toString()
-                }
-                else -> {
-                    ""
-                }
-            }
-        } catch (e: Exception) {
-            ""
-        }
     }
 
     fun convertDate(formatFrom: String, formatTo: String, value: String): String {

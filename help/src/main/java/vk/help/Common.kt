@@ -32,12 +32,12 @@ object Common {
     fun convertDate(formatFrom: String, formatTo: String, value: String): String {
         try {
             val dateFormat = SimpleDateFormat(
-                if (formatFrom.isEmpty()) ServerCommonDateTimePattern else formatFrom,
+                formatFrom.ifEmpty { ServerCommonDateTimePattern },
                 Locale.getDefault()
             )
             val sourceDate = dateFormat.parse(value)
             val targetFormat = SimpleDateFormat(
-                if (formatTo.isEmpty()) OnlyDatePattern else formatTo,
+                formatTo.ifEmpty { OnlyDatePattern },
                 Locale.getDefault()
             )
 
@@ -62,7 +62,7 @@ object Common {
         if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.NONE) {
             return message
         } else if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.WORDS_CAPITAL) {
-            return capitalize(message)
+            return message.capitalize()
         } else if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.ALL_CAPITAL) {
             return message.uppercase(Locale.getDefault())
         } else if (MasterApplication.toastMessageStyle == MasterApplication.ToastMessageStyle.FIRST_WORD_CAPITAL) {
@@ -73,21 +73,6 @@ object Common {
             }
         }
         return message
-    }
-
-    fun capitalize(value: String): String {
-        val words = value.lowercase(Locale.getDefault()).trim().split(" ")
-        val ret = StringBuilder()
-        for (i in words.indices) {
-            if (words[i].trim { it <= ' ' }.isNotEmpty()) {
-                ret.append(Character.toUpperCase(words[i].trim { it <= ' ' }[0]))
-                ret.append(words[i].trim { it <= ' ' }.substring(1))
-                if (i < words.size - 1) {
-                    ret.append(' ')
-                }
-            }
-        }
-        return ret.toString()
     }
 
     fun saveString(key: String, value: String) {
