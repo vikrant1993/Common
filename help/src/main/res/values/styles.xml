@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="customToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="actionMenuTextColor">@color/white</item>
-    </style>
-
     <style name="ef_BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionModeOverlay">true</item>
         <item name="windowActionBar">false</item>
@@ -16,11 +11,6 @@
         <item name="colorPrimary">@color/ef_colorPrimary</item>
         <item name="colorPrimaryDark">@color/ef_colorPrimaryDark</item>
         <item name="colorAccent">@color/ef_colorAccent</item>
-    </style>
-
-    <style name="ef_CustomToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/ef_colorTextPrimary</item>
-        <item name="actionMenuTextColor">@color/ef_colorTextPrimary</item>
     </style>
 
 </resources>
