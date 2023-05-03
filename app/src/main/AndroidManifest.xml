@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name="vk.help.base.MasterApplication"
@@ -32,10 +37,6 @@
         <meta-data
             android:name="com.huawei.hms.ml.DEPENDENCY"
             android:value="skeleton" />
-
-        <activity
-            android:name="vk.help.imagepicker.features.ImagePickerActivity"
-            android:configChanges="orientation|screenSize" />
 
         <!--        <meta-data-->
         <!--            android:name="com.google.android.geo.API_KEY"-->

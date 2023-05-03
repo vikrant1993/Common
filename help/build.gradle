@@ -11,15 +11,14 @@ plugins {
 //    from android.sourceSets.main.java.srcDirs
 //}
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'vk.help'
-                artifactId = 'helping'
-                version = '1.1'
-            }
+publishing {
+    publications {
+        release(MavenPublication) {
+//            from components.release
+            groupId = 'vk.help'
+            artifactId = 'helping'
+            version = '1.2'
+            artifact("$buildDir/outputs/aar/helping.aar")
         }
     }
 }

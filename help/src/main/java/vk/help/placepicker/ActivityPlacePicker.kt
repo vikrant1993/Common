@@ -9,7 +9,6 @@ import android.content.res.ColorStateList
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -80,45 +79,6 @@ class ActivityPlacePicker : AppCompatActivity(), OnMapReadyCallback, CommonTask 
                 handler.postDelayed(this, 200)
             }
         }
-    }
-
-    fun useAnother() {
-        val fusedLocationProviderClient = FusedLocationProviderClient(context)
-        fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) { location ->
-            if (location != null) {
-                String.format(
-                    Locale.US,
-                    "%s -- %s",
-                    location.latitude,
-                    location.longitude
-                ).toToast()
-            }
-        }
-
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 20 * 1000
-
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                for (location in locationResult.locations) {
-                    if (location != null) {
-                        String.format(
-                            Locale.US,
-                            "%s -- %s",
-                            location.latitude,
-                            location.longitude
-                        ).toToast()
-                        fusedLocationProviderClient.removeLocationUpdates(this)
-                    }
-                }
-            }
-        }
-        fusedLocationProviderClient.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            Looper.getMainLooper()
-        )
     }
 
     private val showMyLocationRunnable = object : Runnable {
@@ -293,7 +253,7 @@ class ActivityPlacePicker : AppCompatActivity(), OnMapReadyCallback, CommonTask 
                 supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
             mapFragment?.getMapAsync { mMap ->
                 googleMap = mMap
-                googleMap?.isMyLocationEnabled = true
+//                googleMap?.isMyLocationEnabled = true
                 googleMap?.uiSettings?.isMyLocationButtonEnabled = false
                 googleMap?.uiSettings?.isCompassEnabled = true
 
