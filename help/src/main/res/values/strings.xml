@@ -1,11 +1,42 @@
 <resources>
     <string name="app_name">test</string>
     <string name="shared_vk_offline">Vikrant</string>
+    <string name="shared_prefrence_name">Vikrant</string>
+    <string name="please_wait_">Please Wait…</string>
 
+    <string name="ok">OK</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="and">and</string>
+
+    <string name="no_data_found">No Data Found</string>
+    <string name="url_not_found">URL Not Found</string>
+    <string name="failed_to_connect">Failed to connect</string>
+    <string name="data_on_server_not_found">Data On Server Not Found</string>
+    <string name="data_conversion_error">Data Conversion Error</string>
 
     <string name="no_menu_view">No view for menu provided. You must either call .withMenuView(View) or pass a valid resource id to .withMenuLayout(int)</string>
     <string name="bad_content_view">Your content view must contain exactly one child. Make sure you call inject() after setContentView().</string>
 
+    <string name="done">DONE</string>
+
+    <string name="ef_error_no_camera">No camera found</string>
+    <string name="ef_msg_no_write_external_permission">Please grant storage permission to select images</string>
+    <string name="ef_msg_no_camera_permission">Please grant camera permission to capture image</string>
+    <string name="ef_error_create_image_file">Failed to create image file</string>
+    <string name="ef_title_folder">Folder</string>
+    <string name="ef_title_select_image">Tap to select images</string>
+    <string name="ef_msg_empty_images">No images found</string>
+    <string name="ef_content_desc_folder" translatable="false">Folder</string>
+    <string name="ef_content_desc_image" translatable="false">Image</string>
+    <string name="ef_gif" translatable="false">GIF</string>
+    <string name="ef_video" translatable="false">Video</string>
+    <string name="ef_camera">CAMERA</string>
+    <string name="ef_msg_limit_images">Image selection limit</string>
+    <string name="ef_selected">%d selected</string>
+    <string name="ef_selected_with_limit">%1$d/%2$d selected</string>
+    <string name="downloading_file">Downloading File</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_wait_while_downloading_file">Please Wait, While Downloading File</string>
+    <string name="save_at_download">Save at Download</string>
 </resources>
