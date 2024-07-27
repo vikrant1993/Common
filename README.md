@@ -2,7 +2,7 @@
 common operation for any project
 
 
-allprojects {
+projects {
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
