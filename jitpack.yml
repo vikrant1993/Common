@@ -3,4 +3,5 @@ jdk:
 before_install:
   - chmod +x gradlew
 install:
+  - ./gradlew help:assembleRelease
   - ./gradlew publishReleasePublicationToMavenLocal

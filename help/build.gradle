@@ -18,7 +18,7 @@ publishing {
             groupId = 'vk.help'
             artifactId = 'helping'
             version = '2.0'
-            artifact("$buildDir/outputs/aar/helping.aar")
+            artifact("$buildDir/outputs/aar/help-release.aar")
         }
     }
 }
