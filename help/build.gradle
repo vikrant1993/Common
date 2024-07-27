@@ -17,7 +17,7 @@ publishing {
 //            from components.release
             groupId = 'vk.help'
             artifactId = 'helping'
-            version = '1.2'
+            version = '2.0'
             artifact("$buildDir/outputs/aar/helping.aar")
         }
     }
