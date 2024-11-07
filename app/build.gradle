@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "vk.help.common"
-        minSdkVersion 21
+        minSdkVersion 27
         targetSdkVersion 35
         versionCode 1
         useLibrary 'org.apache.http.legacy'
@@ -23,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     namespace 'vk.help.common'
 }
